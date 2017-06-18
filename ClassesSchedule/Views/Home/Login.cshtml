@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_EmptyLayout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Login</h2>
+            @using (Html.BeginForm("PostLogin", "Home", FormMethod.Post, new { @class = "form", id = "Login" }))
+            {
+                <div>
+                    @Html.TextBox("Login", null, new { @class = "form-control", id = "login" })
+                </div>
+                <div>
+                    @Html.TextBox("Password", null, new { @class = "form-control", id = "password" })
+                </div>
+                <button class="btn btn-primary" type="submit">Sing in</button>
+            }
+        </div>
+        <div>
+            @Html.Raw(@ViewBag.BadSignIn)
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4e4d5c8f368849ea94eeea03b9d703b1" Name="Diagram1">
+        <EntityTypeShape EntityType="ClassScheduleModel.ClassRoom" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassScheduleModel.ClassSchedule" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassScheduleModel.ClassScheduleShadow" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassScheduleModel.Course" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassScheduleModel.Mark" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassScheduleModel.Person" Width="1.5" PointX="1.5" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassScheduleModel.Role" Width="1.5" PointX="1.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassScheduleModel.Student" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassScheduleModel.Teacher" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClassScheduleModel.Schedule" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ClassScheduleModel.FK_ClassSchedule_ClassRoom" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_ClassSchedule_ClassSchedule" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_ClassSchedule_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_ClassSchedule_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_Mark_ClassSchedule" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_Mark_Course" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_Mark_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_Mark_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_Person_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_Student_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="ClassScheduleModel.FK_Teacher_Person" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
