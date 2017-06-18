@@ -26,6 +26,7 @@
         <AssociationConnector Association="ClassScheduleModel.FK_Person_Role" ManuallyRouted="false" />
         <AssociationConnector Association="ClassScheduleModel.FK_Student_Person" ManuallyRouted="false" />
         <AssociationConnector Association="ClassScheduleModel.FK_Teacher_Person" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ClassScheduleModel.sysdiagram" Width="1.5" PointX="8.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Classes Schedule", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Classes Schedule", "Main", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -28,7 +28,22 @@
                     <li>@Html.ActionLink("Marks", "Marks", "Home")</li>
                 </ul>
             </div>
-            
+            <div id="UserRole">
+                @* CURRENT USER *@
+                @if (@Session["ROLE"].ToString() == "2")
+                {
+                    <p> Hi, @Session["FNAME"] (Role: Admin.)</p>
+                }
+                @if (Session["ROLE"].ToString() == "3")
+                {
+                    <p>Hi, @Session["FNAME"] (Role: Teacher.)</p>
+                }
+                @if (Session["ROLE"].ToString() == "4")
+                {
+                    <p>Hi, @Session["FNAME"] (Role: Student.)</p>
+                }
+                @* END *@
+            </div>
         </div>
     </div>
     <div class="container body-content">

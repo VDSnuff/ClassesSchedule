@@ -13,6 +13,7 @@ namespace ClassesSchedule.Controllers
     public class HomeController : Controller
     {
 
+        #region RENDER ACTION
         public ActionResult Schedule()
         {
             return View();
@@ -20,29 +21,21 @@ namespace ClassesSchedule.Controllers
 
         public ActionResult Courses()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Teachers()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
         public ActionResult Students()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
         public ActionResult Marks()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -51,18 +44,51 @@ namespace ClassesSchedule.Controllers
             return View();
         }
 
-
-        public ActionResult Main(string fName, int role, int id)
+        public ActionResult Main()
         {
-            MainP model = new MainP();
-
-
-            return View(model);
+         
+            return View();
         }
 
+        #endregion
 
-        //POST ACTION
+      
+        
+        #region GET GRID DATA
 
+        public ActionResult GetScheduleViewGridData()
+        {
+
+            MainP model = new MainP();
+
+            using (var ctx = new CSEntities())
+            {
+                model.ScheduleView = from t in ctx.Schedules select t;
+            }
+
+            WATableModel<Schedule> WATmodel = new WATableModel<Schedule>();
+
+            WATmodel.Columns = new Dictionary<string, WATColumn> {
+        { "Code", new WATColumn { Index = 1, Type = "string", Friendly = "Code" } },
+        { "Type", new WATColumn { Index = 2, Type = "string", Friendly = "Type" } },
+        { "ParentCode", new WATColumn { Index = 3, Type = "string", Friendly = "Parent" } },
+        { "Country", new WATColumn { Index = 4, Type = "string", Friendly = "Country" } },
+        { "State", new WATColumn { Index = 5, Type = "string", Friendly = "State" } },
+        { "City", new WATColumn { Index = 6, Type = "string", Friendly = "City" } },
+        { "Attn", new WATColumn { Index = 7, Type = "string", Friendly = "Attention" } },
+        { "Phone", new WATColumn { Index = 8, Type = "string", Friendly = "Phone" } },
+        //{ "ID", new WATColumn { Index = 9, Type = "string", Friendly = " ", IsFilter = false, Sorting = false, Format= actionformat } },
+      };
+
+
+            WATmodel.Rows = model.ScheduleView.ToList();
+
+            return null;
+        }
+
+        #endregion
+
+        #region POST ACTION
 
         [HttpPost]
         public ActionResult PostLogin(string login, string password)
@@ -81,12 +107,18 @@ namespace ClassesSchedule.Controllers
                 }
                 else
                 {
-                    lUser.User.FName = loggedUser.FName;
-                    lUser.User.Role = loggedUser.RoleID;
-                    lUser.User.ID = loggedUser.ID;
-                    return RedirectToAction("Main", new { fName = lUser.User.FName, role = lUser.User.Role, id = lUser.User.ID });
+
+                    Session["ID"] = loggedUser.ID;
+                    Session["ROLE"] = loggedUser.RoleID;
+                    Session["FNAME"] = loggedUser.FName;
+                    //lUser.User.FName = loggedUser.FName;
+                    //lUser.User.Role = loggedUser.RoleID;
+                    //lUser.User.ID = loggedUser.ID;
+                    // return RedirectToAction("Main", new { fName = lUser.User.FName, role = lUser.User.Role, id = lUser.User.ID });
+                    return RedirectToAction("Main");
                 }
             }
         }
+        #endregion
     }
 }

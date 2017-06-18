@@ -246,7 +246,16 @@
     <Compile Include="Models\Schedule.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Student.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">
@@ -256,6 +265,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\Authentication.cs" />
     <Compile Include="ViewModel\MainP.cs" />
+    <Compile Include="ViewModel\WATableModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

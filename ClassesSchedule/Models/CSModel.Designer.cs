@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\vdovnich\documents\visual studio 2015\Projects\ClassesSchedule\ClassesSchedule\Models\CSModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\vdovnich\Source\Repos\ClassesSchedule\ClassesSchedule\Models\CSModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
