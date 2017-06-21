@@ -39,18 +39,22 @@
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="1000" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'ClassSchedule.dbo.CourseStudent' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="CourseStudent">
-          <Property Name="CourseID" Type="int" />
-          <Property Name="StudentID" Type="int" />
-        </EntityType>-->
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'ClassSchedule.dbo.CourseTeacher' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="CourseTeacher">
-          <Property Name="CourseID" Type="int" />
-          <Property Name="TeacherID" Type="int" />
-        </EntityType>-->
+  <EntityType Name="CourseStudent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CourseID" Type="int" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseTeacher">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CourseID" Type="int" />
+    <Property Name="TeacherID" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <EntityType Name="Mark">
     <Key>
       <PropertyRef Name="ID" />
@@ -176,18 +180,54 @@ warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <!--Errors Found During Generation:
-error 6004: The table 'ClassSchedule.dbo.CourseStudent' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_CourseStudent_Course" />-->
-  <!--Errors Found During Generation:
-error 6004: The table 'ClassSchedule.dbo.CourseStudent' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_CourseStudent_Student" />-->
-  <!--Errors Found During Generation:
-error 6004: The table 'ClassSchedule.dbo.CourseTeacher' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_CourseTeacher_Course" />-->
-  <!--Errors Found During Generation:
-error 6004: The table 'ClassSchedule.dbo.CourseTeacher' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_CourseTeacher_Teacher" />-->
+  <Association Name="FK_CourseStudent_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="CourseStudent" Type="Self.CourseStudent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CourseStudent">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseStudent_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="CourseStudent" Type="Self.CourseStudent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CourseStudent">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseTeacher_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="CourseTeacher" Type="Self.CourseTeacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CourseTeacher">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseTeacher_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="CourseTeacher" Type="Self.CourseTeacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CourseTeacher">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Mark_ClassSchedule">
     <End Role="ClassSchedule" Type="Self.ClassSchedule" Multiplicity="1" />
     <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
@@ -312,6 +352,8 @@ error 6004: The table 'ClassSchedule.dbo.CourseTeacher' is referenced by a relat
     <EntitySet Name="ClassSchedule" EntityType="Self.ClassSchedule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassScheduleShadow" EntityType="Self.ClassScheduleShadow" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseStudent" EntityType="Self.CourseStudent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseTeacher" EntityType="Self.CourseTeacher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mark" EntityType="Self.Mark" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
@@ -344,6 +386,22 @@ error 6004: The table 'ClassSchedule.dbo.CourseTeacher' is referenced by a relat
     <AssociationSet Name="FK_ClassSchedule_Teacher" Association="Self.FK_ClassSchedule_Teacher">
       <End Role="Teacher" EntitySet="Teacher" />
       <End Role="ClassSchedule" EntitySet="ClassSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseStudent_Course" Association="Self.FK_CourseStudent_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseStudent" EntitySet="CourseStudent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseStudent_Student" Association="Self.FK_CourseStudent_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="CourseStudent" EntitySet="CourseStudent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseTeacher_Course" Association="Self.FK_CourseTeacher_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseTeacher" EntitySet="CourseTeacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseTeacher_Teacher" Association="Self.FK_CourseTeacher_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="CourseTeacher" EntitySet="CourseTeacher" />
     </AssociationSet>
     <AssociationSet Name="FK_Mark_ClassSchedule" Association="Self.FK_Mark_ClassSchedule">
       <End Role="ClassSchedule" EntitySet="ClassSchedule" />

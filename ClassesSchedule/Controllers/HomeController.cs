@@ -46,8 +46,16 @@ namespace ClassesSchedule.Controllers
 
         public ActionResult Main()
         {
-         
-            return View();
+            MainP model = new MainP();
+
+            using (var ctx = new CSEntities())
+            {
+                model.ScheduleView = (from t in ctx.Schedules select t).ToList();
+
+            }
+
+            return View(model);
+
         }
 
         #endregion
@@ -76,8 +84,7 @@ namespace ClassesSchedule.Controllers
         { "State", new WATColumn { Index = 5, Type = "string", Friendly = "State" } },
         { "City", new WATColumn { Index = 6, Type = "string", Friendly = "City" } },
         { "Attn", new WATColumn { Index = 7, Type = "string", Friendly = "Attention" } },
-        { "Phone", new WATColumn { Index = 8, Type = "string", Friendly = "Phone" } },
-        //{ "ID", new WATColumn { Index = 9, Type = "string", Friendly = " ", IsFilter = false, Sorting = false, Format= actionformat } },
+        { "Phone", new WATColumn { Index = 8, Type = "string", Friendly = "Phone" } }
       };
 
 

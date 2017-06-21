@@ -38,6 +38,8 @@ namespace ClassesSchedule.Models
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<CourseStudent> CourseStudents { get; set; }
+        public virtual DbSet<CourseTeacher> CourseTeachers { get; set; }
     
         public virtual ObjectResult<Login_Result> Login(string login, string password)
         {

@@ -4,7 +4,45 @@
     ViewBag.Title = "Main";
 }
 
-<h2>Main</h2>
+<div class="container">
+<h2>Schedule for today - @DateTime.Now.ToString("dd MMMM")</h2>
+
+<div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Start time</th>
+                <th>End time</th>
+                <th>Classroom No.</th>
+                <th>Course Name</th>
+                <th>Teacher name</th>
+                <th>Degree</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int i = 1;}
+            @foreach (var item in Model.ScheduleView)
+            {
+                <tr>
+                 
+                    <td>@i @{i++;}</td>
+                   
+                    <td>@item.Start_time.ToString("MMMM dd, H:mm")</td>
+                    <td>@item.End_time.ToString("MMMM dd, H:mm")</td>
+                    <td>@item.Classroom_No_</td>
+                    <td>@item.Course_Name</td>
+                    <td>@item.Teacher_name</td>
+                    <td>@item.Degree</td>
+                </tr>
+            }
+        </tbody>
+        <!--Add footer for totals-->
+    </table>
+
+</div>
+    </div>
 
 
 
@@ -12,137 +50,4 @@
 
 <script type="text/javascript">
 
-    $('input[type="date"]').datetimepicker({
-      timepicker: true,
-      step: 1,
-      closeOnDateSelect: true,
-      format: '@ViewBag.PerlShortDateTimeFormat',
-      lang: '@ViewBag.Language',
-      scrollInput: false
-    });
-      fixChromeDate();
-
-    $('#RepSearch').validate({
-        rules: {
-            ProdLineS: {
-                remote: {
-                    url: '@Url.Action("ValidateProductLine", "Report")',
-                    type: "post",
-                    data: {
-                        customer: function () {
-                            return $("#Customer").val();
-                        }
-                    }
-                }
-            },
-            ProdLineE: {
-                remote: {
-                    url: '@Url.Action("ValidateProductLine", "Report")',
-                    type: "post",
-                    data: {
-                        customer: function () {
-                            return $("#Customer").val();
-                        }
-                    }
-                }
-            },
-            ItemCodeS: {
-                remote: {
-                    url: '@Url.Action("ValidatePNItem", "Report")',
-                    type: "post",
-                    data: {
-                        PN: function () {
-                            return $("#ItemCodeS").val();
-                        }
-                    }
-                }
-            },
-            ItemCodeE: {
-                remote: {
-                    url: '@Url.Action("ValidatePNItem", "Report")',
-                    type: "post",
-                    data: {
-                        PN: function () {
-                            return $("#ItemCodeE").val();
-                        }
-                    }
-                }
-            }
-        }
-    });
-
-    $('#btnToggleCustomerList').click(function () {
-      var ltype;
-      var selected = $('#Customer').val();
-
-      if (this.value == 'Customer ID') {
-        this.value = 'Customer Code';
-        ltype = 'id';
-      }
-      else {
-        this.value = 'Customer ID';
-        ltype = 'code';
-      }
-      // get new list from controller, and update the customer list control
-      $.get(
-        '@Url.Action("GetCustomerList", "Report")',
-        { type: ltype },
-        function (data) {
-          var option = '';
-          var isselected = false;
-          for (var i = 0; i < data.length; i++) {
-            if (selected && selected.indexOf(data[i].Value) >= 0) {
-              option += '<option selected value="' + data[i].Value + '">' + data[i].Text + '</option>';
-            }
-            else {
-              option += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
-            }
-          }
-
-          $('#Customer').empty();
-          $('#Customer').append(option);
-
-        }
-      );
-    });
-
-    var waTable = $('#resultcontainer').WATable({
-      debug: true,
-      filter: false,
-      sorting: true,
-      pageSize: 25,
-      pageSizes: [10, 25, 50],
-      url: '@Url.Action("GetReportFaultyInboundGridData", "Report")',
-      urlData: {},
-      types: {
-        date: {
-          format: '@ViewBag.WATableDateTimeFormat'
-        }
-      }
-    }).data('WATable');
-
-      function btnClick(type) {
-      if (type == 'export' && waTable.getData().rows == 0) {
-        $('.validation-summary-valid ul li').show();
-        $('.validation-summary-valid ul li').html('There is no data to Export');
-      }
-      else {
-        $('.validation-summary-valid ul li').html('');
-        $('.validation-summary-valid ul li').hide();
-
-        $('#Function').val(type);
-        $('#RepSearch').submit();
-      }
-    }
-
-    $('#cmdReset').click(function () {
-        $('#RepSearch').get(0).reset();
-
-        // date types are changed to text in fixChromeDate()
-        $('#RepSearch').find('input[type="text"]').attr('value', '')
-        // but conditionally, so erase values for other types too, button is input as well, need filter
-        $('#RepSearch').find('input[type="date"]').attr('value', '')
-        $('#RepSearch').find('option').removeAttr('selected');
-
-    });
 </script>

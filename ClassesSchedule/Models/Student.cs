@@ -18,6 +18,7 @@ namespace ClassesSchedule.Models
         public Student()
         {
             this.Marks = new HashSet<Mark>();
+            this.CourseStudents = new HashSet<CourseStudent>();
         }
     
         public int ID { get; set; }
@@ -27,5 +28,7 @@ namespace ClassesSchedule.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mark> Marks { get; set; }
         public virtual Person Person { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CourseStudent> CourseStudents { get; set; }
     }
 }

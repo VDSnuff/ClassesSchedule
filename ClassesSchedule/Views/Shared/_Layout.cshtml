@@ -30,17 +30,20 @@
             </div>
             <div id="UserRole">
                 @* CURRENT USER *@
-                @if (@Session["ROLE"].ToString() == "2")
+                @if (@Session["ROLE"] != null)
+                {
+                if (@Session["ROLE"].ToString() == "2")
                 {
                     <p> Hi, @Session["FNAME"] (Role: Admin.)</p>
                 }
-                @if (Session["ROLE"].ToString() == "3")
+                if (Session["ROLE"].ToString() == "3")
                 {
                     <p>Hi, @Session["FNAME"] (Role: Teacher.)</p>
                 }
-                @if (Session["ROLE"].ToString() == "4")
+                if (Session["ROLE"].ToString() == "4")
                 {
                     <p>Hi, @Session["FNAME"] (Role: Student.)</p>
+                    }
                 }
                 @* END *@
             </div>

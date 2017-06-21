@@ -12,9 +12,6 @@ namespace ClassesSchedule.ViewModel
 
         public Authentication User { get; set; }
        
-       
-
-
         public MainP()
         {
             User = new Authentication();
