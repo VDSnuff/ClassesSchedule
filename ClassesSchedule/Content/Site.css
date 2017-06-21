@@ -22,3 +22,19 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* My custom part */
+#UserRole {
+    float:right;
+    margin-top: 15px;
+    color: #999999;
+}
+
+.loginFild{
+    margin:5px;
+}
+
+.lg{
+    margin-bottom:22%;
+    margin-top:10%;
+}

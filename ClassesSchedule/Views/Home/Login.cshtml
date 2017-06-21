@@ -5,22 +5,21 @@
 }
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-offset-4 col-sm-8 lg">
             <h2>Login</h2>
             @using (Html.BeginForm("PostLogin", "Home", FormMethod.Post, new { @class = "form", id = "Login" }))
             {
-                <div>
+                <div class="loginFild">
                     @Html.TextBox("Login", null, new { @class = "form-control", id = "login" })
                 </div>
-                <div>
-                    @Html.TextBox("Password", null, new { @class = "form-control", id = "password" })
+                <div class="loginFild">
+                    @Html.TextBox("Password", null, new { @class = "form-control", id = "password", type = "password" })
                 </div>
-                <button class="btn btn-primary" type="submit">Sing in</button>
+                <button class="btn btn-primary loginFild" type="submit">Sing in</button>
             }
         </div>
         <div>
             @Html.Raw(@ViewBag.BadSignIn)
         </div>
-
     </div>
 </div>

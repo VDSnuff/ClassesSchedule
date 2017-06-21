@@ -6,6 +6,10 @@
     <title>@ViewBag.Title - Classes Schedule</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @if (Session["ROLE"] == null || Session["FNAME"] == null || Session["ID"] == null)
+    {
+        Response.Redirect(Url.Action("Login"));
+    }
 
 </head>
 <body>
@@ -27,33 +31,34 @@
                     <li>@Html.ActionLink("Students", "Students", "Home")</li>
                     <li>@Html.ActionLink("Marks", "Marks", "Home")</li>
                 </ul>
-            </div>
-            <div id="UserRole">
-                @* CURRENT USER *@
-                @if (@Session["ROLE"] != null)
-                {
-                if (@Session["ROLE"].ToString() == "2")
-                {
-                    <p> Hi, @Session["FNAME"] (Role: Admin.)</p>
-                }
-                if (Session["ROLE"].ToString() == "3")
-                {
-                    <p>Hi, @Session["FNAME"] (Role: Teacher.)</p>
-                }
-                if (Session["ROLE"].ToString() == "4")
-                {
-                    <p>Hi, @Session["FNAME"] (Role: Student.)</p>
+                <div id="UserRole">
+                    @* CURRENT USER *@
+                    @if (@Session["ROLE"] != null)
+                    {
+                        if (@Session["ROLE"].ToString() == "2")
+                        {
+                            <p> Hi, @Session["FNAME"] (Role: Admin.)</p>
+                        }
+                        if (Session["ROLE"].ToString() == "3")
+                        {
+                            <p>Hi, @Session["FNAME"] (Role: Teacher.)</p>
+                        }
+                        if (Session["ROLE"].ToString() == "4")
+                        {
+                            <p>Hi, @Session["FNAME"] (Role: Student.)</p>
+                        }
                     }
-                }
-                @* END *@
+                    @* END *@
+                </div>
             </div>
+          
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>@DateTime.Now.Year - Class Schedule Application</p>
+            <p style="text-align:center;">@DateTime.Now.Year - Class Schedule Application</p>
         </footer>
     </div>
 
