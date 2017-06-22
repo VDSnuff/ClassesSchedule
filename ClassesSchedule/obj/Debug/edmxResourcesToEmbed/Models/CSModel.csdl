@@ -374,6 +374,22 @@
       <End Role="Teacher" EntitySet="Teachers" />
       <End Role="CourseTeacher" EntitySet="CourseTeachers" />
     </AssociationSet>
+    <EntitySet Name="ScheduleLists" EntityType="ClassScheduleModel.ScheduleList" />
+    <FunctionImport Name="ScheduleUser" IsComposable="true" ReturnType="Collection(ClassScheduleModel.ScheduleUser_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ScheduleUserFunc" IsComposable="true" ReturnType="Collection(ClassScheduleModel.ScheduleUserFunc_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="CoursesLists" EntityType="ClassScheduleModel.CoursesList" />
+    <FunctionImport Name="Courses1" IsComposable="true" ReturnType="Collection(ClassScheduleModel.Courses1_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CoursesUser" IsComposable="true" ReturnType="Collection(ClassScheduleModel.Courses1_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Teachers1" EntityType="ClassScheduleModel.Teacher1" />
+    <EntitySet Name="Students1" EntityType="ClassScheduleModel.Student1" />
   </EntityContainer>
   <ComplexType Name="Login_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -475,4 +491,87 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="ScheduleList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Start_time" />
+      <PropertyRef Name="End_time" />
+      <PropertyRef Name="Classroom_No_" />
+      <PropertyRef Name="Course_Name" />
+      <PropertyRef Name="Teacher_name" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Start_time" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="End_time" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="Classroom_No_" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Course_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Teacher_name" Type="String" Nullable="false" MaxLength="201" FixedLength="false" Unicode="true" />
+    <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="ScheduleUser_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="DateTime" Name="Start_time" Nullable="false" Precision="27" />
+    <Property Type="DateTime" Name="End_time" Nullable="false" Precision="27" />
+    <Property Type="String" Name="Classroom_No_" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Course_Name" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Teacher_name" Nullable="false" MaxLength="201" />
+    <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ScheduleUserFunc_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="DateTime" Name="Start_time" Nullable="false" Precision="27" />
+    <Property Type="DateTime" Name="End_time" Nullable="false" Precision="27" />
+    <Property Type="String" Name="Classroom_No_" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Course_Name" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Teacher_name" Nullable="false" MaxLength="201" />
+    <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="CoursesList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Teacher" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="Courses1_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="Teacher" Nullable="true" MaxLength="201" />
+    <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="Teacher1">
+    <Key>
+      <PropertyRef Name="Person_ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Surname" />
+      <PropertyRef Name="Teacher_ID" />
+    </Key>
+    <Property Name="Person_ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Teacher_ID" Type="Int32" Nullable="false" />
+    <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Student1">
+    <Key>
+      <PropertyRef Name="Person_ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Surname" />
+      <PropertyRef Name="Student_ID" />
+    </Key>
+    <Property Name="Person_ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Student_ID" Type="Int32" Nullable="false" />
+    <Property Name="Specialization" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

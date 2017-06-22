@@ -179,5 +179,103 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ScheduleLists">
+      <EntityTypeMapping TypeName="ClassScheduleModel.ScheduleList">
+        <MappingFragment StoreEntitySet="ScheduleList">
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="Teacher_name" ColumnName="Teacher name" />
+          <ScalarProperty Name="Course_Name" ColumnName="Course Name" />
+          <ScalarProperty Name="Classroom_No_" ColumnName="Classroom No." />
+          <ScalarProperty Name="End_time" ColumnName="End time" />
+          <ScalarProperty Name="Start_time" ColumnName="Start time" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ScheduleUser" FunctionName="ClassScheduleModel.Store.ScheduleUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClassScheduleModel.ScheduleUser_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Start_time" ColumnName="Start time" />
+          <ScalarProperty Name="End_time" ColumnName="End time" />
+          <ScalarProperty Name="Classroom_No_" ColumnName="Classroom No." />
+          <ScalarProperty Name="Course_Name" ColumnName="Course Name" />
+          <ScalarProperty Name="Teacher_name" ColumnName="Teacher name" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ScheduleUserFunc" FunctionName="ClassScheduleModel.Store.ScheduleUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClassScheduleModel.ScheduleUserFunc_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Start_time" ColumnName="Start time" />
+          <ScalarProperty Name="End_time" ColumnName="End time" />
+          <ScalarProperty Name="Classroom_No_" ColumnName="Classroom No." />
+          <ScalarProperty Name="Course_Name" ColumnName="Course Name" />
+          <ScalarProperty Name="Teacher_name" ColumnName="Teacher name" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="CoursesLists">
+      <EntityTypeMapping TypeName="ClassScheduleModel.CoursesList">
+        <MappingFragment StoreEntitySet="CoursesList">
+          <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Courses1" FunctionName="ClassScheduleModel.Store.Courses">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClassScheduleModel.Courses1_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CoursesUser" FunctionName="ClassScheduleModel.Store.Courses">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClassScheduleModel.Courses1_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Teachers1">
+      <EntityTypeMapping TypeName="ClassScheduleModel.Teacher1">
+        <MappingFragment StoreEntitySet="Teachers">
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="Teacher_ID" ColumnName="Teacher ID" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Person_ID" ColumnName="Person ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students1">
+      <EntityTypeMapping TypeName="ClassScheduleModel.Student1">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+          <ScalarProperty Name="Student_ID" ColumnName="Student ID" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Person_ID" ColumnName="Person ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

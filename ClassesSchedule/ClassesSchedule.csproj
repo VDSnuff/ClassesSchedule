@@ -214,6 +214,12 @@
     <Compile Include="Models\Course.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Courses1_Result.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CoursesList.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CourseStudent.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
@@ -252,6 +258,15 @@
     <Compile Include="Models\Schedule.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ScheduleList.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleUserFunc_Result.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleUser_Result.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
@@ -261,21 +276,29 @@
     <Compile Include="Models\Student.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Student1.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Teacher1.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModel\Authentication.cs" />
-    <Compile Include="ViewModel\MainP.cs" />
-    <Compile Include="ViewModel\WATableModel.cs" />
+    <Compile Include="ViewModel\CoursesVM.cs" />
+    <Compile Include="ViewModel\ScheduleVM.cs" />
+    <Compile Include="ViewModel\StudentsVM.cs" />
+    <Compile Include="ViewModel\TeachersVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSWorkBook.sql" />
     <Content Include="Content\watable.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

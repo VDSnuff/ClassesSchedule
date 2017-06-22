@@ -40,6 +40,10 @@ namespace ClassesSchedule.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<CourseStudent> CourseStudents { get; set; }
         public virtual DbSet<CourseTeacher> CourseTeachers { get; set; }
+        public virtual DbSet<ScheduleList> ScheduleLists { get; set; }
+        public virtual DbSet<CoursesList> CoursesLists { get; set; }
+        public virtual DbSet<Teacher1> Teachers1 { get; set; }
+        public virtual DbSet<Student1> Students1 { get; set; }
     
         public virtual ObjectResult<Login_Result> Login(string login, string password)
         {
@@ -181,6 +185,46 @@ namespace ClassesSchedule.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        [DbFunction("CSEntities", "ScheduleUser")]
+        public virtual IQueryable<ScheduleUser_Result> ScheduleUser(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ScheduleUser_Result>("[CSEntities].[ScheduleUser](@ID)", iDParameter);
+        }
+    
+        [DbFunction("CSEntities", "ScheduleUserFunc")]
+        public virtual IQueryable<ScheduleUserFunc_Result> ScheduleUserFunc(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<ScheduleUserFunc_Result>("[CSEntities].[ScheduleUserFunc](@ID)", iDParameter);
+        }
+    
+        [DbFunction("CSEntities", "Courses1")]
+        public virtual IQueryable<Courses1_Result> Courses1(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Courses1_Result>("[CSEntities].[Courses1](@ID)", iDParameter);
+        }
+    
+        [DbFunction("CSEntities", "CoursesUser")]
+        public virtual IQueryable<Courses1_Result> CoursesUser(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Courses1_Result>("[CSEntities].[CoursesUser](@ID)", iDParameter);
         }
     }
 }

@@ -114,6 +114,19 @@
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.CoursesList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CoursesList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Teacher" Type="nvarchar" MaxLength="201" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Schedule">
     <Key>
@@ -130,6 +143,59 @@ warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primar
     <Property Name="Classroom No." Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Course Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Teacher name" Type="nvarchar" MaxLength="201" Nullable="false" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.ScheduleList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ScheduleList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Start time" />
+      <PropertyRef Name="End time" />
+      <PropertyRef Name="Classroom No." />
+      <PropertyRef Name="Course Name" />
+      <PropertyRef Name="Teacher name" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Start time" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="End time" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Classroom No." Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Course Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Teacher name" Type="nvarchar" MaxLength="201" Nullable="false" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.Students' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Person ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Surname" />
+      <PropertyRef Name="Student ID" />
+    </Key>
+    <Property Name="Person ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Student ID" Type="int" Nullable="false" />
+    <Property Name="Specialization" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="Person ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Surname" />
+      <PropertyRef Name="Teacher ID" />
+    </Key>
+    <Property Name="Person ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Teacher ID" Type="int" Nullable="false" />
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_ClassSchedule_ClassRoom">
@@ -312,10 +378,40 @@ warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="Courses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Teacher" Type="nvarchar" MaxLength="201" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Login" Type="nvarchar" Mode="In" />
     <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ScheduleUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Start time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="End time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Classroom No." Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Course Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Teacher name" Type="nvarchar" MaxLength="201" Nullable="false" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
   </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -360,6 +456,15 @@ warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primar
     <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CoursesList" EntityType="Self.CoursesList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CoursesList].[ID] AS [ID], 
+    [CoursesList].[Name] AS [Name], 
+    [CoursesList].[Description] AS [Description], 
+    [CoursesList].[Teacher] AS [Teacher], 
+    [CoursesList].[Degree] AS [Degree]
+    FROM [dbo].[CoursesList] AS [CoursesList]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="Schedule" EntityType="Self.Schedule" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Schedule].[ID] AS [ID], 
@@ -370,6 +475,39 @@ warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primar
     [Schedule].[Teacher name] AS [Teacher name], 
     [Schedule].[Degree] AS [Degree]
     FROM [dbo].[Schedule] AS [Schedule]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ScheduleList" EntityType="Self.ScheduleList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ScheduleList].[ID] AS [ID], 
+    [ScheduleList].[Start time] AS [Start time], 
+    [ScheduleList].[End time] AS [End time], 
+    [ScheduleList].[Classroom No.] AS [Classroom No.], 
+    [ScheduleList].[Course Name] AS [Course Name], 
+    [ScheduleList].[Teacher name] AS [Teacher name], 
+    [ScheduleList].[Degree] AS [Degree]
+    FROM [dbo].[ScheduleList] AS [ScheduleList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Students" EntityType="Self.Students" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Students].[Person ID] AS [Person ID], 
+    [Students].[Name] AS [Name], 
+    [Students].[Surname] AS [Surname], 
+    [Students].[Phone] AS [Phone], 
+    [Students].[Email] AS [Email], 
+    [Students].[Student ID] AS [Student ID], 
+    [Students].[Specialization] AS [Specialization]
+    FROM [dbo].[Students] AS [Students]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Teachers].[Person ID] AS [Person ID], 
+    [Teachers].[Name] AS [Name], 
+    [Teachers].[Surname] AS [Surname], 
+    [Teachers].[Phone] AS [Phone], 
+    [Teachers].[Email] AS [Email], 
+    [Teachers].[Teacher ID] AS [Teacher ID], 
+    [Teachers].[Degree] AS [Degree]
+    FROM [dbo].[Teachers] AS [Teachers]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_ClassSchedule_ClassRoom" Association="Self.FK_ClassSchedule_ClassRoom">
       <End Role="ClassRoom" EntitySet="ClassRoom" />

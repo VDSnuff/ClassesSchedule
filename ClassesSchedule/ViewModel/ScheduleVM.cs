@@ -6,15 +6,13 @@ using System.Web;
 
 namespace ClassesSchedule.ViewModel
 {
-    public class MainP
+    public class ScheduleVM
     {
         public IEnumerable<Schedule> ScheduleView { get; set; }
 
-        public Authentication User { get; set; }
-       
-        public MainP()
-        {
-            User = new Authentication();
-        }
+        public IEnumerable<ScheduleList> ScheduleList { get; set;}
+
+        public IEnumerable<ScheduleUserFunc_Result> ScheduleUser { get; set; }
+
     }
 }

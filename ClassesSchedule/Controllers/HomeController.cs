@@ -16,22 +16,52 @@ namespace ClassesSchedule.Controllers
         #region RENDER ACTION
         public ActionResult Schedule()
         {
-            return View();
+            ScheduleVM model = new ScheduleVM();
+            using (var ctx = new CSEntities())
+            {
+                model.ScheduleList = (from t in ctx.ScheduleLists select t).ToList();
+
+                model.ScheduleUser = ctx.ScheduleUserFunc(Convert.ToInt32(Session["ID"])).ToList();
+            }
+            return View(model);
         }
 
         public ActionResult Courses()
         {
-            return View();
+            CoursesVM model = new CoursesVM();
+            using (var ctx = new CSEntities())
+            {
+                model.CoursesList = (from t in ctx.CoursesLists select t).ToList();
+
+                model.CoursesUser = ctx.Courses1(Convert.ToInt32(Session["ID"])).ToList();
+            }
+            return View(model);
         }
 
         public ActionResult Teachers()
         {
-            return View();
+
+            TeachersVM model = new TeachersVM();
+            using (var ctx = new CSEntities())
+            {
+                model.TeacherList = (from t in ctx.Teachers1 select t).ToList();
+
+               // model.CoursesUser = ctx.Courses1(Convert.ToInt32(Session["ID"])).ToList();
+            }
+            return View(model);
+
         }
 
         public ActionResult Students()
         {
-            return View();
+            StudentsVM model = new StudentsVM();
+            using (var ctx = new CSEntities())
+            {
+                model.StudentList = (from t in ctx.Students1 select t).ToList();
+
+                // model.CoursesUser = ctx.Courses1(Convert.ToInt32(Session["ID"])).ToList();
+            }
+            return View(model);
         }
 
         public ActionResult Marks()
@@ -44,53 +74,23 @@ namespace ClassesSchedule.Controllers
             return View();
         }
 
+        public ActionResult Logout()
+        {
+            Session["ID"] = null;
+            Session["ROLE"] = null;
+            Session["FNAME"] = null;
+
+            return View("Login");
+        }
+
         public ActionResult Main()
         {
-            MainP model = new MainP();
-
+            ScheduleVM model = new ScheduleVM();
             using (var ctx = new CSEntities())
             {
                 model.ScheduleView = (from t in ctx.Schedules select t).ToList();
-
             }
-
             return View(model);
-
-        }
-
-        #endregion
-
-      
-        
-        #region GET GRID DATA
-
-        public ActionResult GetScheduleViewGridData()
-        {
-
-            MainP model = new MainP();
-
-            using (var ctx = new CSEntities())
-            {
-                model.ScheduleView = from t in ctx.Schedules select t;
-            }
-
-            WATableModel<Schedule> WATmodel = new WATableModel<Schedule>();
-
-            WATmodel.Columns = new Dictionary<string, WATColumn> {
-        { "Code", new WATColumn { Index = 1, Type = "string", Friendly = "Code" } },
-        { "Type", new WATColumn { Index = 2, Type = "string", Friendly = "Type" } },
-        { "ParentCode", new WATColumn { Index = 3, Type = "string", Friendly = "Parent" } },
-        { "Country", new WATColumn { Index = 4, Type = "string", Friendly = "Country" } },
-        { "State", new WATColumn { Index = 5, Type = "string", Friendly = "State" } },
-        { "City", new WATColumn { Index = 6, Type = "string", Friendly = "City" } },
-        { "Attn", new WATColumn { Index = 7, Type = "string", Friendly = "Attention" } },
-        { "Phone", new WATColumn { Index = 8, Type = "string", Friendly = "Phone" } }
-      };
-
-
-            WATmodel.Rows = model.ScheduleView.ToList();
-
-            return null;
         }
 
         #endregion
@@ -101,7 +101,7 @@ namespace ClassesSchedule.Controllers
         public ActionResult PostLogin(string login, string password)
         {
             var loggedUser = new Person();
-            MainP lUser = new ViewModel.MainP();
+            ScheduleVM lUser = new ViewModel.ScheduleVM();
 
             using (var ctx = new CSEntities())
             {

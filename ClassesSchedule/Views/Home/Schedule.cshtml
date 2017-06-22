@@ -1,8 +1,77 @@
 ﻿
+@model ClassesSchedule.ViewModel.ScheduleVM
 @{
     ViewBag.Title = "Schedule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Schedule</h2>
+<div style="margin-top:5%; margin-bottom:10%;" class="container">
+    <h2 style="text-align:center; margin-bottom:2%;">Common Schedule</h2>
+    <div style="margin-bottom:15%;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Cl-rm no.</th>
+                    <th>Course Name</th>
+                    <th>Teacher name</th>
+                    <th>Degree</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int i = 1;}
+                @foreach (var item in Model.ScheduleList)
+            {
+                    <tr>
 
+                        <td>@i @{i++;}</td>
+
+                        <td>@item.Start_time.ToString("MMMM dd, H:mm")</td>
+                        <td>@item.End_time.ToString("MMMM dd, H:mm")</td>
+                        <td>@item.Classroom_No_</td>
+                        <td>@item.Course_Name</td>
+                        <td>@item.Teacher_name</td>
+                        <td>@item.Degree</td>
+                    </tr>
+                            }
+            </tbody>
+        </table>
+
+        <h2 style="text-align:center; margin-bottom:2%; margin-top:5%;">Your Schedule</h2>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Start time</th>
+                        <th>End time</th>
+                        <th>Cl-rm no.</th>
+                        <th>Course Name</th>
+                        <th>Teacher name</th>
+                        <th>Degree</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int j = 1;}
+                    @foreach (var it in Model.ScheduleUser)
+            {
+                        <tr>
+
+                            <td>@j @{j++;}</td>
+
+                            <td>@it.Start_time.ToString("MMMM dd, H:mm")</td>
+                            <td>@it.End_time.ToString("MMMM dd, H:mm")</td>
+                            <td>@it.Classroom_No_</td>
+                            <td>@it.Course_Name</td>
+                            <td>@it.Teacher_name</td>
+                            <td>@it.Degree</td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+            <button style="float:right; margin-top:15px;" class="btn btn-primary">Add New Date</button>
+        </div>
+    </div>
+</div>

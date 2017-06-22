@@ -1,8 +1,69 @@
-﻿
+﻿@model ClassesSchedule.ViewModel.TeachersVM
 @{
     ViewBag.Title = "Teachers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Teachers</h2>
+<div style="margin-top:5%; margin-bottom:10%;" class="container">
+    <h2 style="text-align:center; margin-bottom:2%;">List of Teachers</h2>
+    <div style="margin-bottom:15%;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Degree</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int i = 1;}
+                @foreach (var item in Model.TeacherList)
+            {
+                    <tr>
+                        <td>@i @{i++;}</td>
+                        <td>@item.Name </td>
+                        <td>@item.Surname</td>
+                        <td>@item.Phone</td>
+                        <td>@item.Email</td>
+                        <td>@item.Degree</td>
+                    </tr>
+                            }
+            </tbody>
+        </table>
+
+        @*<h2 style="text-align:center; margin-bottom:2%; margin-top:5%;">Your Course</h2>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Course</th>
+                        <th>Description</th>
+                        <th>Teacher</th>
+                        <th>Degree</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int j = 1;}
+                    @foreach (var it in Model.CoursesUser)
+            {
+                        <tr>
+
+                            <td>@j @{j++;}</td>
+
+                            <td>@it.Name</td>
+                            <td>@it.Description</td>
+                            <td>@it.Teacher</td>
+                            <td>@it.Degree</td>
+                        </tr>
+                                }
+                </tbody>
+            </table>*@
+            <button style="float:right; margin-top:15px;" class="btn btn-primary">Add New Teacher</button>
+        @*</div>*@
+    </div>
+</div>
 
