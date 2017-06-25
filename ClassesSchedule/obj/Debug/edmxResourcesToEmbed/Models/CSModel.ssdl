@@ -64,6 +64,7 @@
     <Property Name="ClassScheduleID" Type="int" Nullable="false" />
     <Property Name="TeacherID" Type="int" Nullable="false" />
     <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="Value" Type="tinyint" Nullable="false" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -123,6 +124,21 @@ warning 6002: The table/view 'ClassSchedule.dbo.CoursesList' does not have a pri
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Teacher" Type="nvarchar" MaxLength="201" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.MarkList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MarkList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Value" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Course" Type="nvarchar" MaxLength="200" />
+    <Property Name="Student" Type="nvarchar" MaxLength="201" />
+    <Property Name="Value" Type="tinyint" Nullable="false" />
+    <Property Name="Date" Type="datetime2" Precision="7" />
     <Property Name="Teacher" Type="nvarchar" MaxLength="201" />
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
   </EntityType>
@@ -378,6 +394,27 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="AddNewCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AddNewDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="STime" Type="datetime2" Mode="In" />
+    <Parameter Name="ETime" Type="datetime2" Mode="In" />
+    <Parameter Name="ClassR" Type="varchar" Mode="In" />
+    <Parameter Name="Course" Type="nvarchar" Mode="In" />
+    <Parameter Name="Teacher" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AddNewTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="DofB" Type="date" Mode="In" />
+    <Parameter Name="Degree" Type="nvarchar" Mode="In" />
+    <Parameter Name="Login" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="Courses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <ReturnType>
@@ -464,6 +501,17 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     [CoursesList].[Teacher] AS [Teacher], 
     [CoursesList].[Degree] AS [Degree]
     FROM [dbo].[CoursesList] AS [CoursesList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="MarkList" EntityType="Self.MarkList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MarkList].[ID] AS [ID], 
+    [MarkList].[Course] AS [Course], 
+    [MarkList].[Student] AS [Student], 
+    [MarkList].[Value] AS [Value], 
+    [MarkList].[Date] AS [Date], 
+    [MarkList].[Teacher] AS [Teacher], 
+    [MarkList].[Degree] AS [Degree]
+    FROM [dbo].[MarkList] AS [MarkList]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="Schedule" EntityType="Self.Schedule" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

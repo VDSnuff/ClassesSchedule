@@ -47,6 +47,7 @@
     <EntitySetMapping Name="Marks">
       <EntityTypeMapping TypeName="ClassScheduleModel.Mark">
         <MappingFragment StoreEntitySet="Mark">
+          <ScalarProperty Name="Value" ColumnName="Value" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="ClassScheduleID" ColumnName="ClassScheduleID" />
@@ -277,5 +278,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MarkLists">
+      <EntityTypeMapping TypeName="ClassScheduleModel.MarkList">
+        <MappingFragment StoreEntitySet="MarkList">
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+          <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Student" ColumnName="Student" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="AddNewDate" FunctionName="ClassScheduleModel.Store.AddNewDate" />
+    <FunctionImportMapping FunctionImportName="AddNewDateSP" FunctionName="ClassScheduleModel.Store.AddNewDate" />
+    <FunctionImportMapping FunctionImportName="AddNewCourse" FunctionName="ClassScheduleModel.Store.AddNewCourse" />
+    <FunctionImportMapping FunctionImportName="AddNewCourseSP" FunctionName="ClassScheduleModel.Store.AddNewCourse" />
+    <FunctionImportMapping FunctionImportName="AddNewTeacher" FunctionName="ClassScheduleModel.Store.AddNewTeacher" />
+    <FunctionImportMapping FunctionImportName="AddNewTeacherPS" FunctionName="ClassScheduleModel.Store.AddNewTeacher" />
   </EntityContainerMapping>
 </Mapping>

@@ -63,6 +63,7 @@
     <NavigationProperty Name="Course" Relationship="Self.FK_Mark_Course" FromRole="Mark" ToRole="Course" />
     <NavigationProperty Name="Student" Relationship="Self.FK_Mark_Student" FromRole="Mark" ToRole="Student" />
     <NavigationProperty Name="Teacher" Relationship="Self.FK_Mark_Teacher" FromRole="Mark" ToRole="Teacher" />
+    <Property Name="Value" Type="Byte" Nullable="false" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
@@ -390,6 +391,49 @@
     </FunctionImport>
     <EntitySet Name="Teachers1" EntityType="ClassScheduleModel.Teacher1" />
     <EntitySet Name="Students1" EntityType="ClassScheduleModel.Student1" />
+    <EntitySet Name="MarkLists" EntityType="ClassScheduleModel.MarkList" />
+    <FunctionImport Name="AddNewDate">
+      <Parameter Name="STime" Mode="In" Type="DateTime" />
+      <Parameter Name="ETime" Mode="In" Type="DateTime" />
+      <Parameter Name="ClassR" Mode="In" Type="String" />
+      <Parameter Name="Course" Mode="In" Type="String" />
+      <Parameter Name="Teacher" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddNewDateSP">
+      <Parameter Name="STime" Mode="In" Type="DateTime" />
+      <Parameter Name="ETime" Mode="In" Type="DateTime" />
+      <Parameter Name="ClassR" Mode="In" Type="String" />
+      <Parameter Name="Course" Mode="In" Type="String" />
+      <Parameter Name="Teacher" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddNewCourse">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddNewCourseSP">
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="Description" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddNewTeacher">
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="DofB" Mode="In" Type="DateTime" />
+      <Parameter Name="Degree" Mode="In" Type="String" />
+      <Parameter Name="Login" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddNewTeacherPS">
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="DofB" Mode="In" Type="DateTime" />
+      <Parameter Name="Degree" Mode="In" Type="String" />
+      <Parameter Name="Login" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Login_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -573,5 +617,18 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Student_ID" Type="Int32" Nullable="false" />
     <Property Name="Specialization" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MarkList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Value" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Course" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Student" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+    <Property Name="Value" Type="Byte" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="7" />
+    <Property Name="Teacher" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+    <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

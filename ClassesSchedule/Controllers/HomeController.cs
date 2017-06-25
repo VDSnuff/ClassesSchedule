@@ -22,6 +22,12 @@ namespace ClassesSchedule.Controllers
                 model.ScheduleList = (from t in ctx.ScheduleLists select t).ToList();
 
                 model.ScheduleUser = ctx.ScheduleUserFunc(Convert.ToInt32(Session["ID"])).ToList();
+
+                model.ClassList = (from t in ctx.ClassRooms select t.ClassNumber).ToList();
+
+                model.TeacherList = (from t in ctx.Teachers select t.Person.LName).ToList();
+
+                model.CourseList = (from t in ctx.Courses select t.Name).ToList();
             }
             return View(model);
         }
@@ -45,8 +51,6 @@ namespace ClassesSchedule.Controllers
             using (var ctx = new CSEntities())
             {
                 model.TeacherList = (from t in ctx.Teachers1 select t).ToList();
-
-               // model.CoursesUser = ctx.Courses1(Convert.ToInt32(Session["ID"])).ToList();
             }
             return View(model);
 
@@ -58,15 +62,18 @@ namespace ClassesSchedule.Controllers
             using (var ctx = new CSEntities())
             {
                 model.StudentList = (from t in ctx.Students1 select t).ToList();
-
-                // model.CoursesUser = ctx.Courses1(Convert.ToInt32(Session["ID"])).ToList();
             }
             return View(model);
         }
 
         public ActionResult Marks()
         {
-            return View();
+            MarksVM model = new MarksVM();
+            using (var ctx = new CSEntities())
+            {
+                model.MarksList = (from t in ctx.MarkLists select t).ToList();
+            }
+            return View(model);
         }
 
         public ActionResult Login()
@@ -114,17 +121,38 @@ namespace ClassesSchedule.Controllers
                 }
                 else
                 {
-
                     Session["ID"] = loggedUser.ID;
                     Session["ROLE"] = loggedUser.RoleID;
                     Session["FNAME"] = loggedUser.FName;
-                    //lUser.User.FName = loggedUser.FName;
-                    //lUser.User.Role = loggedUser.RoleID;
-                    //lUser.User.ID = loggedUser.ID;
-                    // return RedirectToAction("Main", new { fName = lUser.User.FName, role = lUser.User.Role, id = lUser.User.ID });
                     return RedirectToAction("Main");
                 }
             }
+        }
+
+        [HttpPost]
+        public ActionResult PostNewDate(ScheduleVM post)
+        {
+            if (post.STime != null || post.ETime != null)
+            {
+                using (var ctx = new CSEntities())
+                {
+                    ctx.AddNewDate(post.STime, post.ETime, post.ClassList.FirstOrDefault(), post.CourseList.FirstOrDefault(), post.TeacherList.FirstOrDefault());
+
+                    return RedirectToAction("Schedule", "Home");
+                }
+            }
+            return RedirectToAction("Schedule", "Home");
+        }
+
+        [HttpPost]
+        public ActionResult PostNewCourse(CoursesVM post)
+        {
+                using (var ctx = new CSEntities())
+                {
+                    ctx.AddNewCourse(post.Name, post.Description);
+
+                    return RedirectToAction("Courses", "Home");
+                }
         }
         #endregion
     }

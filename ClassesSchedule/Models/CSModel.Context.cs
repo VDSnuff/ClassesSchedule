@@ -44,6 +44,7 @@ namespace ClassesSchedule.Models
         public virtual DbSet<CoursesList> CoursesLists { get; set; }
         public virtual DbSet<Teacher1> Teachers1 { get; set; }
         public virtual DbSet<Student1> Students1 { get; set; }
+        public virtual DbSet<MarkList> MarkLists { get; set; }
     
         public virtual ObjectResult<Login_Result> Login(string login, string password)
         {
@@ -225,6 +226,156 @@ namespace ClassesSchedule.Models
                 new ObjectParameter("ID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Courses1_Result>("[CSEntities].[CoursesUser](@ID)", iDParameter);
+        }
+    
+        public virtual int AddNewDate(Nullable<System.DateTime> sTime, Nullable<System.DateTime> eTime, string classR, string course, string teacher)
+        {
+            var sTimeParameter = sTime.HasValue ?
+                new ObjectParameter("STime", sTime) :
+                new ObjectParameter("STime", typeof(System.DateTime));
+    
+            var eTimeParameter = eTime.HasValue ?
+                new ObjectParameter("ETime", eTime) :
+                new ObjectParameter("ETime", typeof(System.DateTime));
+    
+            var classRParameter = classR != null ?
+                new ObjectParameter("ClassR", classR) :
+                new ObjectParameter("ClassR", typeof(string));
+    
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            var teacherParameter = teacher != null ?
+                new ObjectParameter("Teacher", teacher) :
+                new ObjectParameter("Teacher", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewDate", sTimeParameter, eTimeParameter, classRParameter, courseParameter, teacherParameter);
+        }
+    
+        public virtual int AddNewDateSP(Nullable<System.DateTime> sTime, Nullable<System.DateTime> eTime, string classR, string course, string teacher)
+        {
+            var sTimeParameter = sTime.HasValue ?
+                new ObjectParameter("STime", sTime) :
+                new ObjectParameter("STime", typeof(System.DateTime));
+    
+            var eTimeParameter = eTime.HasValue ?
+                new ObjectParameter("ETime", eTime) :
+                new ObjectParameter("ETime", typeof(System.DateTime));
+    
+            var classRParameter = classR != null ?
+                new ObjectParameter("ClassR", classR) :
+                new ObjectParameter("ClassR", typeof(string));
+    
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            var teacherParameter = teacher != null ?
+                new ObjectParameter("Teacher", teacher) :
+                new ObjectParameter("Teacher", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewDateSP", sTimeParameter, eTimeParameter, classRParameter, courseParameter, teacherParameter);
+        }
+    
+        public virtual int AddNewCourse(string name, string description)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewCourse", nameParameter, descriptionParameter);
+        }
+    
+        public virtual int AddNewCourseSP(string name, string description)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewCourseSP", nameParameter, descriptionParameter);
+        }
+    
+        public virtual int AddNewTeacher(string fName, string lName, string phone, string email, Nullable<System.DateTime> dofB, string degree, string login, string password)
+        {
+            var fNameParameter = fName != null ?
+                new ObjectParameter("FName", fName) :
+                new ObjectParameter("FName", typeof(string));
+    
+            var lNameParameter = lName != null ?
+                new ObjectParameter("LName", lName) :
+                new ObjectParameter("LName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var dofBParameter = dofB.HasValue ?
+                new ObjectParameter("DofB", dofB) :
+                new ObjectParameter("DofB", typeof(System.DateTime));
+    
+            var degreeParameter = degree != null ?
+                new ObjectParameter("Degree", degree) :
+                new ObjectParameter("Degree", typeof(string));
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("Login", login) :
+                new ObjectParameter("Login", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewTeacher", fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, degreeParameter, loginParameter, passwordParameter);
+        }
+    
+        public virtual int AddNewTeacherPS(string fName, string lName, string phone, string email, Nullable<System.DateTime> dofB, string degree, string login, string password)
+        {
+            var fNameParameter = fName != null ?
+                new ObjectParameter("FName", fName) :
+                new ObjectParameter("FName", typeof(string));
+    
+            var lNameParameter = lName != null ?
+                new ObjectParameter("LName", lName) :
+                new ObjectParameter("LName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var dofBParameter = dofB.HasValue ?
+                new ObjectParameter("DofB", dofB) :
+                new ObjectParameter("DofB", typeof(System.DateTime));
+    
+            var degreeParameter = degree != null ?
+                new ObjectParameter("Degree", degree) :
+                new ObjectParameter("Degree", typeof(string));
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("Login", login) :
+                new ObjectParameter("Login", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewTeacherPS", fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, degreeParameter, loginParameter, passwordParameter);
         }
     }
 }

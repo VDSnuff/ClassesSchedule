@@ -37,6 +37,7 @@
         <EntityTypeShape EntityType="ClassScheduleModel.CoursesList" Width="1.5" PointX="10.375" PointY="4.75" />
         <EntityTypeShape EntityType="ClassScheduleModel.Teacher1" Width="1.5" PointX="10.375" PointY="7.75" />
         <EntityTypeShape EntityType="ClassScheduleModel.Student1" Width="1.5" PointX="7.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ClassScheduleModel.MarkList" Width="1.5" PointX="9.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -107,7 +107,7 @@
 --AS
 --SELECT                   c.ID AS ID, c.Name, c.[Description], p.FName, p.LName, t.Degree
 
-                        
+						
 --FROM					 dbo.Course AS c LEFT OUTER JOIN
 --						 dbo.CourseTeacher as cmt on c.ID = cmt.CourseID LEFT OUTER JOIN
 --						 dbo.Teacher AS t ON cmt.TeacherID = t.ID LEFT OUTER JOIN
@@ -148,3 +148,54 @@
 --from Person as p inner join 
 --     Student as s on p.ID = s.PersonID 
 
+--Create View MarkList
+--  as
+--  select top 1000 m.ID as [ID], c.Name as [Course], ps.FName + ' ' + ps.LName as [Student], m.Value, cs.StartTime as [Date], pt.FName + ' ' + pt.LName as [Teacher], t.Degree 
+--  from Mark as m left join
+--  ClassSchedule as cs on cs.ID = m.ClassScheduleID left join
+--  Student as s on m.StudentID = s.ID left join
+--  Teacher as t on m.TeacherID = t.ID left join
+--  Person as ps on s.PersonID = ps.ID left join
+--  Person as pt on t.PersonID = pt.ID left join
+--  Course as c on cs.CourseID = c.ID
+--  order by [Date]
+
+--create procedure AddNewDate @STime datetime2(7), 
+--							  @ETime datetime2(7),
+--							  @ClassR int,
+--							  @Course int,
+--							  @Teacher int
+							  
+--as
+--begin
+--insert into ClassSchedule (StartTime, EndTime, ClassRoomID, CourseID, TeacherID)
+--values(@STime, @ETime, @ClassR, @Course, @Teacher)
+--end 
+ 
+
+-- ALTER procedure [dbo].[AddNewDate] @STime datetime2(7), 
+--								   @ETime datetime2(7),
+--								   @ClassR varchar(15),
+--								   @Course nvarchar(200),
+--								   @Teacher nvarchar(100)
+							  
+--as
+--begin
+--insert into ClassSchedule (StartTime, EndTime, ClassRoomID, CourseID, TeacherID)
+--values(
+-- @STime, 
+-- @ETime, 
+-- (select cr.ID from ClassRoom as cr where cr.ClassNumber = @ClassR), 
+-- (select c.ID from Course as c where c.Name =  @Course), 
+-- (select t.ID from Teacher as t join Person as p on t.PersonID = p.ID where p.LName = @Teacher))
+--end 
+  
+
+--  create procedure AddNewCourse 
+--								@Name nvarchar(200),
+--								@Description nvarchar(1000)
+--as
+--begin
+--insert into Course(Name, [Description])
+--values(@Name, @Description) 
+--end

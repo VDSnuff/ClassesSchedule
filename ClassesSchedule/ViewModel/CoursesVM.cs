@@ -11,5 +11,9 @@ namespace ClassesSchedule.ViewModel
         public IEnumerable<CoursesList> CoursesList { get; set; }
 
         public IEnumerable<Courses1_Result> CoursesUser { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
     }
 }
