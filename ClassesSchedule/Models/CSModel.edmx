@@ -410,6 +410,23 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <Parameter Name="Course" Type="nvarchar" Mode="In" />
           <Parameter Name="Teacher" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="AddNewMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Course" Type="nvarchar" Mode="In" />
+          <Parameter Name="Student" Type="int" Mode="In" />
+          <Parameter Name="Mark" Type="tinyint" Mode="In" />
+          <Parameter Name="When" Type="nvarchar" Mode="In" />
+          <Parameter Name="Teacher" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AddNewStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="DofB" Type="date" Mode="In" />
+          <Parameter Name="Spec" Type="nvarchar" Mode="In" />
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="AddNewTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FName" Type="nvarchar" Mode="In" />
           <Parameter Name="LName" Type="nvarchar" Mode="In" />
@@ -1061,6 +1078,40 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
             <Parameter Name="Login" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="AddNewStudent">
+            <Parameter Name="FName" Mode="In" Type="String" />
+            <Parameter Name="LName" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="DofB" Mode="In" Type="DateTime" />
+            <Parameter Name="Spec" Mode="In" Type="String" />
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewStudentSP">
+            <Parameter Name="FName" Mode="In" Type="String" />
+            <Parameter Name="LName" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="DofB" Mode="In" Type="DateTime" />
+            <Parameter Name="Spec" Mode="In" Type="String" />
+            <Parameter Name="Login" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewMark">
+            <Parameter Name="Course" Mode="In" Type="String" />
+            <Parameter Name="Student" Mode="In" Type="Int32" />
+            <Parameter Name="Mark" Mode="In" Type="Byte" />
+            <Parameter Name="When" Mode="In" Type="String" />
+            <Parameter Name="Teacher" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddNewMarkSP">
+            <Parameter Name="Course" Mode="In" Type="String" />
+            <Parameter Name="Student" Mode="In" Type="Int32" />
+            <Parameter Name="Mark" Mode="In" Type="Byte" />
+            <Parameter Name="When" Mode="In" Type="String" />
+            <Parameter Name="Teacher" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Login_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1560,6 +1611,10 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <FunctionImportMapping FunctionImportName="AddNewCourseSP" FunctionName="ClassScheduleModel.Store.AddNewCourse" />
           <FunctionImportMapping FunctionImportName="AddNewTeacher" FunctionName="ClassScheduleModel.Store.AddNewTeacher" />
           <FunctionImportMapping FunctionImportName="AddNewTeacherPS" FunctionName="ClassScheduleModel.Store.AddNewTeacher" />
+          <FunctionImportMapping FunctionImportName="AddNewStudent" FunctionName="ClassScheduleModel.Store.AddNewStudent" />
+          <FunctionImportMapping FunctionImportName="AddNewStudentSP" FunctionName="ClassScheduleModel.Store.AddNewStudent" />
+          <FunctionImportMapping FunctionImportName="AddNewMark" FunctionName="ClassScheduleModel.Store.AddNewMark" />
+          <FunctionImportMapping FunctionImportName="AddNewMarkSP" FunctionName="ClassScheduleModel.Store.AddNewMark" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

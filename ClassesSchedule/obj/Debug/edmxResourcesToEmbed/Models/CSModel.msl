@@ -297,5 +297,9 @@
     <FunctionImportMapping FunctionImportName="AddNewCourseSP" FunctionName="ClassScheduleModel.Store.AddNewCourse" />
     <FunctionImportMapping FunctionImportName="AddNewTeacher" FunctionName="ClassScheduleModel.Store.AddNewTeacher" />
     <FunctionImportMapping FunctionImportName="AddNewTeacherPS" FunctionName="ClassScheduleModel.Store.AddNewTeacher" />
+    <FunctionImportMapping FunctionImportName="AddNewStudent" FunctionName="ClassScheduleModel.Store.AddNewStudent" />
+    <FunctionImportMapping FunctionImportName="AddNewStudentSP" FunctionName="ClassScheduleModel.Store.AddNewStudent" />
+    <FunctionImportMapping FunctionImportName="AddNewMark" FunctionName="ClassScheduleModel.Store.AddNewMark" />
+    <FunctionImportMapping FunctionImportName="AddNewMarkSP" FunctionName="ClassScheduleModel.Store.AddNewMark" />
   </EntityContainerMapping>
 </Mapping>

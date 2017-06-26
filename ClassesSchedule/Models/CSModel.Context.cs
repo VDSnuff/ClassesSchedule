@@ -377,5 +377,129 @@ namespace ClassesSchedule.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewTeacherPS", fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, degreeParameter, loginParameter, passwordParameter);
         }
+    
+        public virtual int AddNewStudent(string fName, string lName, string phone, string email, Nullable<System.DateTime> dofB, string spec, string login, string password)
+        {
+            var fNameParameter = fName != null ?
+                new ObjectParameter("FName", fName) :
+                new ObjectParameter("FName", typeof(string));
+    
+            var lNameParameter = lName != null ?
+                new ObjectParameter("LName", lName) :
+                new ObjectParameter("LName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var dofBParameter = dofB.HasValue ?
+                new ObjectParameter("DofB", dofB) :
+                new ObjectParameter("DofB", typeof(System.DateTime));
+    
+            var specParameter = spec != null ?
+                new ObjectParameter("Spec", spec) :
+                new ObjectParameter("Spec", typeof(string));
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("Login", login) :
+                new ObjectParameter("Login", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewStudent", fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, specParameter, loginParameter, passwordParameter);
+        }
+    
+        public virtual int AddNewStudentSP(string fName, string lName, string phone, string email, Nullable<System.DateTime> dofB, string spec, string login, string password)
+        {
+            var fNameParameter = fName != null ?
+                new ObjectParameter("FName", fName) :
+                new ObjectParameter("FName", typeof(string));
+    
+            var lNameParameter = lName != null ?
+                new ObjectParameter("LName", lName) :
+                new ObjectParameter("LName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var dofBParameter = dofB.HasValue ?
+                new ObjectParameter("DofB", dofB) :
+                new ObjectParameter("DofB", typeof(System.DateTime));
+    
+            var specParameter = spec != null ?
+                new ObjectParameter("Spec", spec) :
+                new ObjectParameter("Spec", typeof(string));
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("Login", login) :
+                new ObjectParameter("Login", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewStudentSP", fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, specParameter, loginParameter, passwordParameter);
+        }
+    
+        public virtual int AddNewMark(string course, Nullable<int> student, Nullable<byte> mark, string when, string teacher)
+        {
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            var studentParameter = student.HasValue ?
+                new ObjectParameter("Student", student) :
+                new ObjectParameter("Student", typeof(int));
+    
+            var markParameter = mark.HasValue ?
+                new ObjectParameter("Mark", mark) :
+                new ObjectParameter("Mark", typeof(byte));
+    
+            var whenParameter = when != null ?
+                new ObjectParameter("When", when) :
+                new ObjectParameter("When", typeof(string));
+    
+            var teacherParameter = teacher != null ?
+                new ObjectParameter("Teacher", teacher) :
+                new ObjectParameter("Teacher", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewMark", courseParameter, studentParameter, markParameter, whenParameter, teacherParameter);
+        }
+    
+        public virtual int AddNewMarkSP(string course, Nullable<int> student, Nullable<byte> mark, string when, string teacher)
+        {
+            var courseParameter = course != null ?
+                new ObjectParameter("Course", course) :
+                new ObjectParameter("Course", typeof(string));
+    
+            var studentParameter = student.HasValue ?
+                new ObjectParameter("Student", student) :
+                new ObjectParameter("Student", typeof(int));
+    
+            var markParameter = mark.HasValue ?
+                new ObjectParameter("Mark", mark) :
+                new ObjectParameter("Mark", typeof(byte));
+    
+            var whenParameter = when != null ?
+                new ObjectParameter("When", when) :
+                new ObjectParameter("When", typeof(string));
+    
+            var teacherParameter = teacher != null ?
+                new ObjectParameter("Teacher", teacher) :
+                new ObjectParameter("Teacher", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewMarkSP", courseParameter, studentParameter, markParameter, whenParameter, teacherParameter);
+        }
     }
 }

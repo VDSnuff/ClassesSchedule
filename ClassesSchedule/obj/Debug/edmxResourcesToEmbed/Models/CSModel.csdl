@@ -434,6 +434,40 @@
       <Parameter Name="Login" Mode="In" Type="String" />
       <Parameter Name="Password" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="AddNewStudent">
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="DofB" Mode="In" Type="DateTime" />
+      <Parameter Name="Spec" Mode="In" Type="String" />
+      <Parameter Name="Login" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddNewStudentSP">
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="DofB" Mode="In" Type="DateTime" />
+      <Parameter Name="Spec" Mode="In" Type="String" />
+      <Parameter Name="Login" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddNewMark">
+      <Parameter Name="Course" Mode="In" Type="String" />
+      <Parameter Name="Student" Mode="In" Type="Int32" />
+      <Parameter Name="Mark" Mode="In" Type="Byte" />
+      <Parameter Name="When" Mode="In" Type="String" />
+      <Parameter Name="Teacher" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="AddNewMarkSP">
+      <Parameter Name="Course" Mode="In" Type="String" />
+      <Parameter Name="Student" Mode="In" Type="Int32" />
+      <Parameter Name="Mark" Mode="In" Type="Byte" />
+      <Parameter Name="When" Mode="In" Type="String" />
+      <Parameter Name="Teacher" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Login_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />

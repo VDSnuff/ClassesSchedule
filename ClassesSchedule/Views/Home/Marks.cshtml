@@ -36,32 +36,64 @@
             </tbody>
         </table>
 
-        @*<h2 style="text-align:center; margin-bottom:2%; margin-top:5%;">Your Course</h2>
-            <div>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Course</th>
-                            <th>Description</th>
-                            <th>Teacher</th>
-                            <th>Degree</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{int j = 1;}
-                        @foreach (var it in Model.CoursesUser)
-                {
-                            <tr>
+        <button type="button" style="float:right; margin-top:15px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Mark</button>
 
-                                <td>@j @{j++;}</td>
+        <!-- Modal -->
+        @using (Html.BeginForm("PostNewMark", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewMark" }))
+            {
 
-                                <td>@it.Name</td>
-                                <td>@it.Description</td>
-                                <td>@it.Teacher</td>
-                                <td>@it.Degree</td>
-                            </tr>
-                                    }
-                    </tbody>
-                </table>*@
-        <button style="float:right; margin-top:15px;" class="btn btn-primary">Add New Mark</button>
+            @Html.HiddenFor(m => Model.Teacher)
+
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Add New Mark</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            @*TEST*@
+                            <form class="form-horizontal">
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
+                                    <div class="col-sm-8">
+                                        @Html.DropDownListFor(m => Model.Course, new SelectList(Model.Course), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-4 control-label" for="formGroupInputSmall">Student ID</label>
+                                    <div class="col-sm-8">
+                                        @Html.EditorFor(model => Model.StudentID, new { htmlAttributes = new { @class = "form-control", @placeholder = "ID", @required = "true", @autofocus = "true" } })
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label class="col-sm-4 control-label" for="formGroupInputSmall">Mark</label>
+                                    <div class="col-sm-8">
+                                        @Html.EditorFor(model => Model.Mark, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mark", @required = "true", @autofocus = "true" } })
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-lg">
+                                    <label class="col-sm-4 control-label" for="formGroupInputLarge">When</label>
+                                    <div class="col-sm-8">
+                                        @Html.DropDownListFor(m => Model.Date, new SelectList(Model.Date), "When", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-lg">
+                                    <label class="col-sm-4 control-label" for="formGroupInputLarge">Teacher</label>
+                                    <div class="col-sm-8">
+                                        @Html.EditorFor(model => Model.Teacher, new { htmlAttributes = new { @class = "form-control", @placeholder = "Teacher", @required = "true", @autofocus = "true", @disabled = "disabled" } })
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Add</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }

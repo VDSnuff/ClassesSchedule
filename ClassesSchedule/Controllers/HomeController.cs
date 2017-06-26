@@ -71,7 +71,26 @@ namespace ClassesSchedule.Controllers
             MarksVM model = new MarksVM();
             using (var ctx = new CSEntities())
             {
+                model.Teacher = Session["LNAME"].ToString();
+                model.TeacherID = Int32.Parse(Session["ID"].ToString());
+
                 model.MarksList = (from t in ctx.MarkLists select t).ToList();
+
+               // model.Course = (from t in ctx.Courses select t.Name).ToList();
+
+
+                model.Course = (from c in ctx.Courses
+                              join ct in ctx.CourseTeachers on c.ID equals ct.CourseID
+                              join t in ctx.Teachers on ct.TeacherID equals t.ID
+                              join p in ctx.People on t.PersonID equals p.ID
+                              where p.ID == model.TeacherID
+                              select c.Name).ToList();
+
+                model.Date = (from cs in ctx.ClassSchedules
+                              join t in ctx.Teachers on cs.TeacherID equals t.ID
+                              join p in ctx.People on t.PersonID equals p.ID
+                              where p.ID == model.TeacherID  
+                              select cs.StartTime ).ToList();
             }
             return View(model);
         }
@@ -124,6 +143,7 @@ namespace ClassesSchedule.Controllers
                     Session["ID"] = loggedUser.ID;
                     Session["ROLE"] = loggedUser.RoleID;
                     Session["FNAME"] = loggedUser.FName;
+                    Session["LNAME"] = loggedUser.LName;
                     return RedirectToAction("Main");
                 }
             }
@@ -153,6 +173,38 @@ namespace ClassesSchedule.Controllers
 
                     return RedirectToAction("Courses", "Home");
                 }
+        }
+
+        [HttpPost]
+        public ActionResult PostNewTeacher(TeachersVM post)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.AddNewTeacher(post.FName, post.LName, post.Phone, post.Email, post.DofB, post.Degree, post.Login, post.Password);
+
+                return RedirectToAction("Teachers", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult PostNewStudent(StudentsVM post)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.AddNewStudent(post.FName, post.LName, post.Phone, post.Email, post.DofB, post.Spec, post.Login, post.Password);
+
+                return RedirectToAction("Students", "Home");
+            }
+        }
+
+        public ActionResult PostNewMark(MarksVM post)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.AddNewMark(post.Course.FirstOrDefault(), post.StudentID, post.Mark, post.Date.FirstOrDefault().ToString(), post.Teacher);
+
+                return RedirectToAction("Marks", "Home");
+            }
         }
         #endregion
     }

@@ -72,11 +72,10 @@
                 </tbody>
             </table>
             @*TEST*@
-           @if (Session["ROLE"] != null || Session["FNAME"] != null || Session["ID"] != null && Session["ROLE"].ToString() == "3" || Session["ROLE"].ToString() == "4")
-           {
+          
+           
             <button type="button" style="float:right; margin-top:15px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Date</button>
-           }
-           else { }
+          
             <!-- Modal -->
             @using (Html.BeginForm("PostNewDate", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewDate" }))
             {

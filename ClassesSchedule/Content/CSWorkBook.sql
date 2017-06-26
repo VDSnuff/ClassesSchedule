@@ -199,3 +199,48 @@
 --insert into Course(Name, [Description])
 --values(@Name, @Description) 
 --end
+
+--ALTER procedure [dbo].[AddNewStudent]
+--							   @FName nvarchar(100),
+--							   @LName nvarchar(100),
+--							   @Phone varchar(15),
+--							   @Email nvarchar(50),
+--							   @DofB date,
+--							   @Spec nvarchar(50),
+--							   @Login nvarchar(100),
+--							   @Password nvarchar(50)
+--as
+--declare @PersID int
+--insert into Person(FName, LName, Phone, Email, DateOfBirth, RoleID, [Login], [Password])
+--values(@FName, @LName, @Phone, @Email, @DofB, 4, @Login, @Password)
+
+--set @PersID = SCOPE_IDENTITY()
+
+--insert into Student(PersonID, Specialization)
+--values(@PersID, @Spec)
+
+--ALTER procedure [dbo].[AddNewMark] 
+--							@Course nvarchar(200),
+--							@Student int,
+--							@Mark tinyint,
+--							@When nvarchar(50),
+--							@Teacher nvarchar(100)
+--as
+--begin
+
+--insert into Mark( StudentID, ClassScheduleID, TeacherID, CourseID, Value)
+--values(
+--@Student, 
+
+--(select cs.ID from ClassSchedule as cs where cs.CourseID = 
+--														(select c.ID from Course as c where c.Name = @Course)
+--														and cs.StartTime = @When and cs.TeacherID = 
+--														(select t.ID from Teacher as t left join Person as p on t.PersonID = p.ID where p.LName = @Teacher)),
+
+--(select t.ID from Teacher as t left join Person as p on t.PersonID = p.ID where p.LName = @Teacher),
+
+--(select c.ID from Course as c where c.Name = @Course),
+
+--@Mark
+--) 
+--end
