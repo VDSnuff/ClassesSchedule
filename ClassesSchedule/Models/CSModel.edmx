@@ -437,6 +437,10 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <Parameter Name="Login" Type="nvarchar" Mode="In" />
           <Parameter Name="Password" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="AssignTeacherForCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Teacher" Type="int" Mode="In" />
+          <Parameter Name="CourseID" Type="int" Mode="In" />
+        </Function>
         <Function Name="Courses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
           <ReturnType>
@@ -450,6 +454,9 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
               </RowType>
             </CollectionType>
           </ReturnType>
+        </Function>
+        <Function Name="DelCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CourseID" Type="int" Mode="In" />
         </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -502,6 +509,11 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CourseID" Type="int" Mode="In" />
+          <Parameter Name="CName" Type="nvarchar" Mode="In" />
+          <Parameter Name="CDescription" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="ClassScheduleModelStoreContainer">
           <EntitySet Name="ClassRoom" EntityType="Self.ClassRoom" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassSchedule" EntityType="Self.ClassSchedule" Schema="dbo" store:Type="Tables" />
@@ -1112,6 +1124,30 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
             <Parameter Name="When" Mode="In" Type="String" />
             <Parameter Name="Teacher" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="AssignTeacherForCourse">
+            <Parameter Name="Teacher" Mode="In" Type="Int32" />
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AssignTforC">
+            <Parameter Name="Teacher" Mode="In" Type="Int32" />
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DelCourse">
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCourse">
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+            <Parameter Name="CName" Mode="In" Type="String" />
+            <Parameter Name="CDescription" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DelCourseSP">
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCourseSP">
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+            <Parameter Name="CName" Mode="In" Type="String" />
+            <Parameter Name="CDescription" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Login_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1615,6 +1651,12 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <FunctionImportMapping FunctionImportName="AddNewStudentSP" FunctionName="ClassScheduleModel.Store.AddNewStudent" />
           <FunctionImportMapping FunctionImportName="AddNewMark" FunctionName="ClassScheduleModel.Store.AddNewMark" />
           <FunctionImportMapping FunctionImportName="AddNewMarkSP" FunctionName="ClassScheduleModel.Store.AddNewMark" />
+          <FunctionImportMapping FunctionImportName="AssignTeacherForCourse" FunctionName="ClassScheduleModel.Store.AssignTeacherForCourse" />
+          <FunctionImportMapping FunctionImportName="AssignTforC" FunctionName="ClassScheduleModel.Store.AssignTeacherForCourse" />
+          <FunctionImportMapping FunctionImportName="DelCourse" FunctionName="ClassScheduleModel.Store.DelCourse" />
+          <FunctionImportMapping FunctionImportName="UpdateCourse" FunctionName="ClassScheduleModel.Store.UpdateCourse" />
+          <FunctionImportMapping FunctionImportName="DelCourseSP" FunctionName="ClassScheduleModel.Store.DelCourse" />
+          <FunctionImportMapping FunctionImportName="UpdateCourseSP" FunctionName="ClassScheduleModel.Store.UpdateCourse" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

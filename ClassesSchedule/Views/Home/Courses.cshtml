@@ -15,6 +15,7 @@
                     <th>Description</th>
                     <th>Teacher</th>
                     <th>Degree</th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -22,13 +23,17 @@
                 @foreach (var item in Model.CoursesList)
             {
                     <tr>
-
                         <td>@i @{i++;}</td>
                         <td>@item.Name </td>
                         <td>@item.Description</td>
                         <td>@item.Teacher</td>
                         <td>@item.Degree</td>
-                    </tr>
+                        @if (item.Description != "!!! --- COURSE CLOSED --- !!!")
+                        {
+                        <td><button class="btn btn-sm btn-info" onclick="@item.ID">Update</button></td>
+                        <td><button class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("DelCourse", "Home", new { ID = item.ID })'">Close</button></td>
+                        }
+                      </tr>
                             }
             </tbody>
         </table>
@@ -62,41 +67,51 @@
                 </tbody>
             </table>
             @*TEST*@
-          
-            
-                <button type="button" style="float:right; margin-top:15px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Course</button>
-            <!-- Modal -->
-            @using (Html.BeginForm("PostNewCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewCourse" }))
+            @*onclick="location.href='@Url.Action("AssignTeacherForCourse", "Home")'"*@
+
+            <div class="row">
+                <div class="col-sm-offset-8 col-sm-2">
+                    <button type="button" style="float:right; margin-top:15px; display:inline-block;" class="btn btn-primary" data-toggle="modal" data-target="#ATFC">Assign Teacher</button>
+                </div>
+
+                <div class="col-sm-2">
+                    <button type="button" style="float:right; margin-top:15px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Course</button>
+                </div>
+            </div>
+           
+            <!-- Modal Assign Teacher-->
+            @using (Html.BeginForm("AssignTeacherForCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AssignTeacherForCourse" }))
             {
                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                <div id="myModal" class="modal fade" role="dialog">
+                <div id="ATFC" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Add New Date</h4>
+                                <h4 class="modal-title">Assign Teacher</h4>
                             </div>
                             <div class="modal-body">
 
                                 @*TEST*@
                                 <form class="form-horizontal">
                                     <div class="form-group form-group-sm">
-                                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Start Time</label>
+                                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Teacher</label>
                                         <div class="col-sm-8">
-                                            @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "Course Name", @required = "true", @autofocus = "true" } })
+                                            @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
+                                            
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm">
-                                        <label class="col-sm-4 control-label" for="formGroupInputSmall">End Time</label>
+                                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
                                         <div class="col-sm-8">
-                                            @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @required = "true", @autofocus = "true",  @cols = 300, @rows = 10, maxlength = "1000" })
+                                            @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" }) 
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary">Add Course</button>
+                                <button type="submit" class="btn btn-primary">Assign</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -107,19 +122,58 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    //jQuery('#datetimepicker3').datetimepicker({
-    //    format: 'd.m.Y H:i',
-    //    inline: true,
-    //    lang: 'ru'
-    //});
+<!-- Modal Add New Course-->
+@using (Html.BeginForm("PostNewCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewCourse" }))
+            {
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Course</h4>
+                </div>
+                <div class="modal-body">
 
-    @*$('input[type="datetime"]').datetimepicker({
-      timepicker: true,
-      step: 1,
-      closeOnDateSelect: true,
-      format: '@ViewBag.PerlShortDateTimeFormat',
-      lang: '@ViewBag.Language',
-      scrollInput: false
-    });*@
+                    @*TEST*@
+                    <form class="form-horizontal">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Start Time</label>
+                            <div class="col-sm-8">
+                                @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "Course Name", @required = "true", @autofocus = "true" } })
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label" for="formGroupInputSmall">End Time</label>
+                            <div class="col-sm-8">
+                                @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @required = "true", @autofocus = "true", @cols = 300, @rows = 10, maxlength = "1000" })
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add Course</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+   function CallDelAction(ID)
+    {
+       $.ajax({
+           url: "/ControllerName/ActionName",
+           success: function () {
+               alert("success");
+           }
+       });
+    }
+
 </script>

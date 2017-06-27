@@ -432,6 +432,10 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     <Parameter Name="Login" Type="nvarchar" Mode="In" />
     <Parameter Name="Password" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="AssignTeacherForCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Teacher" Type="int" Mode="In" />
+    <Parameter Name="CourseID" Type="int" Mode="In" />
+  </Function>
   <Function Name="Courses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <ReturnType>
@@ -445,6 +449,9 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
         </RowType>
       </CollectionType>
     </ReturnType>
+  </Function>
+  <Function Name="DelCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CourseID" Type="int" Mode="In" />
   </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -497,6 +504,11 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="UpdateCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CourseID" Type="int" Mode="In" />
+    <Parameter Name="CName" Type="nvarchar" Mode="In" />
+    <Parameter Name="CDescription" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="ClassScheduleModelStoreContainer">
     <EntitySet Name="ClassRoom" EntityType="Self.ClassRoom" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ClassSchedule" EntityType="Self.ClassSchedule" Schema="dbo" store:Type="Tables" />

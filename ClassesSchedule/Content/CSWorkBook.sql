@@ -244,3 +244,66 @@
 --@Mark
 --) 
 --end
+
+
+--create procedure AssignTeacherForCourse 
+--										@Teacher int,
+--										@CourseID int
+
+--as
+
+--declare @id as int
+
+--select @id = CourseID from CourseTeacher where CourseID = @CourseID
+
+--if @id is null
+--	begin
+--		insert into CourseTeacher (TeacherID, CourseID)
+--		values(@Teacher, @CourseID)
+--	end
+--else
+--	begin
+--		update CourseTeacher
+--		set TeacherID = @Teacher
+--		where CourseID = @CourseID 
+--	end
+
+
+--create procedure UpdateCourse 
+--								@CourseID int,
+--								@CName nvarchar(200) = null,
+--								@CDescription nvarchar(1000) = null
+--as
+
+--if @CName is not null
+--begin
+--update Course set Name = @CName
+--where ID = @CourseID
+--end
+
+--if @CDescription is not null
+--begin
+--update Course set Description = @CDescription
+--where ID = @CourseID
+--end
+
+
+--create procedure DelCourse
+--							@CourseID int
+--as
+--begin
+--delete from Course
+--where ID = @CourseID
+--end
+
+
+--ALTER procedure [dbo].[DelCourse]
+--							@CourseID int
+--as
+--begin
+--update Course
+--set [Description] = '!!! --- COURSE CLOSED --- !!!'
+--where ID = @CourseID
+--end
+
+

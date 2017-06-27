@@ -468,6 +468,30 @@
       <Parameter Name="When" Mode="In" Type="String" />
       <Parameter Name="Teacher" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="AssignTeacherForCourse">
+      <Parameter Name="Teacher" Mode="In" Type="Int32" />
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AssignTforC">
+      <Parameter Name="Teacher" Mode="In" Type="Int32" />
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DelCourse">
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateCourse">
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+      <Parameter Name="CName" Mode="In" Type="String" />
+      <Parameter Name="CDescription" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DelCourseSP">
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateCourseSP">
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+      <Parameter Name="CName" Mode="In" Type="String" />
+      <Parameter Name="CDescription" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Login_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />

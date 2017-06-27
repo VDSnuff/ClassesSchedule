@@ -501,5 +501,83 @@ namespace ClassesSchedule.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewMarkSP", courseParameter, studentParameter, markParameter, whenParameter, teacherParameter);
         }
+    
+        public virtual int AssignTeacherForCourse(Nullable<int> teacher, Nullable<int> courseID)
+        {
+            var teacherParameter = teacher.HasValue ?
+                new ObjectParameter("Teacher", teacher) :
+                new ObjectParameter("Teacher", typeof(int));
+    
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AssignTeacherForCourse", teacherParameter, courseIDParameter);
+        }
+    
+        public virtual int AssignTforC(Nullable<int> teacher, Nullable<int> courseID)
+        {
+            var teacherParameter = teacher.HasValue ?
+                new ObjectParameter("Teacher", teacher) :
+                new ObjectParameter("Teacher", typeof(int));
+    
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AssignTforC", teacherParameter, courseIDParameter);
+        }
+    
+        public virtual int DelCourse(Nullable<int> courseID)
+        {
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DelCourse", courseIDParameter);
+        }
+    
+        public virtual int UpdateCourse(Nullable<int> courseID, string cName, string cDescription)
+        {
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            var cNameParameter = cName != null ?
+                new ObjectParameter("CName", cName) :
+                new ObjectParameter("CName", typeof(string));
+    
+            var cDescriptionParameter = cDescription != null ?
+                new ObjectParameter("CDescription", cDescription) :
+                new ObjectParameter("CDescription", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCourse", courseIDParameter, cNameParameter, cDescriptionParameter);
+        }
+    
+        public virtual int DelCourseSP(Nullable<int> courseID)
+        {
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DelCourseSP", courseIDParameter);
+        }
+    
+        public virtual int UpdateCourseSP(Nullable<int> courseID, string cName, string cDescription)
+        {
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            var cNameParameter = cName != null ?
+                new ObjectParameter("CName", cName) :
+                new ObjectParameter("CName", typeof(string));
+    
+            var cDescriptionParameter = cDescription != null ?
+                new ObjectParameter("CDescription", cDescription) :
+                new ObjectParameter("CDescription", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCourseSP", courseIDParameter, cNameParameter, cDescriptionParameter);
+        }
     }
 }

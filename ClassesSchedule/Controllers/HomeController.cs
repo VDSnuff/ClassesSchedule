@@ -37,8 +37,25 @@ namespace ClassesSchedule.Controllers
             CoursesVM model = new CoursesVM();
             using (var ctx = new CSEntities())
             {
-                model.CoursesList = (from t in ctx.CoursesLists select t).ToList();
+                // Drop Down List For Teachers
+                model.TeacherList = (from t in ctx.Teachers select t).ToList();
+                List<SelectListItem> itemsT = new List<SelectListItem>();
+                foreach (var item in model.TeacherList)
+                {
+                    itemsT.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.Person.FName + " " + item.Person.LName});
+                }
+                model.ValuesT = itemsT;
 
+                // Drop Down List For Courses
+                model.CoursesList = (from c in ctx.CoursesLists select c).ToList();
+                List<SelectListItem> itemsC = new List<SelectListItem>();
+                foreach (var item in model.CoursesList)
+                {
+                    itemsC.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.Name});
+                }
+                model.ValuesC = itemsC;
+
+                //List of Courses
                 model.CoursesUser = ctx.Courses1(Convert.ToInt32(Session["ID"])).ToList();
             }
             return View(model);
@@ -76,9 +93,6 @@ namespace ClassesSchedule.Controllers
 
                 model.MarksList = (from t in ctx.MarkLists select t).ToList();
 
-               // model.Course = (from t in ctx.Courses select t.Name).ToList();
-
-
                 model.Course = (from c in ctx.Courses
                               join ct in ctx.CourseTeachers on c.ID equals ct.CourseID
                               join t in ctx.Teachers on ct.TeacherID equals t.ID
@@ -105,6 +119,7 @@ namespace ClassesSchedule.Controllers
             Session["ID"] = null;
             Session["ROLE"] = null;
             Session["FNAME"] = null;
+            Session["LNAME"] = null;
 
             return View("Login");
         }
@@ -197,6 +212,7 @@ namespace ClassesSchedule.Controllers
             }
         }
 
+        [HttpPost]
         public ActionResult PostNewMark(MarksVM post)
         {
             using (var ctx = new CSEntities())
@@ -206,6 +222,28 @@ namespace ClassesSchedule.Controllers
                 return RedirectToAction("Marks", "Home");
             }
         }
+
+        public ActionResult AssignTeacherForCourse(CoursesVM post)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.AssignTeacherForCourse(post.SelectedValuesT.FirstOrDefault(), post.SelectedValuesC.FirstOrDefault());
+
+                return RedirectToAction("Courses", "Home");
+            }
+        }
+
+        public ActionResult DelCourse(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.DelCourse(ID);
+
+                return RedirectToAction("Courses", "Home");
+            }
+        }
+
+
         #endregion
     }
 }

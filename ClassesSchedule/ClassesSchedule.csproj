@@ -332,6 +332,7 @@
       <DependentUpon>CSModel.edmx</DependentUpon>
     </Content>
     <Content Include="Content\ClassSchedule.bak" />
+    <Content Include="Content\ClassSchedule_20170627.bak" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

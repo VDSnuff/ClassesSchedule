@@ -301,5 +301,11 @@
     <FunctionImportMapping FunctionImportName="AddNewStudentSP" FunctionName="ClassScheduleModel.Store.AddNewStudent" />
     <FunctionImportMapping FunctionImportName="AddNewMark" FunctionName="ClassScheduleModel.Store.AddNewMark" />
     <FunctionImportMapping FunctionImportName="AddNewMarkSP" FunctionName="ClassScheduleModel.Store.AddNewMark" />
+    <FunctionImportMapping FunctionImportName="AssignTeacherForCourse" FunctionName="ClassScheduleModel.Store.AssignTeacherForCourse" />
+    <FunctionImportMapping FunctionImportName="AssignTforC" FunctionName="ClassScheduleModel.Store.AssignTeacherForCourse" />
+    <FunctionImportMapping FunctionImportName="DelCourse" FunctionName="ClassScheduleModel.Store.DelCourse" />
+    <FunctionImportMapping FunctionImportName="UpdateCourse" FunctionName="ClassScheduleModel.Store.UpdateCourse" />
+    <FunctionImportMapping FunctionImportName="DelCourseSP" FunctionName="ClassScheduleModel.Store.DelCourse" />
+    <FunctionImportMapping FunctionImportName="UpdateCourseSP" FunctionName="ClassScheduleModel.Store.UpdateCourse" />
   </EntityContainerMapping>
 </Mapping>
