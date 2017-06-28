@@ -27,7 +27,7 @@ namespace ClassesSchedule.Controllers
 
                 model.TeacherList = (from t in ctx.Teachers select t.Person.LName).ToList();
 
-                model.CourseList = (from t in ctx.Courses select t.Name).ToList();
+                model.CourseList = (from t in ctx.Courses where t.Closed == false select t.Name).ToList();
             }
             return View(model);
         }
@@ -97,7 +97,7 @@ namespace ClassesSchedule.Controllers
                               join ct in ctx.CourseTeachers on c.ID equals ct.CourseID
                               join t in ctx.Teachers on ct.TeacherID equals t.ID
                               join p in ctx.People on t.PersonID equals p.ID
-                              where p.ID == model.TeacherID
+                              where p.ID == model.TeacherID && c.Closed == false
                               select c.Name).ToList();
 
                 model.Date = (from cs in ctx.ClassSchedules
@@ -223,6 +223,17 @@ namespace ClassesSchedule.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult UpdateCourse(CoursesVM post)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.UpdateCourse(Int32.Parse(post.HelpID), post.Name, post.Description);
+
+                return RedirectToAction("Courses", "Home");
+            }
+        }
+
         public ActionResult AssignTeacherForCourse(CoursesVM post)
         {
             using (var ctx = new CSEntities())
@@ -243,6 +254,26 @@ namespace ClassesSchedule.Controllers
             }
         }
 
+
+        public ActionResult DelMark(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.DelMark(ID);
+
+                return RedirectToAction("Marks", "Home");
+            }
+        }
+
+        public ActionResult StartCourse(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+               ctx.StartCourse(ID);
+
+               return RedirectToAction("Courses", "Home");
+            }
+        }
 
         #endregion
     }

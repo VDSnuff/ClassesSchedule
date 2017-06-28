@@ -306,4 +306,8 @@
 --where ID = @CourseID
 --end
 
-
+--create procedure StartCourse @id int
+--as
+--update Course 
+--set Closed = 0
+--where ID = @id

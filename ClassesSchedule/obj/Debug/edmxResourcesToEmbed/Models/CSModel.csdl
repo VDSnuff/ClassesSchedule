@@ -49,6 +49,7 @@
     <NavigationProperty Name="Marks" Relationship="Self.FK_Mark_Course" FromRole="Course" ToRole="Mark" />
     <NavigationProperty Name="CourseStudents" Relationship="ClassScheduleModel.FK_CourseStudent_Course" FromRole="Course" ToRole="CourseStudent" />
     <NavigationProperty Name="CourseTeachers" Relationship="ClassScheduleModel.FK_CourseTeacher_Course" FromRole="Course" ToRole="CourseTeacher" />
+    <Property Name="Closed" Type="Boolean" />
   </EntityType>
   <EntityType Name="Mark">
     <Key>
@@ -101,6 +102,7 @@
     <NavigationProperty Name="Marks" Relationship="Self.FK_Mark_Student" FromRole="Student" ToRole="Mark" />
     <NavigationProperty Name="Person" Relationship="Self.FK_Student_Person" FromRole="Student" ToRole="Person" />
     <NavigationProperty Name="CourseStudents" Relationship="ClassScheduleModel.FK_CourseStudent_Student" FromRole="Student" ToRole="CourseStudent" />
+    <Property Name="Dismiss" Type="Boolean" />
   </EntityType>
   <EntityType Name="Teacher">
     <Key>
@@ -113,6 +115,7 @@
     <NavigationProperty Name="Marks" Relationship="Self.FK_Mark_Teacher" FromRole="Teacher" ToRole="Mark" />
     <NavigationProperty Name="Person" Relationship="Self.FK_Teacher_Person" FromRole="Teacher" ToRole="Person" />
     <NavigationProperty Name="CourseTeachers" Relationship="ClassScheduleModel.FK_CourseTeacher_Teacher" FromRole="Teacher" ToRole="CourseTeacher" />
+    <Property Name="Dismiss" Type="Boolean" />
   </EntityType>
   <EntityType Name="Schedule">
     <Key>
@@ -492,6 +495,15 @@
       <Parameter Name="CName" Mode="In" Type="String" />
       <Parameter Name="CDescription" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="DelMark">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DelMarkSP">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="StartCourse">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Login_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -638,6 +650,7 @@
     <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Teacher" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+    <Property Name="Closed" Type="Boolean" />
   </EntityType>
   <ComplexType Name="Courses1_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -645,6 +658,7 @@
     <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
     <Property Type="String" Name="Teacher" Nullable="true" MaxLength="201" />
     <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+    <Property Type="Boolean" Name="Closed" Nullable="false" />
   </ComplexType>
   <EntityType Name="Teacher1">
     <Key>

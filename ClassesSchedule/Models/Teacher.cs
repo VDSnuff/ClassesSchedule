@@ -25,6 +25,7 @@ namespace ClassesSchedule.Models
         public int ID { get; set; }
         public int PersonID { get; set; }
         public string Degree { get; set; }
+        public Nullable<bool> Dismiss { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClassSchedule> ClassSchedules { get; set; }

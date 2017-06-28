@@ -22,7 +22,7 @@ namespace ClassesSchedule.ViewModel
 
         public int StudentID { get; set; }
 
-
+        public int ID { get; set; }
 
     }
 }

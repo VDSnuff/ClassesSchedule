@@ -26,5 +26,7 @@ namespace ClassesSchedule.ViewModel
 
         public string Password { get; set; }
 
+        public int HelpID { get; set; }
+
     }
 }

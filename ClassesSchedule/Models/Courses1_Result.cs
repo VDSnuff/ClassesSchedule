@@ -18,5 +18,6 @@ namespace ClassesSchedule.Models
         public string Description { get; set; }
         public string Teacher { get; set; }
         public string Degree { get; set; }
+        public bool Closed { get; set; }
     }
 }

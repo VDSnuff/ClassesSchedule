@@ -38,6 +38,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Closed" Type="bit" />
   </EntityType>
   <EntityType Name="CourseStudent">
     <Key>
@@ -95,6 +96,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PersonID" Type="int" Nullable="false" />
     <Property Name="Specialization" Type="nvarchar" MaxLength="100" />
+    <Property Name="Dismiss" Type="bit" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -113,6 +115,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PersonID" Type="int" Nullable="false" />
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+    <Property Name="Dismiss" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'ClassSchedule.dbo.CoursesList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -124,6 +127,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.CoursesList' does not have a pri
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Closed" Type="bit" />
     <Property Name="Teacher" Type="nvarchar" MaxLength="201" />
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
   </EntityType>
@@ -444,6 +448,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Closed" Type="bit" />
           <Property Name="Teacher" Type="nvarchar" MaxLength="201" />
           <Property Name="Degree" Type="nvarchar" MaxLength="50" />
         </RowType>
@@ -452,6 +457,9 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
   </Function>
   <Function Name="DelCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CourseID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DelMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -504,6 +512,9 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="StartCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
   <Function Name="UpdateCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CourseID" Type="int" Mode="In" />
     <Parameter Name="CName" Type="nvarchar" Mode="In" />
@@ -527,6 +538,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     [CoursesList].[ID] AS [ID], 
     [CoursesList].[Name] AS [Name], 
     [CoursesList].[Description] AS [Description], 
+    [CoursesList].[Closed] AS [Closed], 
     [CoursesList].[Teacher] AS [Teacher], 
     [CoursesList].[Degree] AS [Degree]
     FROM [dbo].[CoursesList] AS [CoursesList]</DefiningQuery>

@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <div style="margin-top:5%; margin-bottom:10%;" class="container">
     <h2 style="text-align:center; margin-bottom:2%;">All Courses</h2>
     <div style="margin-bottom:15%;">
@@ -28,10 +29,15 @@
                         <td>@item.Description</td>
                         <td>@item.Teacher</td>
                         <td>@item.Degree</td>
-                        @if (item.Description != "!!! --- COURSE CLOSED --- !!!")
+                        @if (item.Closed == false)
                         {
-                        <td><button class="btn btn-sm btn-info" onclick="@item.ID">Update</button></td>
-                        <td><button class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("DelCourse", "Home", new { ID = item.ID })'">Close</button></td>
+                        <td><button type="button" data-toggle="modal" data-target="#UpdateCourse" class="btn btn-xs btn-info" onclick="t(@item.ID)" >Update</button></td>
+                        <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelCourse", "Home", new { ID = item.ID })'">Close</button></td>
+                        }
+                        else
+                        {
+                                <td><button  class="btn btn-xs btn-info" onclick="location.href='@Url.Action("StartCourse", "Home", new { ID = item.ID })'">Start</button></td>
+                                <td><button disabled class="btn btn-xs btn-default">Close</button></td>
                         }
                       </tr>
                             }
@@ -62,6 +68,16 @@
                             <td>@it.Description</td>
                             <td>@it.Teacher</td>
                             <td>@it.Degree</td>
+                            @if (it.Closed == false)
+                            {
+                                <td><button type="button" data-toggle="modal" data-target="#UpdateCourse" class="btn btn-xs btn-info" onclick="t(@it.ID)">Update</button></td>
+                                <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelCourse", "Home", new { ID = it.ID })'">Close</button></td>
+                            }
+                            else
+                            {
+                                <td><button class="btn btn-xs btn-info" onclick="location.href='@Url.Action("StartCourse", "Home", new { ID = it.ID })'">Start</button></td>
+                                 <td><button disabled class="btn btn-xs btn-default">Close</button></td>
+                            }
                         </tr>
                                 }
                 </tbody>
@@ -122,6 +138,49 @@
     </div>
 </div>
 
+
+<!-- Modal Update Course-->
+@using (Html.BeginForm("UpdateCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "Update" }))
+            {
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div id="UpdateCourse" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update Course</h4>
+                </div>
+                <div class="modal-body">
+
+                    @*TEST*@
+                    <form class="form-horizontal">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Name</label>
+                            <div class="col-sm-8">
+                                @*HelpID*@
+                                @Html.TextBoxFor(model => Model.HelpID, new { @class = "form-control", @id = "HelpID", @type = "hidden" })
+                                @*END*@
+                                @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Course Name", @required = "true", @autofocus = "true", @id = "Name" } })
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Description</label>
+                            <div class="col-sm-8">
+                                @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @required = "true", @autofocus = "true", @cols = 300, @rows = 10, maxlength = "1000", @id = "Description" })
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" onclick="post()">Update Course</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 <!-- Modal Add New Course-->
 @using (Html.BeginForm("PostNewCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewCourse" }))
             {
@@ -139,13 +198,13 @@
                     @*TEST*@
                     <form class="form-horizontal">
                         <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Start Time</label>
+                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Name</label>
                             <div class="col-sm-8">
-                                @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "Course Name", @required = "true", @autofocus = "true" } })
+                                @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Course Name", @required = "true", @autofocus = "true" } })
                             </div>
                         </div>
                         <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label" for="formGroupInputSmall">End Time</label>
+                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Description</label>
                             <div class="col-sm-8">
                                 @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @required = "true", @autofocus = "true", @cols = 300, @rows = 10, maxlength = "1000" })
                             </div>
@@ -165,15 +224,17 @@
 </div>
 
 <script type="text/javascript">
+    var v;
 
-   function CallDelAction(ID)
-    {
-       $.ajax({
-           url: "/ControllerName/ActionName",
-           success: function () {
-               alert("success");
-           }
-       });
+    function post() {
+        $.post("Home/UpdateCourse", { HelpID: v, Description: $("#Description").val(), }, function (data) {
+            console.log(data);
+        });
+
     }
+    function t(e) {
+        v = e;
+        $("#HelpID").val(v);
+    };
 
 </script>

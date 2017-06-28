@@ -16,6 +16,7 @@ namespace ClassesSchedule.ViewModel
 
         public IEnumerable<Teacher> TeacherList { get; set; }
 
+        public string HelpID { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }

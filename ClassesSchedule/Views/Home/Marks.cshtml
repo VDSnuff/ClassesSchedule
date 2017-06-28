@@ -31,6 +31,7 @@
                         <td>@item.Date.Value.ToShortDateString()</td>
                         <td>@item.Teacher</td>
                         <td>@item.Degree</td>
+                        <td><button class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("DelMark", "Home", new { ID = item.ID })'">Delete</button></td>
                     </tr>
                             }
             </tbody>
