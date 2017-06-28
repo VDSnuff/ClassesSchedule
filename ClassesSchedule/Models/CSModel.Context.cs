@@ -606,5 +606,105 @@ namespace ClassesSchedule.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StartCourse", idParameter);
         }
+    
+        public virtual int DismissTeacher(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DismissTeacher", idParameter);
+        }
+    
+        public virtual int UpdateTeacher(Nullable<int> id, string fName, string lName, string phone, string email, Nullable<System.DateTime> dofB, string degree, string login, string password)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var fNameParameter = fName != null ?
+                new ObjectParameter("FName", fName) :
+                new ObjectParameter("FName", typeof(string));
+    
+            var lNameParameter = lName != null ?
+                new ObjectParameter("LName", lName) :
+                new ObjectParameter("LName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var dofBParameter = dofB.HasValue ?
+                new ObjectParameter("DofB", dofB) :
+                new ObjectParameter("DofB", typeof(System.DateTime));
+    
+            var degreeParameter = degree != null ?
+                new ObjectParameter("Degree", degree) :
+                new ObjectParameter("Degree", typeof(string));
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("Login", login) :
+                new ObjectParameter("Login", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateTeacher", idParameter, fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, degreeParameter, loginParameter, passwordParameter);
+        }
+    
+        public virtual int UpdateTeacherSP(Nullable<int> id, string fName, string lName, string phone, string email, Nullable<System.DateTime> dofB, string degree, string login, string password)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var fNameParameter = fName != null ?
+                new ObjectParameter("FName", fName) :
+                new ObjectParameter("FName", typeof(string));
+    
+            var lNameParameter = lName != null ?
+                new ObjectParameter("LName", lName) :
+                new ObjectParameter("LName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var dofBParameter = dofB.HasValue ?
+                new ObjectParameter("DofB", dofB) :
+                new ObjectParameter("DofB", typeof(System.DateTime));
+    
+            var degreeParameter = degree != null ?
+                new ObjectParameter("Degree", degree) :
+                new ObjectParameter("Degree", typeof(string));
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("Login", login) :
+                new ObjectParameter("Login", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateTeacherSP", idParameter, fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, degreeParameter, loginParameter, passwordParameter);
+        }
+    
+        public virtual int DismissTeacherSP(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DismissTeacherSP", idParameter);
+        }
     }
 }

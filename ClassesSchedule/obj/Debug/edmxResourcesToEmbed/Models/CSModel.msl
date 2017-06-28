@@ -314,5 +314,9 @@
     <FunctionImportMapping FunctionImportName="DelMark" FunctionName="ClassScheduleModel.Store.DelMark" />
     <FunctionImportMapping FunctionImportName="DelMarkSP" FunctionName="ClassScheduleModel.Store.DelMark" />
     <FunctionImportMapping FunctionImportName="StartCourse" FunctionName="ClassScheduleModel.Store.StartCourse" />
+    <FunctionImportMapping FunctionImportName="DismissTeacher" FunctionName="ClassScheduleModel.Store.DismissTeacher" />
+    <FunctionImportMapping FunctionImportName="UpdateTeacher" FunctionName="ClassScheduleModel.Store.UpdateTeacher" />
+    <FunctionImportMapping FunctionImportName="UpdateTeacherSP" FunctionName="ClassScheduleModel.Store.UpdateTeacher" />
+    <FunctionImportMapping FunctionImportName="DismissTeacherSP" FunctionName="ClassScheduleModel.Store.DismissTeacher" />
   </EntityContainerMapping>
 </Mapping>

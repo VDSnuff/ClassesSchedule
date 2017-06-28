@@ -29,6 +29,8 @@
                         <td>@item.Phone</td>
                         <td>@item.Email</td>
                         <td>@item.Specialization</td>
+                        <td><button type="button" data-toggle="modal" data-target="#UpdateTeacher" class="btn btn-xs btn-info" onclick="t(@item.Student_ID)">Update</button></td>
+                        <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DismissTeacher", "Home", new { ID = item.Student_ID })'">Dismiss</button></td>
                     </tr>
                             }
             </tbody>
@@ -117,3 +119,18 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    var v;
+
+    function post() {
+        $.post("Home/UpdateStudent", { HelpID: v, Description: $("#Description").val(), }, function (data) {
+            console.log(data);
+        });
+
+    }
+    function t(e) {
+        v = e;
+        $("#HelpID").val(v);
+    };
+
+</script>

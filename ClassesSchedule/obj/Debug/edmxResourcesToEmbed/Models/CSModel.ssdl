@@ -461,6 +461,9 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
   <Function Name="DelMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="DismissTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
   <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Login" Type="nvarchar" Mode="In" />
@@ -519,6 +522,17 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     <Parameter Name="CourseID" Type="int" Mode="In" />
     <Parameter Name="CName" Type="nvarchar" Mode="In" />
     <Parameter Name="CDescription" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="FName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="DofB" Type="date" Mode="In" />
+    <Parameter Name="Degree" Type="nvarchar" Mode="In" />
+    <Parameter Name="Login" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="ClassScheduleModelStoreContainer">
     <EntitySet Name="ClassRoom" EntityType="Self.ClassRoom" Schema="dbo" store:Type="Tables" />

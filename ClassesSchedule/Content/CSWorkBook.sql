@@ -1,4 +1,4 @@
---insert into ClassSchedule.dbo.PERSON (
+﻿--insert into ClassSchedule.dbo.PERSON (
 --		person.FName,
 --		person.LName,
 --		person.DateOfBirth,
@@ -311,3 +311,37 @@
 --update Course 
 --set Closed = 0
 --where ID = @id
+
+--create procedure [dbo].[UpdateTeacher]
+--							   @id int,
+--							   @FName nvarchar(100),
+--							   @LName nvarchar(100),
+--							   @Phone varchar(15),
+--							   @Email nvarchar(50),
+--							   @DofB date,
+--							   @Degree nvarchar(50),
+--							   @Login nvarchar(25),
+--							   @Password nvarchar(50)
+--as
+--begin
+--update Teacher
+--set
+--Degree = @Degree
+--end
+
+--declare @PersonID int = (select p.ID 
+--						from Person as p left join 
+--						Teacher as t on p.ID = t.PersonID
+--					    where t.ID = @id)
+--begin
+--update Person 
+--set 
+--FName = @FName,
+--LName = @LName,
+--Phone = @Phone,
+--Email = @Email,
+--DateOfBirth = @DofB,
+--[Login] = @Login,
+--[Password] = @Password
+--where ID = @PersonID
+--end

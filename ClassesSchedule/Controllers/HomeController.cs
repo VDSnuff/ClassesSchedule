@@ -275,6 +275,28 @@ namespace ClassesSchedule.Controllers
             }
         }
 
+        public ActionResult DismissTeacher(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.DismissTeacher(ID);
+
+                return RedirectToAction("Teachers", "Home");
+            }
+        }
+
+
+        public ActionResult UpdateTeacher(TeachersVM post)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.UpdateTeacher(post.HelpID, post.FName, post.LName, post.Phone, post.Email, post.DofB, post.Degree, post.Login, post.Password);
+
+                return RedirectToAction("Teachers", "Home");
+            }
+        }
+
         #endregion
     }
 }
+

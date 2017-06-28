@@ -202,7 +202,7 @@
     var v;
 
     function post() {
-        $.post("Home/UpdateTeacher", { HelpID: v, Description: $("#Description").val(), }, function (data) {
+        $.post("Home/UpdateTeacher", { HelpID: v, FName: $("#FName").val(),  LName: $("#LName").val(), Phone: $("#Phone").val(), Email: $("#Email").val(),  DofB: $("#DofB").val(), Degree: $("#Degree").val(), Login: $("#Login").val(), Password: $("#Password").val() }, function (data) {
             console.log(data);
         });
 

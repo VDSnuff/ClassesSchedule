@@ -504,6 +504,34 @@
     <FunctionImport Name="StartCourse">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="DismissTeacher">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateTeacher">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="DofB" Mode="In" Type="DateTime" />
+      <Parameter Name="Degree" Mode="In" Type="String" />
+      <Parameter Name="Login" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateTeacherSP">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="DofB" Mode="In" Type="DateTime" />
+      <Parameter Name="Degree" Mode="In" Type="String" />
+      <Parameter Name="Login" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DismissTeacherSP">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Login_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
