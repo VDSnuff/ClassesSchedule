@@ -32,5 +32,7 @@ namespace ClassesSchedule.ViewModel
         public string Course { get; set; }
 
         public string Teacher { get; set; }
+
+        public int HelpID { get; set; }
     }
 }

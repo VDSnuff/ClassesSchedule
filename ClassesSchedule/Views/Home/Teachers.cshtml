@@ -29,8 +29,16 @@
                         <td>@item.Phone</td>
                         <td>@item.Email</td>
                         <td>@item.Degree</td>
+                        @if (item.Dismiss == false)
+                        {
                         <td><button type="button" data-toggle="modal" data-target="#UpdateTeacher" class="btn btn-xs btn-info" onclick="t(@item.Teacher_ID)">Update</button></td>
                         <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DismissTeacher", "Home", new { ID = item.Teacher_ID })'">Dismiss</button></td>
+                        }
+                        else
+                        {
+                        <td><button disabled class="btn btn-xs btn-default">Update</button></td>
+                        <td><button class="btn btn-xs btn-success" onclick="location.href='@Url.Action("InvolveTeacher", "Home", new { ID = item.Teacher_ID })'">Involve</button></td>
+                        }
                     </tr>
                             }
             </tbody>

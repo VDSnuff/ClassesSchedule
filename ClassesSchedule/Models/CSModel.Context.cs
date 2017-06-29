@@ -706,5 +706,188 @@ namespace ClassesSchedule.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DismissTeacherSP", idParameter);
         }
+    
+        public virtual int InvolveTeacher(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InvolveTeacher", idParameter);
+        }
+    
+        public virtual int InvolveTeacherSP(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InvolveTeacherSP", idParameter);
+        }
+    
+        public virtual int DismissStudent(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DismissStudent", idParameter);
+        }
+    
+        public virtual int InvolveStudent(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InvolveStudent", idParameter);
+        }
+    
+        public virtual int DismissStudentSP(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DismissStudentSP", idParameter);
+        }
+    
+        public virtual int InvolveStudentSP(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InvolveStudentSP", idParameter);
+        }
+    
+        public virtual int UpdateStudent(Nullable<int> id, string fName, string lName, string phone, string email, Nullable<System.DateTime> dofB, string spec, string login, string password)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var fNameParameter = fName != null ?
+                new ObjectParameter("FName", fName) :
+                new ObjectParameter("FName", typeof(string));
+    
+            var lNameParameter = lName != null ?
+                new ObjectParameter("LName", lName) :
+                new ObjectParameter("LName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var dofBParameter = dofB.HasValue ?
+                new ObjectParameter("DofB", dofB) :
+                new ObjectParameter("DofB", typeof(System.DateTime));
+    
+            var specParameter = spec != null ?
+                new ObjectParameter("Spec", spec) :
+                new ObjectParameter("Spec", typeof(string));
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("Login", login) :
+                new ObjectParameter("Login", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateStudent", idParameter, fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, specParameter, loginParameter, passwordParameter);
+        }
+    
+        public virtual int UpdateStudentSP(Nullable<int> id, string fName, string lName, string phone, string email, Nullable<System.DateTime> dofB, string spec, string login, string password)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var fNameParameter = fName != null ?
+                new ObjectParameter("FName", fName) :
+                new ObjectParameter("FName", typeof(string));
+    
+            var lNameParameter = lName != null ?
+                new ObjectParameter("LName", lName) :
+                new ObjectParameter("LName", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("Phone", phone) :
+                new ObjectParameter("Phone", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var dofBParameter = dofB.HasValue ?
+                new ObjectParameter("DofB", dofB) :
+                new ObjectParameter("DofB", typeof(System.DateTime));
+    
+            var specParameter = spec != null ?
+                new ObjectParameter("Spec", spec) :
+                new ObjectParameter("Spec", typeof(string));
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("Login", login) :
+                new ObjectParameter("Login", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateStudentSP", idParameter, fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, specParameter, loginParameter, passwordParameter);
+        }
+    
+        public virtual int DelScheduleDate(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DelScheduleDate", idParameter);
+        }
+    
+        public virtual int DelScheduleDateSP(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DelScheduleDateSP", idParameter);
+        }
+    
+        public virtual int UpdateClassSchedule(Nullable<int> id, Nullable<System.DateTime> startTime, Nullable<System.DateTime> endTime, Nullable<int> classRoomID, Nullable<int> courseID, Nullable<int> teacherID)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var startTimeParameter = startTime.HasValue ?
+                new ObjectParameter("StartTime", startTime) :
+                new ObjectParameter("StartTime", typeof(System.DateTime));
+    
+            var endTimeParameter = endTime.HasValue ?
+                new ObjectParameter("EndTime", endTime) :
+                new ObjectParameter("EndTime", typeof(System.DateTime));
+    
+            var classRoomIDParameter = classRoomID.HasValue ?
+                new ObjectParameter("ClassRoomID", classRoomID) :
+                new ObjectParameter("ClassRoomID", typeof(int));
+    
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            var teacherIDParameter = teacherID.HasValue ?
+                new ObjectParameter("TeacherID", teacherID) :
+                new ObjectParameter("TeacherID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClassSchedule", idParameter, startTimeParameter, endTimeParameter, classRoomIDParameter, courseIDParameter, teacherIDParameter);
+        }
     }
 }

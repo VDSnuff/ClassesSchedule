@@ -532,6 +532,60 @@
     <FunctionImport Name="DismissTeacherSP">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="InvolveTeacher">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InvolveTeacherSP">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DismissStudent">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InvolveStudent">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DismissStudentSP">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InvolveStudentSP">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateStudent">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="DofB" Mode="In" Type="DateTime" />
+      <Parameter Name="Spec" Mode="In" Type="String" />
+      <Parameter Name="Login" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateStudentSP">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="FName" Mode="In" Type="String" />
+      <Parameter Name="LName" Mode="In" Type="String" />
+      <Parameter Name="Phone" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="DofB" Mode="In" Type="DateTime" />
+      <Parameter Name="Spec" Mode="In" Type="String" />
+      <Parameter Name="Login" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="DelScheduleDate">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DelScheduleDateSP">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UpdateClassSchedule">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="StartTime" Mode="In" Type="DateTime" />
+      <Parameter Name="EndTime" Mode="In" Type="DateTime" />
+      <Parameter Name="ClassRoomID" Mode="In" Type="Int32" />
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+      <Parameter Name="TeacherID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Login_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -702,6 +756,7 @@
     <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Dismiss" Type="Boolean" />
   </EntityType>
   <EntityType Name="Student1">
     <Key>
@@ -717,6 +772,7 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Student_ID" Type="Int32" Nullable="false" />
     <Property Name="Specialization" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Dismiss" Type="Boolean" />
   </EntityType>
   <EntityType Name="MarkList">
     <Key>

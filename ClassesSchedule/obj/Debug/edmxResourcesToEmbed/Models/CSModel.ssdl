@@ -200,6 +200,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Students' does not have a primar
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Student ID" Type="int" Nullable="false" />
     <Property Name="Specialization" Type="nvarchar" MaxLength="100" />
+    <Property Name="Dismiss" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -217,6 +218,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Teacher ID" Type="int" Nullable="false" />
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+    <Property Name="Dismiss" Type="bit" />
   </EntityType>
   <Association Name="FK_ClassSchedule_ClassRoom">
     <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="1" />
@@ -461,10 +463,22 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
   <Function Name="DelMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="DelScheduleDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DismissStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
   <Function Name="DismissTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="InvolveStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InvolveTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
   <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Login" Type="nvarchar" Mode="In" />
     <Parameter Name="Password" Type="nvarchar" Mode="In" />
@@ -518,10 +532,29 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
   <Function Name="StartCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="UpdateClassSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="StartTime" Type="datetime2" Mode="In" />
+    <Parameter Name="EndTime" Type="datetime2" Mode="In" />
+    <Parameter Name="ClassRoomID" Type="int" Mode="In" />
+    <Parameter Name="CourseID" Type="int" Mode="In" />
+    <Parameter Name="TeacherID" Type="int" Mode="In" />
+  </Function>
   <Function Name="UpdateCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CourseID" Type="int" Mode="In" />
     <Parameter Name="CName" Type="nvarchar" Mode="In" />
     <Parameter Name="CDescription" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="FName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="DofB" Type="date" Mode="In" />
+    <Parameter Name="Spec" Type="nvarchar" Mode="In" />
+    <Parameter Name="Login" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="UpdateTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
@@ -598,7 +631,8 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     [Students].[Phone] AS [Phone], 
     [Students].[Email] AS [Email], 
     [Students].[Student ID] AS [Student ID], 
-    [Students].[Specialization] AS [Specialization]
+    [Students].[Specialization] AS [Specialization], 
+    [Students].[Dismiss] AS [Dismiss]
     FROM [dbo].[Students] AS [Students]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="Teachers" EntityType="Self.Teachers" store:Type="Views" store:Schema="dbo">
@@ -609,7 +643,8 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     [Teachers].[Phone] AS [Phone], 
     [Teachers].[Email] AS [Email], 
     [Teachers].[Teacher ID] AS [Teacher ID], 
-    [Teachers].[Degree] AS [Degree]
+    [Teachers].[Degree] AS [Degree], 
+    [Teachers].[Dismiss] AS [Dismiss]
     FROM [dbo].[Teachers] AS [Teachers]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_ClassSchedule_ClassRoom" Association="Self.FK_ClassSchedule_ClassRoom">

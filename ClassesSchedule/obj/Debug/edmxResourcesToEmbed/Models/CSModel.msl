@@ -259,6 +259,7 @@
     <EntitySetMapping Name="Teachers1">
       <EntityTypeMapping TypeName="ClassScheduleModel.Teacher1">
         <MappingFragment StoreEntitySet="Teachers">
+          <ScalarProperty Name="Dismiss" ColumnName="Dismiss" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Degree" ColumnName="Degree" />
@@ -272,6 +273,7 @@
     <EntitySetMapping Name="Students1">
       <EntityTypeMapping TypeName="ClassScheduleModel.Student1">
         <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="Dismiss" ColumnName="Dismiss" />
           <ScalarProperty Name="Specialization" ColumnName="Specialization" />
           <ScalarProperty Name="Student_ID" ColumnName="Student ID" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -318,5 +320,16 @@
     <FunctionImportMapping FunctionImportName="UpdateTeacher" FunctionName="ClassScheduleModel.Store.UpdateTeacher" />
     <FunctionImportMapping FunctionImportName="UpdateTeacherSP" FunctionName="ClassScheduleModel.Store.UpdateTeacher" />
     <FunctionImportMapping FunctionImportName="DismissTeacherSP" FunctionName="ClassScheduleModel.Store.DismissTeacher" />
+    <FunctionImportMapping FunctionImportName="InvolveTeacher" FunctionName="ClassScheduleModel.Store.InvolveTeacher" />
+    <FunctionImportMapping FunctionImportName="InvolveTeacherSP" FunctionName="ClassScheduleModel.Store.InvolveTeacher" />
+    <FunctionImportMapping FunctionImportName="DismissStudent" FunctionName="ClassScheduleModel.Store.DismissStudent" />
+    <FunctionImportMapping FunctionImportName="InvolveStudent" FunctionName="ClassScheduleModel.Store.InvolveStudent" />
+    <FunctionImportMapping FunctionImportName="DismissStudentSP" FunctionName="ClassScheduleModel.Store.DismissStudent" />
+    <FunctionImportMapping FunctionImportName="InvolveStudentSP" FunctionName="ClassScheduleModel.Store.InvolveStudent" />
+    <FunctionImportMapping FunctionImportName="UpdateStudent" FunctionName="ClassScheduleModel.Store.UpdateStudent" />
+    <FunctionImportMapping FunctionImportName="UpdateStudentSP" FunctionName="ClassScheduleModel.Store.UpdateStudent" />
+    <FunctionImportMapping FunctionImportName="DelScheduleDate" FunctionName="ClassScheduleModel.Store.DelScheduleDate" />
+    <FunctionImportMapping FunctionImportName="DelScheduleDateSP" FunctionName="ClassScheduleModel.Store.DelScheduleDate" />
+    <FunctionImportMapping FunctionImportName="UpdateClassSchedule" FunctionName="ClassScheduleModel.Store.UpdateClassSchedule" />
   </EntityContainerMapping>
 </Mapping>

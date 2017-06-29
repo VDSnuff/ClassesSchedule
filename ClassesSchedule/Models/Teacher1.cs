@@ -21,5 +21,6 @@ namespace ClassesSchedule.Models
         public string Degree { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
+        public Nullable<bool> Dismiss { get; set; }
     }
 }

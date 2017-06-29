@@ -285,7 +285,6 @@ namespace ClassesSchedule.Controllers
             }
         }
 
-
         public ActionResult UpdateTeacher(TeachersVM post)
         {
             using (var ctx = new CSEntities())
@@ -293,6 +292,70 @@ namespace ClassesSchedule.Controllers
                 ctx.UpdateTeacher(post.HelpID, post.FName, post.LName, post.Phone, post.Email, post.DofB, post.Degree, post.Login, post.Password);
 
                 return RedirectToAction("Teachers", "Home");
+            }
+        }
+
+
+        public ActionResult InvolveTeacher(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.InvolveTeacher(ID);
+
+                return RedirectToAction("Teachers", "Home");
+            }
+        }
+
+
+        public ActionResult DismissStudent(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.DismissStudent(ID);
+
+                return RedirectToAction("Students", "Home");
+            }
+        }
+
+        public ActionResult InvolveStudent(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.InvolveStudent(ID);
+
+                return RedirectToAction("Students", "Home");
+            }
+        }
+
+
+         public ActionResult UpdateStudent(StudentsVM post)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.UpdateStudent(post.HelpID, post.FName, post.LName, post.Phone, post.Email, post.DofB, post.Spec, post.Login, post.Password);
+
+                return RedirectToAction("Students", "Home");
+            }
+        }
+
+        public ActionResult DelScheduleDate(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.DelScheduleDate(ID);
+
+                return RedirectToAction("Schedule", "Home");
+            }
+        }
+
+
+        public ActionResult UpdateSchedule(ScheduleVM post)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.UpdateClassSchedule(post.HelpID, post.STime, post.ETime, Int32.Parse(post.ClassList.FirstOrDefault()), Int32.Parse(post.CourseList.FirstOrDefault()), Int32.Parse(post.TeacherList.FirstOrDefault()));
+
+                return RedirectToAction("Students", "Home");
             }
         }
 

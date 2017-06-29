@@ -21,5 +21,6 @@ namespace ClassesSchedule.Models
         public string Email { get; set; }
         public int Student_ID { get; set; }
         public string Specialization { get; set; }
+        public Nullable<bool> Dismiss { get; set; }
     }
 }
