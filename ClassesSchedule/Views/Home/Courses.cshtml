@@ -16,7 +16,7 @@
                     <th>Description</th>
                     <th>Teacher</th>
                     <th>Degree</th>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -31,15 +31,15 @@
                         <td>@item.Degree</td>
                         @if (item.Closed == false)
                         {
-                        <td><button type="button" data-toggle="modal" data-target="#UpdateCourse" class="btn btn-xs btn-info" onclick="t(@item.ID)" >Update</button></td>
-                        <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelCourse", "Home", new { ID = item.ID })'">Close</button></td>
+                            <td><button type="button" data-toggle="modal" data-target="#UpdateCourse" class="btn btn-xs btn-info" onclick="t(@item.ID)">Update</button></td>
+                            <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelCourse", "Home", new { ID = item.ID })'">Close</button></td>
                         }
                         else
                         {
-                                <td><button  class="btn btn-xs btn-success" onclick="location.href='@Url.Action("StartCourse", "Home", new { ID = item.ID })'">Start</button></td>
+                            <td><button class="btn btn-xs btn-success" onclick="location.href='@Url.Action("StartCourse", "Home", new { ID = item.ID })'">Start</button></td>
                                 <td><button disabled class="btn btn-xs btn-default">Close</button></td>
                         }
-                      </tr>
+                    </tr>
                             }
             </tbody>
         </table>
@@ -76,7 +76,7 @@
                             else
                             {
                                 <td><button class="btn btn-xs btn-info" onclick="location.href='@Url.Action("StartCourse", "Home", new { ID = it.ID })'">Start</button></td>
-                                 <td><button disabled class="btn btn-xs btn-default">Close</button></td>
+                                <td><button disabled class="btn btn-xs btn-default">Close</button></td>
                             }
                         </tr>
                                 }
@@ -94,7 +94,7 @@
                     <button type="button" style="float:right; margin-top:15px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Course</button>
                 </div>
             </div>
-           
+
             <!-- Modal Assign Teacher-->
             @using (Html.BeginForm("AssignTeacherForCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AssignTeacherForCourse" }))
             {
@@ -112,16 +112,15 @@
                                 @*TEST*@
                                 <form class="form-horizontal">
                                     <div class="form-group form-group-sm">
-                                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Teacher</label>
+                                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                            
+                                            @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm">
-                                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
+                                        <label class="col-sm-4 control-label" for="formGroupInputSmall"> Teacher</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" }) 
+                                            @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
                                         </div>
                                     </div>
                                 </form>
@@ -161,13 +160,13 @@
                                 @*HelpID*@
                                 @Html.TextBoxFor(model => Model.HelpID, new { @class = "form-control", @id = "HelpID", @type = "hidden" })
                                 @*END*@
-                                @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Course Name", @required = "true", @autofocus = "true", @id = "Name" } })
+                                @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Course Name", @autofocus = "true", @id = "Name" } })
                             </div>
                         </div>
                         <div class="form-group form-group-sm">
                             <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Description</label>
                             <div class="col-sm-8">
-                                @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @required = "true", @autofocus = "true", @cols = 300, @rows = 10, maxlength = "1000", @id = "Description" })
+                                @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @autofocus = "true", @cols = 300, @rows = 10, maxlength = "1000", @id = "Description" })
                             </div>
                         </div>
                     </form>
@@ -224,7 +223,7 @@
 </div>
 
 <script type="text/javascript">
-  
+
     var v;
 
     function post() {

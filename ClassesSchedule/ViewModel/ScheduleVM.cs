@@ -15,11 +15,11 @@ namespace ClassesSchedule.ViewModel
 
         public IEnumerable<ScheduleUserFunc_Result> ScheduleUser { get; set; }
 
-        public IEnumerable<string> ClassList { get; set; }
+        public IEnumerable<ClassRoom> ClassList { get; set; }
 
-        public IEnumerable<string> CourseList { get; set; }
+        public IEnumerable<CoursesList> CoursesList { get; set; }
 
-        public IEnumerable<string> TeacherList { get; set; }
+        public IEnumerable<Teacher> TeacherList { get; set; }
 
         public IEnumerable<SelectListItem> ClassL { get; set; }
 
@@ -34,5 +34,17 @@ namespace ClassesSchedule.ViewModel
         public string Teacher { get; set; }
 
         public int HelpID { get; set; }
+
+        public IEnumerable<SelectListItem> ValuesCl { get; set; }
+
+        public int[] SelectedValuesCl { get; set; }
+
+        public IEnumerable<SelectListItem> ValuesC { get; set; }
+
+        public int[] SelectedValuesC { get; set; }
+
+        public IEnumerable<SelectListItem> ValuesT { get; set; }
+
+        public int[] SelectedValuesT { get; set; }
     }
 }

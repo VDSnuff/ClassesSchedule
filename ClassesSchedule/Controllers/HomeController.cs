@@ -23,11 +23,47 @@ namespace ClassesSchedule.Controllers
 
                 model.ScheduleUser = ctx.ScheduleUserFunc(Convert.ToInt32(Session["ID"])).ToList();
 
-                model.ClassList = (from t in ctx.ClassRooms select t.ClassNumber).ToList();
 
-                model.TeacherList = (from t in ctx.Teachers select t.Person.LName).ToList();
 
-                model.CourseList = (from t in ctx.Courses where t.Closed == false select t.Name).ToList();
+                //model.TeacherList = (from t in ctx.Teachers select t.Person.LName).ToList();
+
+                //model.CourseList = (from t in ctx.Courses where t.Closed == false select t.Name).ToList();
+
+                //TEST PART
+
+                // Drop Down List For Teachers
+                model.TeacherList = (from t in ctx.Teachers select t).ToList();
+                List<SelectListItem> itemsT = new List<SelectListItem>();
+                foreach (var item in model.TeacherList)
+                {
+                    itemsT.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.Person.FName + " " + item.Person.LName });
+                }
+                model.ValuesT = itemsT;
+
+                // Drop Down List For Courses
+                model.CoursesList = (from c in ctx.CoursesLists select c).ToList();
+                List<SelectListItem> itemsC = new List<SelectListItem>();
+                foreach (var item in model.CoursesList)
+                {
+                    itemsC.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.Name });
+                }
+                model.ValuesC = itemsC;
+
+
+
+                // Drop Down List For Classes
+                model.ClassList = (from t in ctx.ClassRooms select t).ToList();
+                List<SelectListItem> itemsCl = new List<SelectListItem>();
+                foreach (var item in model.ClassList)
+                {
+                    itemsCl.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.ClassNumber});
+                }
+                model.ValuesCl = itemsCl;
+
+
+
+                //END
+
             }
             return View(model);
         }
@@ -171,7 +207,7 @@ namespace ClassesSchedule.Controllers
             {
                 using (var ctx = new CSEntities())
                 {
-                    ctx.AddNewDate(post.STime, post.ETime, post.ClassList.FirstOrDefault(), post.CourseList.FirstOrDefault(), post.TeacherList.FirstOrDefault());
+                  //  ctx.AddNewDate(post.STime, post.ETime, post.ClassList.FirstOrDefault(), post.CourseList.FirstOrDefault(), post.TeacherList.FirstOrDefault());
 
                     return RedirectToAction("Schedule", "Home");
                 }
@@ -353,7 +389,7 @@ namespace ClassesSchedule.Controllers
         {
             using (var ctx = new CSEntities())
             {
-                ctx.UpdateClassSchedule(post.HelpID, post.STime, post.ETime, Int32.Parse(post.ClassList.FirstOrDefault()), Int32.Parse(post.CourseList.FirstOrDefault()), Int32.Parse(post.TeacherList.FirstOrDefault()));
+               // ctx.UpdateClassSchedule(post.HelpID, post.STime, post.ETime, Int32.Parse(post.ClassList.FirstOrDefault()), Int32.Parse(post.CourseList.FirstOrDefault()), Int32.Parse(post.TeacherList.FirstOrDefault()));
 
                 return RedirectToAction("Students", "Home");
             }
