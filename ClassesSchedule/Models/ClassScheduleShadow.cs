@@ -21,5 +21,6 @@ namespace ClassesSchedule.Models
         public Nullable<int> ClassRoomID { get; set; }
         public int WhoDeletedID { get; set; }
         public Nullable<System.DateTime> DeleteTime { get; set; }
+        public Nullable<int> TeacherID { get; set; }
     }
 }

@@ -10,7 +10,9 @@ namespace ClassesSchedule
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery.datetimepicker.js"
+                        "~/Scripts/jquery-ui-{version}.js",
+                        "~/Scripts/jquery.datetimepicker.js",
+                        "~/Scripts/jquery.datetimepicker.full.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -28,6 +30,7 @@ namespace ClassesSchedule
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css", "~/Content/jquery.datetimepicker.css",
+                      "~/Content/themes/base/all.css",
                       "~/Content/site.css"));
         }
     }

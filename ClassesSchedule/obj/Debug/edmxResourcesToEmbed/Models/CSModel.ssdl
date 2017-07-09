@@ -30,6 +30,7 @@
     <Property Name="ClassRoomID" Type="int" />
     <Property Name="WhoDeletedID" Type="int" Nullable="false" />
     <Property Name="DeleteTime" Type="datetime2" Precision="7" />
+    <Property Name="TeacherID" Type="int" />
   </EntityType>
   <EntityType Name="Course">
     <Key>
@@ -465,6 +466,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
   </Function>
   <Function Name="DelScheduleDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="WhoDeletedID" Type="int" Mode="In" />
   </Function>
   <Function Name="DismissStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />

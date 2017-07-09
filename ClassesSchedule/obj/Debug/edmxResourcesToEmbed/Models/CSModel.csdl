@@ -37,6 +37,7 @@
     <Property Name="ClassRoomID" Type="Int32" />
     <Property Name="WhoDeletedID" Type="Int32" Nullable="false" />
     <Property Name="DeleteTime" Type="DateTime" Precision="7" />
+    <Property Name="TeacherID" Type="Int32" />
   </EntityType>
   <EntityType Name="Course">
     <Key>
@@ -574,9 +575,11 @@
     </FunctionImport>
     <FunctionImport Name="DelScheduleDate">
       <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="WhoDeletedID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="DelScheduleDateSP">
       <Parameter Name="id" Mode="In" Type="Int32" />
+      <Parameter Name="WhoDeletedID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="UpdateClassSchedule">
       <Parameter Name="id" Mode="In" Type="Int32" />

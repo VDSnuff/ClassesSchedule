@@ -73,16 +73,16 @@
                                 <div class="form-group form-group-sm">
                                     <label class="col-sm-4 control-label" for="formGroupInputSmall">Mark</label>
                                     <div class="col-sm-8">
-                                        @Html.EditorFor(model => Model.Mark, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mark", @required = "true", @autofocus = "true" } })
+                                        @Html.EditorFor(model => Model.Mark, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mark", @required = "true", @autofocus = "true", @min = "1", @max = "5" } })
                                     </div>
                                 </div>
-                                <div class="form-group form-group-lg">
+                                <div class="form-group form-group-sm">
                                     <label class="col-sm-4 control-label" for="formGroupInputLarge">When</label>
                                     <div class="col-sm-8">
                                         @Html.DropDownListFor(m => Model.Date, new SelectList(Model.Date), "When", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
                                     </div>
                                 </div>
-                                <div class="form-group form-group-lg">
+                                <div class="form-group form-group-sm">
                                     <label class="col-sm-4 control-label" for="formGroupInputLarge">Teacher</label>
                                     <div class="col-sm-8">
                                         @Html.EditorFor(model => Model.Teacher, new { htmlAttributes = new { @class = "form-control", @placeholder = "Teacher", @required = "true", @autofocus = "true", @disabled = "disabled" } })

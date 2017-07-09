@@ -378,7 +378,8 @@ namespace ClassesSchedule.Controllers
         {
             using (var ctx = new CSEntities())
             {
-                ctx.DelScheduleDate(ID);
+               
+                ctx.DelScheduleDate(ID, Int32.Parse(Session["ID"].ToString()));
 
                 return RedirectToAction("Schedule", "Home");
             }

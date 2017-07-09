@@ -35,6 +35,7 @@
           <Property Name="ClassRoomID" Type="int" />
           <Property Name="WhoDeletedID" Type="int" Nullable="false" />
           <Property Name="DeleteTime" Type="datetime2" Precision="7" />
+          <Property Name="TeacherID" Type="int" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
@@ -470,6 +471,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
         </Function>
         <Function Name="DelScheduleDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="WhoDeletedID" Type="int" Mode="In" />
         </Function>
         <Function Name="DismissStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -754,6 +756,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <Property Name="ClassRoomID" Type="Int32" />
           <Property Name="WhoDeletedID" Type="Int32" Nullable="false" />
           <Property Name="DeleteTime" Type="DateTime" Precision="7" />
+          <Property Name="TeacherID" Type="Int32" />
         </EntityType>
         <EntityType Name="Course">
           <Key>
@@ -1291,9 +1294,11 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           </FunctionImport>
           <FunctionImport Name="DelScheduleDate">
           <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="WhoDeletedID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DelScheduleDateSP">
           <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="WhoDeletedID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UpdateClassSchedule">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1534,6 +1539,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <EntitySetMapping Name="ClassScheduleShadows">
             <EntityTypeMapping TypeName="ClassScheduleModel.ClassScheduleShadow">
               <MappingFragment StoreEntitySet="ClassScheduleShadow">
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />

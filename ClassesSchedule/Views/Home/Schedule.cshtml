@@ -101,34 +101,34 @@
                                     <div class="form-group form-group-sm">
                                         <label class="col-sm-4 control-label" for="formGroupInputSmall">Start Time</label>
                                         <div class="col-sm-8">
-                                            @Html.EditorFor(model => Model.STime, new { htmlAttributes = new { @id = "datetimepicker3", @class = "form-control", @type = "datetime", @placeholder = "Start", @required = "true", @autofocus= "true" } })
+                                            @Html.EditorFor(model => Model.STime, new { htmlAttributes = new { @id = "datetimepicker", @class = "form-control input-sm date-picker", @type = "datetime", @placeholder = "Start", @required = "true" } })
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm">
                                         <label class="col-sm-4 control-label" for="formGroupInputSmall">End Time</label>
                                         <div class="col-sm-8">
-                                            @Html.EditorFor(model => Model.ETime, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "End", @required = "true", @autofocus = "true" } })
+                                            @Html.EditorFor(model => Model.ETime, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "End", @required = "true" } })
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm">
                                         <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
                                         <div class="col-sm-8">
-                                           @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                             @*@Html.DropDownListFor(m => Model.CoursesList, new SelectList(Model.CoursesList), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })*@
+                                           @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                             @*@Html.DropDownListFor(m => Model.CoursesList, new SelectList(Model.CoursesList), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
                                         </div>
                                     </div>
-                                    <div class="form-group form-group-lg">
+                                    <div class="form-group form-group-sm">
                                         <label class="col-sm-4 control-label" for="formGroupInputLarge">Classroom</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(m => m.SelectedValuesCl, Model.ValuesCl, "Select Classroom", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                            @*@Html.DropDownListFor(m => Model.ClassList, new SelectList(Model.ClassList), "Classroom No.", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })*@
+                                            @Html.DropDownListFor(m => m.SelectedValuesCl, Model.ValuesCl, "Select Classroom", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                            @*@Html.DropDownListFor(m => Model.ClassList, new SelectList(Model.ClassList), "Classroom No.", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm">
                                         <label class="col-sm-4 control-label" for="formGroupInputSmall">Teacher</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                            @*@Html.DropDownListFor(m => Model.TeacherList, new SelectList(Model.TeacherList), "Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })*@
+                                            @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                            @*@Html.DropDownListFor(m => Model.TeacherList, new SelectList(Model.TeacherList), "Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
                                         </div>
                                     </div>
                                 </form>
@@ -164,34 +164,34 @@
                                             @*HelpID*@
                                             @Html.TextBoxFor(model => Model.HelpID, new { @class = "form-control", @id = "HelpID", @type = "hidden" })
                                             @*END*@
-                                            @Html.EditorFor(model => Model.STime, new { htmlAttributes = new { @id = "datetimepicker3", @class = "form-control", @type = "datetime", @placeholder = "Start", @required = "true", @autofocus = "true" } })
+                                            @Html.EditorFor(model => Model.STime, new { htmlAttributes = new { @id = "datetimepicker", @class = "form-control", @type = "datetime", @placeholder = "Start", @required = "true" } })
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm">
                                         <label class="col-sm-4 control-label" for="formGroupInputSmall">End Time</label>
                                         <div class="col-sm-8">
-                                            @Html.EditorFor(model => Model.ETime, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "End", @required = "true", @autofocus = "true" } })
+                                            @Html.EditorFor(model => Model.ETime, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "End", @required = "true" } })
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm">
                                         <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                            @*@Html.DropDownListFor(m => Model.CoursesList, new SelectList(Model.CoursesList), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })*@
+                                            @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                            @*@Html.DropDownListFor(m => Model.CoursesList, new SelectList(Model.CoursesList), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
                                         </div>
                                     </div>
-                                    <div class="form-group form-group-lg">
+                                    <div class="form-group form-group-sm">
                                         <label class="col-sm-4 control-label" for="formGroupInputLarge">Classroom</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(m => m.SelectedValuesCl, Model.ValuesCl, "Select Classroom", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                            @*@Html.DropDownListFor(m => Model.ClassList, new SelectList(Model.ClassList), "Classroom No.", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })*@
+                                            @Html.DropDownListFor(m => m.SelectedValuesCl, Model.ValuesCl, "Select Classroom", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                            @*@Html.DropDownListFor(m => Model.ClassList, new SelectList(Model.ClassList), "Classroom No.", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm">
                                         <label class="col-sm-4 control-label" for="formGroupInputSmall">Teacher</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                            @*@Html.DropDownListFor(m => Model.TeacherList, new SelectList(Model.TeacherList), "Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })*@
+                                            @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                            @*@Html.DropDownListFor(m => Model.TeacherList, new SelectList(Model.TeacherList), "Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
                                         </div>
                                     </div>
                                 </form>
@@ -209,7 +209,7 @@
 </div>
 
 <script type="text/javascript">
-   
+
     var v;
 
     function post() {
@@ -222,5 +222,18 @@
         v = e;
         $("#HelpID").val(v);
     };
+
+    $('input[type="datetime"]').datetimepicker({
+        timepicker: true,
+        step: 1,
+        closeOnDateSelect: true,
+        formatDate: 'd.m.Y',
+        formatTime: 'H:i',
+        //format: 'd.m.Y H:i',
+        //minDate:'-1970/01/02',//yesterday is minimum date(for today use 0 or -1970/01/01)
+        //maxDate:'+1970/01/02',//tomorrow is maximum date calendar
+        lang: 'en',
+        //scrollInput: false
+    });
 
 </script>

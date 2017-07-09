@@ -25,6 +25,7 @@
     <EntitySetMapping Name="ClassScheduleShadows">
       <EntityTypeMapping TypeName="ClassScheduleModel.ClassScheduleShadow">
         <MappingFragment StoreEntitySet="ClassScheduleShadow">
+          <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="StartTime" ColumnName="StartTime" />
           <ScalarProperty Name="EndTime" ColumnName="EndTime" />

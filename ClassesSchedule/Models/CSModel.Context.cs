@@ -843,22 +843,30 @@ namespace ClassesSchedule.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateStudentSP", idParameter, fNameParameter, lNameParameter, phoneParameter, emailParameter, dofBParameter, specParameter, loginParameter, passwordParameter);
         }
     
-        public virtual int DelScheduleDate(Nullable<int> id)
+        public virtual int DelScheduleDate(Nullable<int> id, Nullable<int> whoDeletedID)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DelScheduleDate", idParameter);
+            var whoDeletedIDParameter = whoDeletedID.HasValue ?
+                new ObjectParameter("WhoDeletedID", whoDeletedID) :
+                new ObjectParameter("WhoDeletedID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DelScheduleDate", idParameter, whoDeletedIDParameter);
         }
     
-        public virtual int DelScheduleDateSP(Nullable<int> id)
+        public virtual int DelScheduleDateSP(Nullable<int> id, Nullable<int> whoDeletedID)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DelScheduleDateSP", idParameter);
+            var whoDeletedIDParameter = whoDeletedID.HasValue ?
+                new ObjectParameter("WhoDeletedID", whoDeletedID) :
+                new ObjectParameter("WhoDeletedID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("DelScheduleDateSP", idParameter, whoDeletedIDParameter);
         }
     
         public virtual int UpdateClassSchedule(Nullable<int> id, Nullable<System.DateTime> startTime, Nullable<System.DateTime> endTime, Nullable<int> classRoomID, Nullable<int> courseID, Nullable<int> teacherID)
