@@ -6,6 +6,10 @@
 
 <div style="margin-top:5%; margin-bottom:10%;" class="container">
     <h2 style="text-align:center; margin-bottom:2%;">List of Marks</h2>
+    <div class="row bg-info" style="margin-bottom:15px; padding:10px; padding-top:5px; background-color:#F9F9F9; border-bottom:solid 2px #dddddd;">
+        <button type="button" style="float:right; margin-top:5px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Mark</button>
+    </div>
+
     <div style="margin-bottom:15%;">
         <table class="table table-striped">
             <thead>
@@ -36,8 +40,9 @@
                             }
             </tbody>
         </table>
-
-        <button type="button" style="float:right; margin-top:15px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Mark</button>
+        </div>
+    </div>
+        
 
         <!-- Modal -->
         @using (Html.BeginForm("PostNewMark", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewMark" }))

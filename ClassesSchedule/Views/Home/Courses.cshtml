@@ -7,6 +7,17 @@
 
 <div style="margin-top:5%; margin-bottom:10%;" class="container">
     <h2 style="text-align:center; margin-bottom:2%;">All Courses</h2>
+
+    <div class="row bg-info" style="margin-bottom:15px; padding:10px; padding-top:5px; background-color:#F9F9F9; border-bottom:solid 2px #dddddd;">
+        <div class="col-sm-offset-8 col-sm-2">
+            <button type="button" style="float:right; margin-top:5px; display:inline-block;" class="btn btn-primary" data-toggle="modal" data-target="#ATFC">Assign Teacher</button>
+        </div>
+
+        <div class="col-sm-2">
+            <button type="button" style="float:right; margin-top:5px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Course</button>
+        </div>
+    </div>
+    
     <div style="margin-bottom:15%;">
         <table class="table table-striped">
             <thead>
@@ -85,15 +96,7 @@
             @*TEST*@
             @*onclick="location.href='@Url.Action("AssignTeacherForCourse", "Home")'"*@
 
-            <div class="row">
-                <div class="col-sm-offset-8 col-sm-2">
-                    <button type="button" style="float:right; margin-top:15px; display:inline-block;" class="btn btn-primary" data-toggle="modal" data-target="#ATFC">Assign Teacher</button>
-                </div>
-
-                <div class="col-sm-2">
-                    <button type="button" style="float:right; margin-top:15px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Course</button>
-                </div>
-            </div>
+           
 
             <!-- Modal Assign Teacher-->
             @using (Html.BeginForm("AssignTeacherForCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AssignTeacherForCourse" }))
