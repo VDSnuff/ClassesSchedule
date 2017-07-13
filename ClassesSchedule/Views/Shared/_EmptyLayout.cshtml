@@ -9,20 +9,25 @@
 
     <style>
         body{
-          background-color:#101010;
+          background-color:#F9F9F9;
+          overflow-y: hidden; 
+          overflow-x: hidden;
+
         }
         h2{
-            color:white;
+            color:#808080;
         }
      
     </style>
 
 </head>
 <body>
-    <div class="container body-content">
+    <div class="container-fluid body-content">
          @RenderBody()
-        <hr />
-        <footer style="text-align:center; color:white;">
+        
+        <footer style="text-align:center; color:#808080; position:fixed; bottom: 10px; width:100%;">
+            <hr />
+            @*<img src="@Url.Content("~/Content/school_pattern_03.jpg")" alt="IMAGES" style="opacity:0.3; z-index: -999; position:absolute;" />*@   
             <p>@DateTime.Now.Year - Class Schedule Application</p>
         </footer>
     </div>

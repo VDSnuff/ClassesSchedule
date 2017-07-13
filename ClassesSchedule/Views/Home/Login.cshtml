@@ -3,13 +3,19 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_EmptyLayout.cshtml";
 }
-<div class="container">
-    <div class="row">
-      <h1 style="color:white; text-align:center;">Classes Schedule Aplication</h1>
+<div class="container-fluid">
+  
+      <h1 style="color:#808080; text-align:center;">Classes Schedule Aplication</h1>
           <hr>
-        <div class="col-sm-offset-4 col-sm-8 lg">
-           
-             <h2>Login</h2>
+      
+
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-2">
+            <img src="@Url.Content("~/Content/calendar.png")" alt="IMAGES" style="opacity:0.5; z-index: -999; width:130px; height:130px; margin-top:80%;" />
+        </div>
+        <div class="col-sm-7 lg">
+
+            <h2>Login</h2>
             @using (Html.BeginForm("PostLogin", "Home", FormMethod.Post, new { @class = "form", id = "Login" }))
             {
                 <div class="loginFild">
@@ -21,8 +27,8 @@
                 <button class="btn btn-primary loginFild" type="submit">Sing in</button>
             }
         </div>
+        </div>
         <div>
             @Html.Raw(@ViewBag.BadSignIn)
         </div>
     </div>
-</div>
