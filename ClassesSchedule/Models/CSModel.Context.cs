@@ -228,7 +228,7 @@ namespace ClassesSchedule.Models
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<Courses1_Result>("[CSEntities].[CoursesUser](@ID)", iDParameter);
         }
     
-        public virtual int AddNewDate(Nullable<System.DateTime> sTime, Nullable<System.DateTime> eTime, string classR, string course, string teacher)
+        public virtual int AddNewDate(Nullable<System.DateTime> sTime, Nullable<System.DateTime> eTime, Nullable<int> classR, Nullable<int> course, Nullable<int> teacher)
         {
             var sTimeParameter = sTime.HasValue ?
                 new ObjectParameter("STime", sTime) :
@@ -238,22 +238,22 @@ namespace ClassesSchedule.Models
                 new ObjectParameter("ETime", eTime) :
                 new ObjectParameter("ETime", typeof(System.DateTime));
     
-            var classRParameter = classR != null ?
+            var classRParameter = classR.HasValue ?
                 new ObjectParameter("ClassR", classR) :
-                new ObjectParameter("ClassR", typeof(string));
+                new ObjectParameter("ClassR", typeof(int));
     
-            var courseParameter = course != null ?
+            var courseParameter = course.HasValue ?
                 new ObjectParameter("Course", course) :
-                new ObjectParameter("Course", typeof(string));
+                new ObjectParameter("Course", typeof(int));
     
-            var teacherParameter = teacher != null ?
+            var teacherParameter = teacher.HasValue ?
                 new ObjectParameter("Teacher", teacher) :
-                new ObjectParameter("Teacher", typeof(string));
+                new ObjectParameter("Teacher", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewDate", sTimeParameter, eTimeParameter, classRParameter, courseParameter, teacherParameter);
         }
     
-        public virtual int AddNewDateSP(Nullable<System.DateTime> sTime, Nullable<System.DateTime> eTime, string classR, string course, string teacher)
+        public virtual int AddNewDateSP(Nullable<System.DateTime> sTime, Nullable<System.DateTime> eTime, Nullable<int> classR, Nullable<int> course, Nullable<int> teacher)
         {
             var sTimeParameter = sTime.HasValue ?
                 new ObjectParameter("STime", sTime) :
@@ -263,17 +263,17 @@ namespace ClassesSchedule.Models
                 new ObjectParameter("ETime", eTime) :
                 new ObjectParameter("ETime", typeof(System.DateTime));
     
-            var classRParameter = classR != null ?
+            var classRParameter = classR.HasValue ?
                 new ObjectParameter("ClassR", classR) :
-                new ObjectParameter("ClassR", typeof(string));
+                new ObjectParameter("ClassR", typeof(int));
     
-            var courseParameter = course != null ?
+            var courseParameter = course.HasValue ?
                 new ObjectParameter("Course", course) :
-                new ObjectParameter("Course", typeof(string));
+                new ObjectParameter("Course", typeof(int));
     
-            var teacherParameter = teacher != null ?
+            var teacherParameter = teacher.HasValue ?
                 new ObjectParameter("Teacher", teacher) :
-                new ObjectParameter("Teacher", typeof(string));
+                new ObjectParameter("Teacher", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddNewDateSP", sTimeParameter, eTimeParameter, classRParameter, courseParameter, teacherParameter);
         }

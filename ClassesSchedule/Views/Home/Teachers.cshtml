@@ -215,10 +215,6 @@
 <script type="text/javascript">
     var v;
 
-    $(document).ready(function() {
-        $("table").tablesorterPager({container: $("#pager")});
-    });
-
     function post() {
         $.post("Home/UpdateTeacher", { HelpID: v, FName: $("#FName").val(),  LName: $("#LName").val(), Phone: $("#Phone").val(), Email: $("#Email").val(),  DofB: $("#DofB").val(), Degree: $("#Degree").val(), Login: $("#Login").val(), Password: $("#Password").val() }, function (data) {
             console.log(data);
@@ -245,7 +241,7 @@
 
     $(document).ready(function(){
         $('#data').after('<div class="btn-group" role="group" style="float:right" id="nav"></div>');
-        var rowsShown = 10;
+        var rowsShown = 15;
         var rowsTotal = $('#data tbody tr').length;
         var numPages = rowsTotal/rowsShown;
         for(i = 0;i < numPages;i++) {

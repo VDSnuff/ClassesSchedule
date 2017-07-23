@@ -408,9 +408,9 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
   <Function Name="AddNewDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="STime" Type="datetime2" Mode="In" />
     <Parameter Name="ETime" Type="datetime2" Mode="In" />
-    <Parameter Name="ClassR" Type="varchar" Mode="In" />
-    <Parameter Name="Course" Type="nvarchar" Mode="In" />
-    <Parameter Name="Teacher" Type="nvarchar" Mode="In" />
+    <Parameter Name="ClassR" Type="int" Mode="In" />
+    <Parameter Name="Course" Type="int" Mode="In" />
+    <Parameter Name="Teacher" Type="int" Mode="In" />
   </Function>
   <Function Name="AddNewMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Course" Type="nvarchar" Mode="In" />

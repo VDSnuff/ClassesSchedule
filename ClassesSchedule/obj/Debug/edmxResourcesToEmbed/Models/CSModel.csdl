@@ -399,16 +399,16 @@
     <FunctionImport Name="AddNewDate">
       <Parameter Name="STime" Mode="In" Type="DateTime" />
       <Parameter Name="ETime" Mode="In" Type="DateTime" />
-      <Parameter Name="ClassR" Mode="In" Type="String" />
-      <Parameter Name="Course" Mode="In" Type="String" />
-      <Parameter Name="Teacher" Mode="In" Type="String" />
+      <Parameter Name="ClassR" Mode="In" Type="Int32" />
+      <Parameter Name="Course" Mode="In" Type="Int32" />
+      <Parameter Name="Teacher" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="AddNewDateSP">
       <Parameter Name="STime" Mode="In" Type="DateTime" />
       <Parameter Name="ETime" Mode="In" Type="DateTime" />
-      <Parameter Name="ClassR" Mode="In" Type="String" />
-      <Parameter Name="Course" Mode="In" Type="String" />
-      <Parameter Name="Teacher" Mode="In" Type="String" />
+      <Parameter Name="ClassR" Mode="In" Type="Int32" />
+      <Parameter Name="Course" Mode="In" Type="Int32" />
+      <Parameter Name="Teacher" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="AddNewCourse">
       <Parameter Name="Name" Mode="In" Type="String" />

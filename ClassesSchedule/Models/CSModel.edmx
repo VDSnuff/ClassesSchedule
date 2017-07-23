@@ -413,9 +413,9 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
         <Function Name="AddNewDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="STime" Type="datetime2" Mode="In" />
           <Parameter Name="ETime" Type="datetime2" Mode="In" />
-          <Parameter Name="ClassR" Type="varchar" Mode="In" />
-          <Parameter Name="Course" Type="nvarchar" Mode="In" />
-          <Parameter Name="Teacher" Type="nvarchar" Mode="In" />
+          <Parameter Name="ClassR" Type="int" Mode="In" />
+          <Parameter Name="Course" Type="int" Mode="In" />
+          <Parameter Name="Teacher" Type="int" Mode="In" />
         </Function>
         <Function Name="AddNewMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Course" Type="nvarchar" Mode="In" />
@@ -1118,16 +1118,16 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <FunctionImport Name="AddNewDate">
             <Parameter Name="STime" Mode="In" Type="DateTime" />
             <Parameter Name="ETime" Mode="In" Type="DateTime" />
-            <Parameter Name="ClassR" Mode="In" Type="String" />
-            <Parameter Name="Course" Mode="In" Type="String" />
-            <Parameter Name="Teacher" Mode="In" Type="String" />
+            <Parameter Name="ClassR" Mode="In" Type="Int32" />
+            <Parameter Name="Course" Mode="In" Type="Int32" />
+            <Parameter Name="Teacher" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AddNewDateSP">
             <Parameter Name="STime" Mode="In" Type="DateTime" />
             <Parameter Name="ETime" Mode="In" Type="DateTime" />
-            <Parameter Name="ClassR" Mode="In" Type="String" />
-            <Parameter Name="Course" Mode="In" Type="String" />
-            <Parameter Name="Teacher" Mode="In" Type="String" />
+            <Parameter Name="ClassR" Mode="In" Type="Int32" />
+            <Parameter Name="Course" Mode="In" Type="Int32" />
+            <Parameter Name="Teacher" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AddNewCourse">
             <Parameter Name="Name" Mode="In" Type="String" />
@@ -1293,11 +1293,11 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="DelScheduleDate">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="WhoDeletedID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="DelScheduleDateSP">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="WhoDeletedID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UpdateClassSchedule">

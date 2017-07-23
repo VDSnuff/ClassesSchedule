@@ -14,6 +14,8 @@ namespace ClassesSchedule.Controllers
     {
 
         #region RENDER ACTION
+
+
         public ActionResult Schedule()
         {
             ScheduleVM model = new ScheduleVM();
@@ -172,7 +174,10 @@ namespace ClassesSchedule.Controllers
 
         #endregion
 
+
+
         #region POST ACTION
+
 
         [HttpPost]
         public ActionResult PostLogin(string login, string password)
@@ -207,7 +212,9 @@ namespace ClassesSchedule.Controllers
             {
                 using (var ctx = new CSEntities())
                 {
-                    //  ctx.AddNewDate(post.STime, post.ETime, post.ClassList.FirstOrDefault(), post.CourseList.FirstOrDefault(), post.TeacherList.FirstOrDefault());
+                    // ctx.AddNewDate(post.STime, post.ETime, post.ClassList.FirstOrDefault(), post.CourseList.FirstOrDefault(), post.TeacherList.FirstOrDefault());
+
+                    ctx.AddNewDate(post.STime, post.ETime, post.SelectedValuesCl.FirstOrDefault(), post.SelectedValuesC.FirstOrDefault(), post.SelectedValuesT.FirstOrDefault());
 
                     return RedirectToAction("Schedule", "Home");
                 }
