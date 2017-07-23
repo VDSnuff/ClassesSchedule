@@ -9,207 +9,208 @@
     <h2 style="text-align:center; margin-bottom:2%;">Common Schedule</h2>
     <div class="row bg-info" style="margin-bottom:15px; padding:10px; padding-top:5px; background-color:#F9F9F9; border-bottom:solid 2px #dddddd;">
         <button type="button" style="float:right; margin-top:5px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Date</button>
-     </div>
-        <div style="margin-bottom:15%;">
-            <table class="table table-striped">
-                <thead>
+    </div>
+    <div id="data">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Cl-rm no.</th>
+                    <th>Course Name</th>
+                    <th>Teacher name</th>
+                    <th>Degree</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int i = 1;}
+                @foreach (var item in Model.ScheduleList)
+            {
                     <tr>
-                        <th>No.</th>
-                        <th>Start time</th>
-                        <th>End time</th>
-                        <th>Cl-rm no.</th>
-                        <th>Course Name</th>
-                        <th>Teacher name</th>
-                        <th>Degree</th>
+
+                        <td>@i @{i++;}</td>
+
+                        <td>@item.Start_time.ToString("MMMM dd, H:mm")</td>
+                        <td>@item.End_time.ToString("MMMM dd, H:mm")</td>
+                        <td>@item.Classroom_No_</td>
+                        <td>@item.Course_Name</td>
+                        <td>@item.Teacher_name</td>
+                        <td>@item.Degree</td>
+
+                        <td><button type="button" data-toggle="modal" data-target="#UpdateSC" class="btn btn-xs btn-info" onclick="t(@item.ID)">Update</button></td>
+                        <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelScheduleDate", "Home", new { ID = item.ID })'">Delete Date</button></td>
+
                     </tr>
-                </thead>
-                <tbody>
-                    @{int i = 1;}
-                    @foreach (var item in Model.ScheduleList)
+                            }
+            </tbody>
+        </table>
+    </div>
+
+    <h2 style="text-align:center; margin-bottom:2%; margin-top:5%;">Your Schedule</h2>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Cl-rm no.</th>
+                    <th>Course Name</th>
+                    <th>Teacher name</th>
+                    <th>Degree</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int j = 1;}
+                @foreach (var it in Model.ScheduleUser)
             {
-                        <tr>
+                    <tr>
 
-                            <td>@i @{i++;}</td>
+                        <td>@j @{j++;}</td>
 
-                            <td>@item.Start_time.ToString("MMMM dd, H:mm")</td>
-                            <td>@item.End_time.ToString("MMMM dd, H:mm")</td>
-                            <td>@item.Classroom_No_</td>
-                            <td>@item.Course_Name</td>
-                            <td>@item.Teacher_name</td>
-                            <td>@item.Degree</td>
+                        <td>@it.Start_time.ToString("MMMM dd, H:mm")</td>
+                        <td>@it.End_time.ToString("MMMM dd, H:mm")</td>
+                        <td>@it.Classroom_No_</td>
+                        <td>@it.Course_Name</td>
+                        <td>@it.Teacher_name</td>
+                        <td>@it.Degree</td>
+                        <td><button type="button" data-toggle="modal" data-target="#UpdateSC" class="btn btn-xs btn-info" onclick="t(@it.ID)">Update</button></td>
+                        <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelScheduleDate", "Home", new { ID = it.ID })'">Delete Date</button></td>
+                    </tr>
+                            }
+            </tbody>
+        </table>
+    </div>
+    @*TEST*@
 
-                            <td><button type="button" data-toggle="modal" data-target="#UpdateSC" class="btn btn-xs btn-info" onclick="t(@item.ID)">Update</button></td>
-                            <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelScheduleDate", "Home", new { ID = item.ID })'">Delete Date</button></td>
 
-                        </tr>
-                                }
-                </tbody>
-            </table>
 
-            <h2 style="text-align:center; margin-bottom:2%; margin-top:5%;">Your Schedule</h2>
-            <div>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Start time</th>
-                            <th>End time</th>
-                            <th>Cl-rm no.</th>
-                            <th>Course Name</th>
-                            <th>Teacher name</th>
-                            <th>Degree</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{int j = 1;}
-                        @foreach (var it in Model.ScheduleUser)
+
+    <!-- Modal Add New Date-->
+    @using (Html.BeginForm("PostNewDate", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewDate" }))
             {
-                            <tr>
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add New Date</h4>
+                    </div>
+                    <div class="modal-body">
 
-                                <td>@j @{j++;}</td>
-
-                                <td>@it.Start_time.ToString("MMMM dd, H:mm")</td>
-                                <td>@it.End_time.ToString("MMMM dd, H:mm")</td>
-                                <td>@it.Classroom_No_</td>
-                                <td>@it.Course_Name</td>
-                                <td>@it.Teacher_name</td>
-                                <td>@it.Degree</td>
-                                <td><button type="button" data-toggle="modal" data-target="#UpdateSC" class="btn btn-xs btn-info" onclick="t(@it.ID)">Update</button></td>
-                                <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelScheduleDate", "Home", new { ID = it.ID })'">Delete Date</button></td>
-                            </tr>
-                                    }
-                    </tbody>
-                </table>
-                @*TEST*@
-
-
-
-
-                <!-- Modal Add New Date-->
-                @using (Html.BeginForm("PostNewDate", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewDate" }))
-            {
-                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                    <div id="myModal" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Add New Date</h4>
-                                </div>
-                                <div class="modal-body">
-
-                                    @*TEST*@
-                                    <form class="form-horizontal">
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Start Time</label>
-                                            <div class="col-sm-8">
-                                                @Html.EditorFor(model => Model.STime, new { htmlAttributes = new { @id = "datetimepicker", @class = "form-control input-sm date-picker", @type = "datetime", @placeholder = "Start", @required = "true" } })
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputSmall">End Time</label>
-                                            <div class="col-sm-8">
-                                                @Html.EditorFor(model => Model.ETime, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "End", @required = "true" } })
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
-                                            <div class="col-sm-8">
-                                                @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
-                                                @*@Html.DropDownListFor(m => Model.CoursesList, new SelectList(Model.CoursesList), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputLarge">Classroom</label>
-                                            <div class="col-sm-8">
-                                                @Html.DropDownListFor(m => m.SelectedValuesCl, Model.ValuesCl, "Select Classroom", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
-                                                @*@Html.DropDownListFor(m => Model.ClassList, new SelectList(Model.ClassList), "Classroom No.", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Teacher</label>
-                                            <div class="col-sm-8">
-                                                @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
-                                                @*@Html.DropDownListFor(m => Model.TeacherList, new SelectList(Model.TeacherList), "Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Add</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        @*TEST*@
+                        <form class="form-horizontal">
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall">Start Time</label>
+                                <div class="col-sm-8">
+                                    @Html.EditorFor(model => Model.STime, new { htmlAttributes = new { @id = "datetimepicker", @class = "form-control input-sm date-picker", @type = "datetime", @placeholder = "Start", @required = "true" } })
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                }
-
-                <!-- Modal Update Date-->
-                @using (Html.BeginForm("UpdateSchedule", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "PND" }))
-            {
-                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                    <div id="UpdateSC" class="modal fade" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Update Schedule</h4>
-                                </div>
-                                <div class="modal-body">
-
-                                    @*TEST*@
-                                    <form class="form-horizontal">
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Start Time</label>
-                                            <div class="col-sm-8">
-                                                @*HelpID*@
-                                                @Html.TextBoxFor(model => Model.HelpID, new { @class = "form-control", @id = "HelpID", @type = "hidden" })
-                                                @*END*@
-                                                @Html.EditorFor(model => Model.STime, new { htmlAttributes = new { @id = "datetimepicker", @class = "form-control", @type = "datetime", @placeholder = "Start", @required = "true" } })
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputSmall">End Time</label>
-                                            <div class="col-sm-8">
-                                                @Html.EditorFor(model => Model.ETime, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "End", @required = "true" } })
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
-                                            <div class="col-sm-8">
-                                                @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
-                                                @*@Html.DropDownListFor(m => Model.CoursesList, new SelectList(Model.CoursesList), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputLarge">Classroom</label>
-                                            <div class="col-sm-8">
-                                                @Html.DropDownListFor(m => m.SelectedValuesCl, Model.ValuesCl, "Select Classroom", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
-                                                @*@Html.DropDownListFor(m => Model.ClassList, new SelectList(Model.ClassList), "Classroom No.", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
-                                            </div>
-                                        </div>
-                                        <div class="form-group form-group-sm">
-                                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Teacher</label>
-                                            <div class="col-sm-8">
-                                                @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
-                                                @*@Html.DropDownListFor(m => Model.TeacherList, new SelectList(Model.TeacherList), "Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall">End Time</label>
+                                <div class="col-sm-8">
+                                    @Html.EditorFor(model => Model.ETime, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "End", @required = "true" } })
                                 </div>
                             </div>
-                        </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                    @*@Html.DropDownListFor(m => Model.CoursesList, new SelectList(Model.CoursesList), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputLarge">Classroom</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(m => m.SelectedValuesCl, Model.ValuesCl, "Select Classroom", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                    @*@Html.DropDownListFor(m => Model.ClassList, new SelectList(Model.ClassList), "Classroom No.", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall">Teacher</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                    @*@Html.DropDownListFor(m => Model.TeacherList, new SelectList(Model.TeacherList), "Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                }
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    }
+
+    <!-- Modal Update Date-->
+    @using (Html.BeginForm("UpdateSchedule", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "PND" }))
+            {
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div id="UpdateSC" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Update Schedule</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        @*TEST*@
+                        <form class="form-horizontal">
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall">Start Time</label>
+                                <div class="col-sm-8">
+                                    @*HelpID*@
+                                    @Html.TextBoxFor(model => Model.HelpID, new { @class = "form-control", @id = "HelpID", @type = "hidden" })
+                                    @*END*@
+                                    @Html.EditorFor(model => Model.STime, new { htmlAttributes = new { @id = "datetimepicker", @class = "form-control", @type = "datetime", @placeholder = "Start", @required = "true" } })
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall">End Time</label>
+                                <div class="col-sm-8">
+                                    @Html.EditorFor(model => Model.ETime, new { htmlAttributes = new { @class = "form-control", @type = "datetime", @placeholder = "End", @required = "true" } })
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                    @*@Html.DropDownListFor(m => Model.CoursesList, new SelectList(Model.CoursesList), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputLarge">Classroom</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(m => m.SelectedValuesCl, Model.ValuesCl, "Select Classroom", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                    @*@Html.DropDownListFor(m => Model.ClassList, new SelectList(Model.ClassList), "Classroom No.", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall">Teacher</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })
+                                    @*@Html.DropDownListFor(m => Model.TeacherList, new SelectList(Model.TeacherList), "Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true" })*@
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
 
 <script type="text/javascript">
 
@@ -239,4 +240,28 @@
         //scrollInput: false
     });
 
+
+    $(document).ready(function(){
+        $('#data').after('<div class="btn-group" role="group" style="float:right" id="nav"></div>');
+        var rowsShown = 10;
+        var rowsTotal = $('#data tbody tr').length;
+        var numPages = rowsTotal/rowsShown;
+        for(i = 0;i < numPages;i++) {
+            var pageNum = i + 1;
+            $('#nav').append('<a type="button" class="btn btn-sm btn-default" href="#" rel="'+i+'">'+pageNum+'</a> ');
+        }
+        $('#data tbody tr').hide();
+        $('#data tbody tr').slice(0, rowsShown).show();
+        $('#nav a:first').addClass('active');
+        $('#nav a').bind('click', function(){
+
+            $('#nav a').removeClass('active');
+            $(this).addClass('active');
+            var currPage = $(this).attr('rel');
+            var startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
+                    css('display','table-row').animate({opacity:1}, 300);
+        });
+    });
 </script>

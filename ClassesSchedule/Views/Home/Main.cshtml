@@ -5,43 +5,43 @@
 }
 
 <div style="margin-top:5%; margin-bottom:20%;" class="container">
-<h2 style="text-align:center; margin-bottom:2%;"> Schedule for today - @DateTime.Now.ToString("dd MMMM")</h2>
+    <h2 style="text-align:center; margin-bottom:2%;"> Schedule for today - @DateTime.Now.ToString("dd MMMM")</h2>
 
-<div>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Start time</th>
-                <th>End time</th>
-                <th>Cl-rm no.</th>
-                <th>Course Name</th>
-                <th>Teacher name</th>
-                <th>Degree</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{int i = 1;}
-            @foreach (var item in Model.ScheduleView)
-            {
+    <div>
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                 
-                    <td>@i @{i++;}</td>
-                   
-                    <td>@item.Start_time.ToString("MMMM dd, H:mm")</td>
-                    <td>@item.End_time.ToString("MMMM dd, H:mm")</td>
-                    <td>@item.Classroom_No_</td>
-                    <td>@item.Course_Name</td>
-                    <td>@item.Teacher_name</td>
-                    <td>@item.Degree</td>
+                    <th>No.</th>
+                    <th>Start time</th>
+                    <th>End time</th>
+                    <th>Cl-rm no.</th>
+                    <th>Course Name</th>
+                    <th>Teacher name</th>
+                    <th>Degree</th>
                 </tr>
-            }
-        </tbody>
-        <!--Add footer for totals-->
-    </table>
+            </thead>
+            <tbody>
+                @{int i = 1;}
+                @foreach (var item in Model.ScheduleView)
+            {
+                    <tr>
 
-</div>
+                        <td>@i @{i++;}</td>
+
+                        <td>@item.Start_time.ToString("MMMM dd, H:mm")</td>
+                        <td>@item.End_time.ToString("MMMM dd, H:mm")</td>
+                        <td>@item.Classroom_No_</td>
+                        <td>@item.Course_Name</td>
+                        <td>@item.Teacher_name</td>
+                        <td>@item.Degree</td>
+                    </tr>
+                            }
+            </tbody>
+            <!--Add footer for totals-->
+        </table>
+
     </div>
+</div>
 
 
 

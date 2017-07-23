@@ -56,7 +56,7 @@ namespace ClassesSchedule.Controllers
                 List<SelectListItem> itemsCl = new List<SelectListItem>();
                 foreach (var item in model.ClassList)
                 {
-                    itemsCl.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.ClassNumber});
+                    itemsCl.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.ClassNumber });
                 }
                 model.ValuesCl = itemsCl;
 
@@ -78,7 +78,7 @@ namespace ClassesSchedule.Controllers
                 List<SelectListItem> itemsT = new List<SelectListItem>();
                 foreach (var item in model.TeacherList)
                 {
-                    itemsT.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.Person.FName + " " + item.Person.LName});
+                    itemsT.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.Person.FName + " " + item.Person.LName });
                 }
                 model.ValuesT = itemsT;
 
@@ -87,7 +87,7 @@ namespace ClassesSchedule.Controllers
                 List<SelectListItem> itemsC = new List<SelectListItem>();
                 foreach (var item in model.CoursesList)
                 {
-                    itemsC.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.Name});
+                    itemsC.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.Name });
                 }
                 model.ValuesC = itemsC;
 
@@ -130,17 +130,17 @@ namespace ClassesSchedule.Controllers
                 model.MarksList = (from t in ctx.MarkLists select t).ToList();
 
                 model.Course = (from c in ctx.Courses
-                              join ct in ctx.CourseTeachers on c.ID equals ct.CourseID
-                              join t in ctx.Teachers on ct.TeacherID equals t.ID
-                              join p in ctx.People on t.PersonID equals p.ID
-                              where p.ID == model.TeacherID && c.Closed == false
-                              select c.Name).ToList();
+                                join ct in ctx.CourseTeachers on c.ID equals ct.CourseID
+                                join t in ctx.Teachers on ct.TeacherID equals t.ID
+                                join p in ctx.People on t.PersonID equals p.ID
+                                where p.ID == model.TeacherID && c.Closed == false
+                                select c.Name).ToList();
 
                 model.Date = (from cs in ctx.ClassSchedules
                               join t in ctx.Teachers on cs.TeacherID equals t.ID
                               join p in ctx.People on t.PersonID equals p.ID
-                              where p.ID == model.TeacherID  
-                              select cs.StartTime ).ToList();
+                              where p.ID == model.TeacherID
+                              select cs.StartTime).ToList();
             }
             return View(model);
         }
@@ -207,7 +207,7 @@ namespace ClassesSchedule.Controllers
             {
                 using (var ctx = new CSEntities())
                 {
-                  //  ctx.AddNewDate(post.STime, post.ETime, post.ClassList.FirstOrDefault(), post.CourseList.FirstOrDefault(), post.TeacherList.FirstOrDefault());
+                    //  ctx.AddNewDate(post.STime, post.ETime, post.ClassList.FirstOrDefault(), post.CourseList.FirstOrDefault(), post.TeacherList.FirstOrDefault());
 
                     return RedirectToAction("Schedule", "Home");
                 }
@@ -218,12 +218,12 @@ namespace ClassesSchedule.Controllers
         [HttpPost]
         public ActionResult PostNewCourse(CoursesVM post)
         {
-                using (var ctx = new CSEntities())
-                {
-                    ctx.AddNewCourse(post.Name, post.Description);
+            using (var ctx = new CSEntities())
+            {
+                ctx.AddNewCourse(post.Name, post.Description);
 
-                    return RedirectToAction("Courses", "Home");
-                }
+                return RedirectToAction("Courses", "Home");
+            }
         }
 
         [HttpPost]
@@ -305,9 +305,9 @@ namespace ClassesSchedule.Controllers
         {
             using (var ctx = new CSEntities())
             {
-               ctx.StartCourse(ID);
+                ctx.StartCourse(ID);
 
-               return RedirectToAction("Courses", "Home");
+                return RedirectToAction("Courses", "Home");
             }
         }
 
@@ -364,7 +364,7 @@ namespace ClassesSchedule.Controllers
         }
 
 
-         public ActionResult UpdateStudent(StudentsVM post)
+        public ActionResult UpdateStudent(StudentsVM post)
         {
             using (var ctx = new CSEntities())
             {
@@ -378,7 +378,7 @@ namespace ClassesSchedule.Controllers
         {
             using (var ctx = new CSEntities())
             {
-               
+
                 ctx.DelScheduleDate(ID, Int32.Parse(Session["ID"].ToString()));
 
                 return RedirectToAction("Schedule", "Home");
@@ -390,7 +390,7 @@ namespace ClassesSchedule.Controllers
         {
             using (var ctx = new CSEntities())
             {
-               // ctx.UpdateClassSchedule(post.HelpID, post.STime, post.ETime, Int32.Parse(post.ClassList.FirstOrDefault()), Int32.Parse(post.CourseList.FirstOrDefault()), Int32.Parse(post.TeacherList.FirstOrDefault()));
+                // ctx.UpdateClassSchedule(post.HelpID, post.STime, post.ETime, Int32.Parse(post.ClassList.FirstOrDefault()), Int32.Parse(post.CourseList.FirstOrDefault()), Int32.Parse(post.TeacherList.FirstOrDefault()));
 
                 return RedirectToAction("Students", "Home");
             }

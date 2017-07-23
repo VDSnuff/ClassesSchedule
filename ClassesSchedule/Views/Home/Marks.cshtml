@@ -10,7 +10,7 @@
         <button type="button" style="float:right; margin-top:5px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Mark</button>
     </div>
 
-    <div style="margin-bottom:15%;">
+    <div id="data">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -40,66 +40,94 @@
                             }
             </tbody>
         </table>
-        </div>
     </div>
-        
+</div>
 
-        <!-- Modal -->
-        @using (Html.BeginForm("PostNewMark", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewMark" }))
+
+<!-- Modal -->
+@using (Html.BeginForm("PostNewMark", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewMark" }))
             {
 
-            @Html.HiddenFor(m => Model.Teacher)
+    @Html.HiddenFor(m => Model.Teacher)
 
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-            <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Add New Mark</h4>
-                        </div>
-                        <div class="modal-body">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add New Mark</h4>
+                </div>
+                <div class="modal-body">
 
-                            @*TEST*@
-                            <form class="form-horizontal">
-                                <div class="form-group form-group-sm">
-                                    <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
-                                    <div class="col-sm-8">
-                                        @Html.DropDownListFor(m => Model.Course, new SelectList(Model.Course), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                    </div>
-                                </div>
-                                <div class="form-group form-group-sm">
-                                    <label class="col-sm-4 control-label" for="formGroupInputSmall">Student ID</label>
-                                    <div class="col-sm-8">
-                                        @Html.EditorFor(model => Model.StudentID, new { htmlAttributes = new { @class = "form-control", @placeholder = "ID", @required = "true", @autofocus = "true" } })
-                                    </div>
-                                </div>
-                                <div class="form-group form-group-sm">
-                                    <label class="col-sm-4 control-label" for="formGroupInputSmall">Mark</label>
-                                    <div class="col-sm-8">
-                                        @Html.EditorFor(model => Model.Mark, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mark", @required = "true", @autofocus = "true", @min = "1", @max = "5" } })
-                                    </div>
-                                </div>
-                                <div class="form-group form-group-sm">
-                                    <label class="col-sm-4 control-label" for="formGroupInputLarge">When</label>
-                                    <div class="col-sm-8">
-                                        @Html.DropDownListFor(m => Model.Date, new SelectList(Model.Date), "When", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                    </div>
-                                </div>
-                                <div class="form-group form-group-sm">
-                                    <label class="col-sm-4 control-label" for="formGroupInputLarge">Teacher</label>
-                                    <div class="col-sm-8">
-                                        @Html.EditorFor(model => Model.Teacher, new { htmlAttributes = new { @class = "form-control", @placeholder = "Teacher", @required = "true", @autofocus = "true", @disabled = "disabled" } })
-                                    </div>
-                                </div>
-                            </form>
+                    @*TEST*@
+                    <form class="form-horizontal">
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => Model.Course, new SelectList(Model.Course), "Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Add</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Student ID</label>
+                            <div class="col-sm-8">
+                                @Html.EditorFor(model => Model.StudentID, new { htmlAttributes = new { @class = "form-control", @placeholder = "ID", @required = "true", @autofocus = "true" } })
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Mark</label>
+                            <div class="col-sm-8">
+                                @Html.EditorFor(model => Model.Mark, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mark", @required = "true", @autofocus = "true", @min = "1", @max = "5" } })
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label" for="formGroupInputLarge">When</label>
+                            <div class="col-sm-8">
+                                @Html.DropDownListFor(m => Model.Date, new SelectList(Model.Date), "When", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label class="col-sm-4 control-label" for="formGroupInputLarge">Teacher</label>
+                            <div class="col-sm-8">
+                                @Html.EditorFor(model => Model.Teacher, new { htmlAttributes = new { @class = "form-control", @placeholder = "Teacher", @required = "true", @autofocus = "true", @disabled = "disabled" } })
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    $(document).ready(function () {
+        $('#data').after('<div class="btn-group" role="group" style="float:right" id="nav"></div>');
+        var rowsShown = 15;
+        var rowsTotal = $('#data tbody tr').length;
+        var numPages = rowsTotal / rowsShown;
+        for (i = 0; i < numPages; i++) {
+            var pageNum = i + 1;
+            $('#nav').append('<a type="button" class="btn btn-sm btn-default" href="#" rel="' + i + '">' + pageNum + '</a> ');
         }
+        $('#data tbody tr').hide();
+        $('#data tbody tr').slice(0, rowsShown).show();
+        $('#nav a:first').addClass('active');
+        $('#nav a').bind('click', function () {
+
+            $('#nav a').removeClass('active');
+            $(this).addClass('active');
+            var currPage = $(this).attr('rel');
+            var startItem = currPage * rowsShown;
+            var endItem = startItem + rowsShown;
+            $('#data tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+                    css('display', 'table-row').animate({ opacity: 1 }, 300);
+        });
+    });
+
+</script>
