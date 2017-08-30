@@ -4,18 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div style="margin-top:5%; margin-bottom:10%;" class="container">
     <h2 style="text-align:center; margin-bottom:2%;">All Courses</h2>
 
     <div class="row bg-info" style="margin-bottom:15px; padding:10px; padding-top:5px; background-color:#F9F9F9; border-bottom:solid 2px #dddddd;">
+        @if (Session["ROLE"].ToString() == "2" || Session["ROLE"].ToString() == "1" || Session["ROLE"].ToString() == "3")
+        {
         <div class="col-sm-offset-8 col-sm-2">
             <button type="button" style="float:right; margin-top:5px; display:inline-block;" class="btn btn-primary" data-toggle="modal" data-target="#ATFC">Assign Teacher</button>
         </div>
+        }
 
+        @if (Session["ROLE"].ToString() == "2" || Session["ROLE"].ToString() == "3" || Session["ROLE"].ToString() == "1")
+        {
         <div class="col-sm-2">
             <button type="button" style="float:right; margin-top:5px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Course</button>
         </div>
+        }
     </div>
 
     <div id="data">
@@ -33,25 +38,28 @@
             <tbody>
                 @{int i = 1;}
                 @foreach (var item in Model.CoursesList)
-            {
-                    <tr>
-                        <td>@i @{i++;}</td>
-                        <td>@item.Name </td>
-                        <td>@item.Description</td>
-                        <td>@item.Teacher</td>
-                        <td>@item.Degree</td>
-                        @if (item.Closed == false)
-                        {
-                            <td><button type="button" data-toggle="modal" data-target="#UpdateCourse" class="btn btn-xs btn-info" onclick="t(@item.ID)">Update</button></td>
-                            <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelCourse", "Home", new { ID = item.ID })'">Close</button></td>
-                        }
-                        else
-                        {
-                            <td><button class="btn btn-xs btn-success" onclick="location.href='@Url.Action("StartCourse", "Home", new { ID = item.ID })'">Start</button></td>
-                            <td><button disabled class="btn btn-xs btn-default">Close</button></td>
-                        }
-                    </tr>
-                            }
+                {
+                <tr>
+                    <td>@i @{i++;}</td>
+                    <td>@item.Name </td>
+                    <td>@item.Description</td>
+                    <td>@item.Teacher</td>
+                    <td>@item.Degree</td>
+                   @if (Session["ROLE"].ToString() == "2" || Session["ROLE"].ToString() == "1")
+                   {
+                     if (item.Closed == false)
+                     {
+                    <td><button type="button" data-toggle="modal" data-target="#UpdateCourse" class="btn btn-xs btn-info" onclick="t(@item.ID)">Update</button></td>
+                    <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action(" DelCourse", "Home", new { ID = item.ID })'">Close</button></td>
+                     }
+                     else
+                     {
+                    <td><button class="btn btn-xs btn-success" onclick="location.href='@Url.Action(" StartCourse", "Home", new { ID = item.ID })'">Start</button></td>
+                    <td><button disabled class="btn btn-xs btn-default">Close</button></td>
+                     }
+                   }
+                </tr>
+                }
             </tbody>
         </table>
     </div>
@@ -71,27 +79,30 @@
             <tbody>
                 @{int j = 1;}
                 @foreach (var it in Model.CoursesUser)
-            {
-                    <tr>
+                {
+                <tr>
 
-                        <td>@j @{j++;}</td>
+                    <td>@j @{j++;}</td>
 
-                        <td>@it.Name</td>
-                        <td>@it.Description</td>
-                        <td>@it.Teacher</td>
-                        <td>@it.Degree</td>
-                        @if (it.Closed == false)
-                        {
-                            <td><button type="button" data-toggle="modal" data-target="#UpdateCourse" class="btn btn-xs btn-info" onclick="t(@it.ID)">Update</button></td>
-                            <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelCourse", "Home", new { ID = it.ID })'">Close</button></td>
-                        }
-                        else
-                        {
-                            <td><button class="btn btn-xs btn-info" onclick="location.href='@Url.Action("StartCourse", "Home", new { ID = it.ID })'">Start</button></td>
-                            <td><button disabled class="btn btn-xs btn-default">Close</button></td>
-                        }
-                    </tr>
-                            }
+                    <td>@it.Name</td>
+                    <td>@it.Description</td>
+                    <td>@it.Teacher</td>
+                    <td>@it.Degree</td>
+                   @if (Session["ROLE"].ToString() == "2" || Session["ROLE"].ToString() == "1" || Session["ROLE"].ToString() == "3")
+                   {
+                     if (it.Closed == false)
+                     {
+                    <td><button type="button" data-toggle="modal" data-target="#UpdateCourse" class="btn btn-xs btn-info" onclick="t(@it.ID)">Update</button></td>
+                    <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action(" DelCourse", "Home", new { ID = it.ID })'">Close</button></td>
+                     }
+                     else
+                     {
+                    <td><button class="btn btn-xs btn-info" onclick="location.href='@Url.Action(" StartCourse", "Home", new { ID = it.ID })'">Start</button></td>
+                    <td><button disabled class="btn btn-xs btn-default">Close</button></td>
+                     }
+                   }
+                 </tr>
+                }
             </tbody>
         </table>
         @*TEST*@
@@ -101,41 +112,41 @@
 
         <!-- Modal Assign Teacher-->
         @using (Html.BeginForm("AssignTeacherForCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AssignTeacherForCourse" }))
-            {
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-            <div id="ATFC" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Assign Teacher</h4>
-                        </div>
-                        <div class="modal-body">
+        {
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div id="ATFC" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Assign Teacher</h4>
+                    </div>
+                    <div class="modal-body">
 
-                            @*TEST*@
-                            <form class="form-horizontal">
-                                <div class="form-group form-group-sm">
-                                    <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
-                                    <div class="col-sm-8">
-                                        @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                    </div>
+                        @*TEST*@
+                        <form class="form-horizontal">
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall">Course</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(m => m.SelectedValuesC, Model.ValuesC, "Select Course", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
                                 </div>
-                                <div class="form-group form-group-sm">
-                                    <label class="col-sm-4 control-label" for="formGroupInputSmall"> Teacher</label>
-                                    <div class="col-sm-8">
-                                        @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
-                                    </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label class="col-sm-4 control-label" for="formGroupInputSmall"> Teacher</label>
+                                <div class="col-sm-8">
+                                    @Html.DropDownListFor(m => m.SelectedValuesT, Model.ValuesT, "Select Teacher", htmlAttributes: new { @class = "form-control input-sm", @required = "true", @autofocus = "true" })
                                 </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Assign</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Assign</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
+        </div>
         }
     </div>
 </div>
@@ -145,81 +156,81 @@
 @using (Html.BeginForm("UpdateCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "Update" }))
             {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    <div id="UpdateCourse" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Update Course</h4>
-                </div>
-                <div class="modal-body">
+<div id="UpdateCourse" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update Course</h4>
+            </div>
+            <div class="modal-body">
 
-                    @*TEST*@
-                    <form class="form-horizontal">
-                        <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Name</label>
-                            <div class="col-sm-8">
-                                @*HelpID*@
-                                @Html.TextBoxFor(model => Model.HelpID, new { @class = "form-control", @id = "HelpID", @type = "hidden" })
-                                @*END*@
-                                @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Course Name", @autofocus = "true", @id = "Name" } })
-                            </div>
+                @*TEST*@
+                <form class="form-horizontal">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Name</label>
+                        <div class="col-sm-8">
+                            @*HelpID*@
+                            @Html.TextBoxFor(model => Model.HelpID, new { @class = "form-control", @id = "HelpID", @type = "hidden" })
+                            @*END*@
+                            @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Course Name", @autofocus = "true", @id = "Name" } })
                         </div>
-                        <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Description</label>
-                            <div class="col-sm-8">
-                                @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @autofocus = "true", @cols = 300, @rows = 10, maxlength = "1000", @id = "Description" })
-                            </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Description</label>
+                        <div class="col-sm-8">
+                            @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @autofocus = "true", @cols = 300, @rows = 10, maxlength = "1000", @id = "Description" })
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" onclick="post()">Update Course</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" onclick="post()">Update Course</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 }
 
 <!-- Modal Add New Course-->
 @using (Html.BeginForm("PostNewCourse", "Home", FormMethod.Post, new { @class = "form form-horizontal form-limt", id = "AddNewCourse" }))
             {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add New Course</h4>
-                </div>
-                <div class="modal-body">
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add New Course</h4>
+            </div>
+            <div class="modal-body">
 
-                    @*TEST*@
-                    <form class="form-horizontal">
-                        <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Name</label>
-                            <div class="col-sm-8">
-                                @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Course Name", @required = "true", @autofocus = "true" } })
-                            </div>
+                @*TEST*@
+                <form class="form-horizontal">
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Name</label>
+                        <div class="col-sm-8">
+                            @Html.EditorFor(model => Model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Course Name", @required = "true", @autofocus = "true" } })
                         </div>
-                        <div class="form-group form-group-sm">
-                            <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Description</label>
-                            <div class="col-sm-8">
-                                @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @required = "true", @autofocus = "true", @cols = 300, @rows = 10, maxlength = "1000" })
-                            </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-4 control-label" for="formGroupInputSmall">Course Description</label>
+                        <div class="col-sm-8">
+                            @Html.TextAreaFor(model => Model.Description, new { @class = "form-control", @placeholder = "Description", @required = "true", @autofocus = "true", @cols = 300, @rows = 10, maxlength = "1000" })
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add Course</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Add Course</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 }
 
 <script type="text/javascript">

@@ -7,9 +7,12 @@
 
 <div style="margin-top:5%; margin-bottom:10%;" class="container">
     <h2 style="text-align:center; margin-bottom:2%;">Common Schedule</h2>
-    <div class="row bg-info" style="margin-bottom:15px; padding:10px; padding-top:5px; background-color:#F9F9F9; border-bottom:solid 2px #dddddd;">
-        <button type="button" style="float:right; margin-top:5px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Date</button>
-    </div>
+    @if (Session["ROLE"].ToString() == "2" || Session["ROLE"].ToString() == "1" || Session["ROLE"].ToString() == "3")
+    {
+        <div class="row bg-info" style="margin-bottom:15px; padding:10px; padding-top:5px; background-color:#F9F9F9; border-bottom:solid 2px #dddddd;">
+            <button type="button" style="float:right; margin-top:5px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Date</button>
+        </div>
+    }
     <div id="data">
         <table class="table table-striped">
             <thead>
@@ -37,10 +40,11 @@
                         <td>@item.Course_Name</td>
                         <td>@item.Teacher_name</td>
                         <td>@item.Degree</td>
-
-                        <td><button type="button" data-toggle="modal" data-target="#UpdateSC" class="btn btn-xs btn-info" onclick="t(@item.ID)">Update</button></td>
-                        <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelScheduleDate", "Home", new { ID = item.ID })'">Delete Date</button></td>
-
+                        @if (Session["ROLE"].ToString() == "2" || Session["ROLE"].ToString() == "1")
+                        {
+                            <td><button type="button" data-toggle="modal" data-target="#UpdateSC" class="btn btn-xs btn-info" onclick="t(@item.ID)">Update</button></td>
+                            <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelScheduleDate", "Home", new { ID = item.ID })'">Delete Date</button></td>
+                        }
                     </tr>
                             }
             </tbody>
@@ -68,15 +72,17 @@
                     <tr>
 
                         <td>@j @{j++;}</td>
-
                         <td>@it.Start_time.ToString("MMMM dd, H:mm")</td>
                         <td>@it.End_time.ToString("MMMM dd, H:mm")</td>
                         <td>@it.Classroom_No_</td>
                         <td>@it.Course_Name</td>
                         <td>@it.Teacher_name</td>
                         <td>@it.Degree</td>
-                        <td><button type="button" data-toggle="modal" data-target="#UpdateSC" class="btn btn-xs btn-info" onclick="t(@it.ID)">Update</button></td>
-                        <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelScheduleDate", "Home", new { ID = it.ID })'">Delete Date</button></td>
+                        @if (Session["ROLE"].ToString() == "1" || Session["ROLE"].ToString() == "3")
+                        {
+                            <td><button type="button" data-toggle="modal" data-target="#UpdateSC" class="btn btn-xs btn-info" onclick="t(@it.ID)">Update</button></td>
+                            <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DelScheduleDate", "Home", new { ID = it.ID })'">Delete Date</button></td>
+                        }
                     </tr>
                             }
             </tbody>
@@ -241,27 +247,27 @@
     });
 
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#data').after('<div class="btn-group" role="group" style="float:right" id="nav"></div>');
         var rowsShown = 10;
         var rowsTotal = $('#data tbody tr').length;
-        var numPages = rowsTotal/rowsShown;
-        for(i = 0;i < numPages;i++) {
+        var numPages = rowsTotal / rowsShown;
+        for (i = 0; i < numPages; i++) {
             var pageNum = i + 1;
-            $('#nav').append('<a type="button" class="btn btn-sm btn-default" href="#" rel="'+i+'">'+pageNum+'</a> ');
+            $('#nav').append('<a type="button" class="btn btn-sm btn-default" href="#" rel="' + i + '">' + pageNum + '</a> ');
         }
         $('#data tbody tr').hide();
         $('#data tbody tr').slice(0, rowsShown).show();
         $('#nav a:first').addClass('active');
-        $('#nav a').bind('click', function(){
+        $('#nav a').bind('click', function () {
 
             $('#nav a').removeClass('active');
             $(this).addClass('active');
             var currPage = $(this).attr('rel');
             var startItem = currPage * rowsShown;
             var endItem = startItem + rowsShown;
-            $('#data tbody tr').css('opacity','0.0').hide().slice(startItem, endItem).
-                    css('display','table-row').animate({opacity:1}, 300);
+            $('#data tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+                    css('display', 'table-row').animate({ opacity: 1 }, 300);
         });
     });
 </script>

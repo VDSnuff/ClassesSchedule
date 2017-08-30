@@ -1,0 +1,697 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClassScheduleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ClassRoom">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassNumber" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ClassSchedule">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="EndTime" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="ClassRoomID" Type="int" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClassScheduleShadow">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="EndTime" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="CourseID" Type="int" />
+    <Property Name="ClassRoomID" Type="int" />
+    <Property Name="WhoDeletedID" Type="int" Nullable="false" />
+    <Property Name="DeleteTime" Type="datetime2" Precision="7" />
+    <Property Name="TeacherID" Type="int" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Closed" Type="bit" />
+  </EntityType>
+  <EntityType Name="CourseStudent">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CourseID" Type="int" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseTeacher">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="CourseID" Type="int" />
+    <Property Name="TeacherID" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Mark">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentID" Type="int" Nullable="false" />
+    <Property Name="TeacherID" Type="int" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="Value" Type="tinyint" Nullable="false" />
+    <Property Name="WhenAdded" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="RoleID" Type="smallint" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="25" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonID" Type="int" Nullable="false" />
+    <Property Name="Specialization" Type="nvarchar" MaxLength="100" />
+    <Property Name="Dismiss" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonID" Type="int" Nullable="false" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+    <Property Name="Dismiss" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.CoursesList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="CoursesList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Closed" Type="bit" />
+    <Property Name="Teacher" Type="nvarchar" MaxLength="201" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.MarkList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="MarkList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Value" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Course" Type="nvarchar" MaxLength="200" />
+    <Property Name="Student" Type="nvarchar" MaxLength="201" />
+    <Property Name="Value" Type="tinyint" Nullable="false" />
+    <Property Name="Date" Type="datetime2" Precision="7" />
+    <Property Name="Teacher" Type="nvarchar" MaxLength="201" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Schedule">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Start time" />
+      <PropertyRef Name="End time" />
+      <PropertyRef Name="Classroom No." />
+      <PropertyRef Name="Course Name" />
+      <PropertyRef Name="Teacher name" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Start time" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="End time" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Classroom No." Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Course Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Teacher name" Type="nvarchar" MaxLength="201" Nullable="false" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.ScheduleList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ScheduleList">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Start time" />
+      <PropertyRef Name="End time" />
+      <PropertyRef Name="Classroom No." />
+      <PropertyRef Name="Course Name" />
+      <PropertyRef Name="Teacher name" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Start time" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="End time" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="Classroom No." Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Course Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Teacher name" Type="nvarchar" MaxLength="201" Nullable="false" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.Students' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Person ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Surname" />
+      <PropertyRef Name="Student ID" />
+    </Key>
+    <Property Name="Person ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Student ID" Type="int" Nullable="false" />
+    <Property Name="Specialization" Type="nvarchar" MaxLength="100" />
+    <Property Name="Dismiss" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="Person ID" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Surname" />
+      <PropertyRef Name="Teacher ID" />
+    </Key>
+    <Property Name="Person ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Phone" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Teacher ID" Type="int" Nullable="false" />
+    <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+    <Property Name="Dismiss" Type="bit" />
+  </EntityType>
+  <Association Name="FK_ClassSchedule_ClassRoom">
+    <End Role="ClassRoom" Type="Self.ClassRoom" Multiplicity="1" />
+    <End Role="ClassSchedule" Type="Self.ClassSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClassRoom">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ClassSchedule">
+        <PropertyRef Name="ClassRoomID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassSchedule_ClassSchedule">
+    <End Role="ClassSchedule" Type="Self.ClassSchedule" Multiplicity="1" />
+    <End Role="ClassSchedule1" Type="Self.ClassSchedule" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="ClassSchedule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ClassSchedule1">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassSchedule_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="ClassSchedule" Type="Self.ClassSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ClassSchedule">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClassSchedule_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="ClassSchedule" Type="Self.ClassSchedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ClassSchedule">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseStudent_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="CourseStudent" Type="Self.CourseStudent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CourseStudent">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseStudent_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="CourseStudent" Type="Self.CourseStudent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CourseStudent">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseTeacher_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="0..1" />
+    <End Role="CourseTeacher" Type="Self.CourseTeacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CourseTeacher">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseTeacher_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="CourseTeacher" Type="Self.CourseTeacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CourseTeacher">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mark_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mark">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mark_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mark">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mark_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Mark" Type="Self.Mark" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mark">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Person_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Person" Type="Self.Person" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Person">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Student_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Student" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teacher_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="AddNewCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AddNewDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="STime" Type="datetime2" Mode="In" />
+    <Parameter Name="ETime" Type="datetime2" Mode="In" />
+    <Parameter Name="ClassR" Type="int" Mode="In" />
+    <Parameter Name="Course" Type="int" Mode="In" />
+    <Parameter Name="Teacher" Type="int" Mode="In" />
+  </Function>
+  <Function Name="AddNewMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Course" Type="nvarchar" Mode="In" />
+    <Parameter Name="Student" Type="int" Mode="In" />
+    <Parameter Name="Mark" Type="tinyint" Mode="In" />
+    <Parameter Name="When" Type="nvarchar" Mode="In" />
+    <Parameter Name="Teacher" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AddNewStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="DofB" Type="date" Mode="In" />
+    <Parameter Name="Spec" Type="nvarchar" Mode="In" />
+    <Parameter Name="Login" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AddNewTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="DofB" Type="date" Mode="In" />
+    <Parameter Name="Degree" Type="nvarchar" Mode="In" />
+    <Parameter Name="Login" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="AssignTeacherForCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Teacher" Type="int" Mode="In" />
+    <Parameter Name="CourseID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Courses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Closed" Type="bit" />
+          <Property Name="Teacher" Type="nvarchar" MaxLength="201" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="DelCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CourseID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DelMark" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DelScheduleDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="WhoDeletedID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DismissStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DismissTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="InvolveStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InvolveTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Login" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="ScheduleUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Start time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="End time" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="Classroom No." Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Course Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Teacher name" Type="nvarchar" MaxLength="201" Nullable="false" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="50" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="StartCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateClassSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="StartTime" Type="datetime2" Mode="In" />
+    <Parameter Name="EndTime" Type="datetime2" Mode="In" />
+    <Parameter Name="ClassRoomID" Type="int" Mode="In" />
+    <Parameter Name="CourseID" Type="int" Mode="In" />
+    <Parameter Name="TeacherID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UpdateCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CourseID" Type="int" Mode="In" />
+    <Parameter Name="CName" Type="nvarchar" Mode="In" />
+    <Parameter Name="CDescription" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="FName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="DofB" Type="date" Mode="In" />
+    <Parameter Name="Spec" Type="nvarchar" Mode="In" />
+    <Parameter Name="Login" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="FName" Type="nvarchar" Mode="In" />
+    <Parameter Name="LName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Phone" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="DofB" Type="date" Mode="In" />
+    <Parameter Name="Degree" Type="nvarchar" Mode="In" />
+    <Parameter Name="Login" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ClassScheduleModelStoreContainer">
+    <EntitySet Name="ClassRoom" EntityType="Self.ClassRoom" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassSchedule" EntityType="Self.ClassSchedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClassScheduleShadow" EntityType="Self.ClassScheduleShadow" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Course" EntityType="Self.Course" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseStudent" EntityType="Self.CourseStudent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CourseTeacher" EntityType="Self.CourseTeacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mark" EntityType="Self.Mark" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CoursesList" EntityType="Self.CoursesList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CoursesList].[ID] AS [ID], 
+    [CoursesList].[Name] AS [Name], 
+    [CoursesList].[Description] AS [Description], 
+    [CoursesList].[Closed] AS [Closed], 
+    [CoursesList].[Teacher] AS [Teacher], 
+    [CoursesList].[Degree] AS [Degree]
+    FROM [dbo].[CoursesList] AS [CoursesList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="MarkList" EntityType="Self.MarkList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [MarkList].[ID] AS [ID], 
+    [MarkList].[Course] AS [Course], 
+    [MarkList].[Student] AS [Student], 
+    [MarkList].[Value] AS [Value], 
+    [MarkList].[Date] AS [Date], 
+    [MarkList].[Teacher] AS [Teacher], 
+    [MarkList].[Degree] AS [Degree]
+    FROM [dbo].[MarkList] AS [MarkList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Schedule" EntityType="Self.Schedule" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Schedule].[ID] AS [ID], 
+    [Schedule].[Start time] AS [Start time], 
+    [Schedule].[End time] AS [End time], 
+    [Schedule].[Classroom No.] AS [Classroom No.], 
+    [Schedule].[Course Name] AS [Course Name], 
+    [Schedule].[Teacher name] AS [Teacher name], 
+    [Schedule].[Degree] AS [Degree]
+    FROM [dbo].[Schedule] AS [Schedule]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ScheduleList" EntityType="Self.ScheduleList" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ScheduleList].[ID] AS [ID], 
+    [ScheduleList].[Start time] AS [Start time], 
+    [ScheduleList].[End time] AS [End time], 
+    [ScheduleList].[Classroom No.] AS [Classroom No.], 
+    [ScheduleList].[Course Name] AS [Course Name], 
+    [ScheduleList].[Teacher name] AS [Teacher name], 
+    [ScheduleList].[Degree] AS [Degree]
+    FROM [dbo].[ScheduleList] AS [ScheduleList]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Students" EntityType="Self.Students" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Students].[Person ID] AS [Person ID], 
+    [Students].[Name] AS [Name], 
+    [Students].[Surname] AS [Surname], 
+    [Students].[Phone] AS [Phone], 
+    [Students].[Email] AS [Email], 
+    [Students].[Student ID] AS [Student ID], 
+    [Students].[Specialization] AS [Specialization], 
+    [Students].[Dismiss] AS [Dismiss]
+    FROM [dbo].[Students] AS [Students]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Teachers].[Person ID] AS [Person ID], 
+    [Teachers].[Name] AS [Name], 
+    [Teachers].[Surname] AS [Surname], 
+    [Teachers].[Phone] AS [Phone], 
+    [Teachers].[Email] AS [Email], 
+    [Teachers].[Teacher ID] AS [Teacher ID], 
+    [Teachers].[Degree] AS [Degree], 
+    [Teachers].[Dismiss] AS [Dismiss]
+    FROM [dbo].[Teachers] AS [Teachers]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_ClassSchedule_ClassRoom" Association="Self.FK_ClassSchedule_ClassRoom">
+      <End Role="ClassRoom" EntitySet="ClassRoom" />
+      <End Role="ClassSchedule" EntitySet="ClassSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassSchedule_ClassSchedule" Association="Self.FK_ClassSchedule_ClassSchedule">
+      <End Role="ClassSchedule" EntitySet="ClassSchedule" />
+      <End Role="ClassSchedule1" EntitySet="ClassSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassSchedule_Course" Association="Self.FK_ClassSchedule_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="ClassSchedule" EntitySet="ClassSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClassSchedule_Teacher" Association="Self.FK_ClassSchedule_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="ClassSchedule" EntitySet="ClassSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseStudent_Course" Association="Self.FK_CourseStudent_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseStudent" EntitySet="CourseStudent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseStudent_Student" Association="Self.FK_CourseStudent_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="CourseStudent" EntitySet="CourseStudent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseTeacher_Course" Association="Self.FK_CourseTeacher_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="CourseTeacher" EntitySet="CourseTeacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseTeacher_Teacher" Association="Self.FK_CourseTeacher_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="CourseTeacher" EntitySet="CourseTeacher" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mark_Course" Association="Self.FK_Mark_Course">
+      <End Role="Course" EntitySet="Course" />
+      <End Role="Mark" EntitySet="Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mark_Student" Association="Self.FK_Mark_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Mark" EntitySet="Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mark_Teacher" Association="Self.FK_Mark_Teacher">
+      <End Role="Teacher" EntitySet="Teacher" />
+      <End Role="Mark" EntitySet="Mark" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Person_Role" Association="Self.FK_Person_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Person" EntitySet="Person" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Student_Person" Association="Self.FK_Student_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Student" EntitySet="Student" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teacher_Person" Association="Self.FK_Teacher_Person">
+      <End Role="Person" EntitySet="Person" />
+      <End Role="Teacher" EntitySet="Teacher" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

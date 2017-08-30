@@ -9,13 +9,12 @@
 
 
     @*TEST*@
-    @if (Session != null && Session["ROLE"] != null || Session["FNAME"] != null || Session["ID"] != null && Session["ROLE"].ToString() == "3" || Session["ROLE"].ToString() == "4")
+    @if (Session["ROLE"].ToString() == "2" || Session["ROLE"].ToString() == "1")
     {
         <div class="row bg-info" style="margin-bottom:15px; padding:10px; padding-top:5px; background-color:#F9F9F9; border-bottom:solid 2px #dddddd;">
             <button type="button" style="float:right; margin-top:5px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add New Student</button>
         </div>
     }
-    else { }
 
     <div id="data">
         <table class="table table-striped">
@@ -40,17 +39,19 @@
                         <td>@item.Phone</td>
                         <td>@item.Email</td>
                         <td>@item.Specialization</td>
-                        @if (item.Dismiss == false)
+                        @if (Session["ROLE"].ToString() == "2" || Session["ROLE"].ToString() == "1")
                         {
-                            <td><button type="button" data-toggle="modal" data-target="#UpdateStudentModal" class="btn btn-xs btn-info" onclick="t(@item.Student_ID)">Update</button></td>
-                                    <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DismissStudent", "Home", new { ID = item.Student_ID })'">Dismiss</button></td>
+                            if (item.Dismiss == false)
+                            {
+                                <td><button type="button" data-toggle="modal" data-target="#UpdateStudentModal" class="btn btn-xs btn-info" onclick="t(@item.Student_ID)">Update</button></td>
+                                <td><button class="btn btn-xs btn-danger" onclick="location.href='@Url.Action("DismissStudent", "Home", new { ID = item.Student_ID })'">Dismiss</button></td>
+                            }
+                            else
+                            {
+                                <td><button disabled class="btn btn-xs btn-default">Update</button></td>
+                                <td><button class="btn btn-xs btn-success" onclick="location.href='@Url.Action("InvolveStudent", "Home", new { ID = item.Student_ID })'">Involve</button></td>
+                            }
                         }
-                        else
-                        {
-                            <td><button disabled class="btn btn-xs btn-default">Update</button></td>
-                                    <td><button class="btn btn-xs btn-success" onclick="location.href='@Url.Action("InvolveStudent", "Home", new { ID = item.Student_ID })'">Involve</button></td>
-                        }
-
                     </tr>
                             }
             </tbody>
