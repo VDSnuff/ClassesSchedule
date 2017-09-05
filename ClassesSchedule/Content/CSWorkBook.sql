@@ -345,3 +345,270 @@
 --[Password] = @Password
 --where ID = @PersonID
 --end
+--alter procedure [CoursesForAll] @ID int
+--as
+
+--if 3 = (select RoleId from Person where ID = @ID)
+--begin
+--									SELECT          c.ID AS ID, c.Name, c.[Description], c.Closed, p.FName + ' ' + p.LName as Teacher, t.Degree
+			
+--									FROM            dbo.Course AS c LEFT OUTER JOIN
+--													dbo.CourseTeacher as cmt on c.ID = cmt.CourseID LEFT OUTER JOIN
+--													dbo.Teacher AS t ON cmt.TeacherID = t.ID LEFT OUTER JOIN
+--													dbo.Person AS p ON t.PersonID = p.ID
+							
+--													WHERE p.ID = @ID
+--end
+
+--if 4 = (select RoleId from Person where ID = @ID)
+--begin
+----declare @ID int = 1
+--	declare @StudCourseID int = (
+--									SELECT         c.ID
+			
+--									FROM            dbo.Course AS c LEFT OUTER JOIN
+--													CourseStudent as cs on c.ID = cs.CourseID LEFT OUTER JOIN
+--													Student as s on cs.StudentID = s.ID LEFT OUTER JOIN
+--													Person as p on s.PersonID = p.ID
+							
+--													WHERE p.ID = @ID)
+							
+
+--									SELECT          c.ID AS ID, c.Name, c.[Description], c.Closed, p.FName + ' ' + p.LName as Teacher, t.Degree
+			
+--									FROM            dbo.Course AS c LEFT OUTER JOIN
+--													dbo.CourseTeacher as cmt on c.ID = cmt.CourseID LEFT OUTER JOIN
+--													dbo.Teacher AS t ON cmt.TeacherID = t.ID LEFT OUTER JOIN
+--													dbo.Person AS p ON t.PersonID = p.ID
+			
+--													WHERE c.ID = @StudCourseID
+
+--end.
+
+
+
+
+--create procedure ScheduleForAllUser (@ID int)
+
+--as
+
+--if 3 = (select RoleId from Person where ID = @ID) -- Teacher
+--begin
+--SELECT          cs.ID AS ID, cs.StartTime AS [Start time], cs.EndTime AS [End time], 
+--				cr.ClassNumber AS [Classroom No.], c.Name AS [Course Name], 
+--                p.FName + ' ' + p.LName AS [Teacher name], 
+--				t.Degree
+
+--FROM					 dbo.ClassSchedule AS cs INNER JOIN
+--                         dbo.ClassRoom AS cr ON cs.ClassRoomID = cr.ID INNER JOIN
+--                         dbo.Course AS c ON cs.CourseID = c.ID INNER JOIN
+--                         dbo.Teacher AS t ON cs.TeacherID = t.ID INNER JOIN
+--                         dbo.Person AS p ON t.PersonID = p.ID						 
+--WHERE					 p.ID = @ID and c.Closed = 0
+
+--end
+--if 4 = (select RoleId from Person where ID = @ID) -- Student
+--begin
+----declare @ID int = 1
+--	declare @StudCourseID int = (
+--									SELECT         c.ID
+			
+--									FROM            dbo.Course AS c LEFT OUTER JOIN
+--													CourseStudent as cs on c.ID = cs.CourseID LEFT OUTER JOIN
+--													Student as s on cs.StudentID = s.ID LEFT OUTER JOIN
+--													Person as p on s.PersonID = p.ID
+							
+--													WHERE p.ID = @ID
+--								)
+
+--								    SELECT          cs.ID AS ID, cs.StartTime AS [Start time], cs.EndTime AS [End time], 
+--													cr.ClassNumber AS [Classroom No.], c.Name AS [Course Name], 
+--													p.FName + ' ' + p.LName AS [Teacher name], 
+--													t.Degree
+--									FROM			dbo.ClassSchedule AS cs INNER JOIN
+--													dbo.ClassRoom AS cr ON cs.ClassRoomID = cr.ID INNER JOIN
+--													dbo.Course AS c ON cs.CourseID = c.ID INNER JOIN
+--													dbo.Teacher AS t ON cs.TeacherID = t.ID INNER JOIN
+--													dbo.Person AS p ON t.PersonID = p.ID						 
+--									WHERE			c.ID = @StudCourseID and c.Closed = 0
+--end
+
+--create procedure JoinCourseForStudent
+--									@CourseID int,
+--									@PersonID int
+--as 
+--begin
+
+--insert into CourseStudent (CourseID, StudentID)
+--values(@CourseID, @PersonID)
+
+--end
+
+--ALTER procedure [dbo].[CoursesForAll] @ID int
+--as
+
+--if 3 = (select RoleId from Person where ID = @ID)
+--begin
+--									SELECT          c.ID AS ID, c.Name, c.[Description], c.Closed, p.FName + ' ' + p.LName as Teacher, t.Degree
+			
+--									FROM            dbo.Course AS c LEFT OUTER JOIN
+--													dbo.CourseTeacher as cmt on c.ID = cmt.CourseID LEFT OUTER JOIN
+--													dbo.Teacher AS t ON cmt.TeacherID = t.ID LEFT OUTER JOIN
+--													dbo.Person AS p ON t.PersonID = p.ID
+							
+--													WHERE p.ID = @ID
+--end
+
+--if 4 = (select RoleId from Person where ID = @ID)
+--begin							
+
+--									SELECT          c.ID AS ID, c.Name, c.[Description], c.Closed, p.FName + ' ' + p.LName as Teacher, t.Degree
+			
+--									FROM            dbo.Course AS c LEFT OUTER JOIN
+--													dbo.CourseTeacher as cmt on c.ID = cmt.CourseID LEFT OUTER JOIN
+--													dbo.Teacher AS t ON cmt.TeacherID = t.ID LEFT OUTER JOIN
+--													dbo.Person AS p ON t.PersonID = p.ID
+			
+--													WHERE c.ID in (
+													
+--																	SELECT         c.ID
+--																	FROM            dbo.Course AS c LEFT OUTER JOIN
+--																					CourseStudent as cs on c.ID = cs.CourseID LEFT OUTER JOIN
+--																					Student as s on cs.StudentID = s.ID LEFT OUTER JOIN
+--																					Person as p on s.PersonID = p.ID
+																					
+--																					WHERE p.ID = @ID
+--																	)
+--end
+
+--ALTER procedure [dbo].[ScheduleForAllUser] (@ID int)
+
+--as
+
+--if 3 = (select RoleId from Person where ID = @ID) -- Teacher
+--begin
+--SELECT          cs.ID AS ID, cs.StartTime AS [Start time], cs.EndTime AS [End time], 
+--				cr.ClassNumber AS [Classroom No.], c.Name AS [Course Name], 
+--                p.FName + ' ' + p.LName AS [Teacher name], 
+--				t.Degree
+
+--FROM					 dbo.ClassSchedule AS cs INNER JOIN
+--                         dbo.ClassRoom AS cr ON cs.ClassRoomID = cr.ID INNER JOIN
+--                         dbo.Course AS c ON cs.CourseID = c.ID INNER JOIN
+--                         dbo.Teacher AS t ON cs.TeacherID = t.ID INNER JOIN
+--                         dbo.Person AS p ON t.PersonID = p.ID						 
+--WHERE					 p.ID = @ID and c.Closed = 0
+
+--end
+--if 4 = (select RoleId from Person where ID = @ID) -- Student
+--begin
+--								    SELECT          cs.ID AS ID, cs.StartTime AS [Start time], cs.EndTime AS [End time], 
+--													cr.ClassNumber AS [Classroom No.], c.Name AS [Course Name], 
+--													p.FName + ' ' + p.LName AS [Teacher name], 
+--													t.Degree
+--									FROM			dbo.ClassSchedule AS cs INNER JOIN
+--													dbo.ClassRoom AS cr ON cs.ClassRoomID = cr.ID INNER JOIN
+--													dbo.Course AS c ON cs.CourseID = c.ID INNER JOIN
+--													dbo.Teacher AS t ON cs.TeacherID = t.ID INNER JOIN
+--													dbo.Person AS p ON t.PersonID = p.ID						 
+--									WHERE			c.ID in (
+									
+--																SELECT          c.ID
+--																FROM            dbo.Course AS c LEFT OUTER JOIN
+--																				CourseStudent as cs on c.ID = cs.CourseID LEFT OUTER JOIN
+--																				Student as s on cs.StudentID = s.ID LEFT OUTER JOIN
+--																				Person as p on s.PersonID = p.ID
+--															    WHERE			p.ID = @ID
+--																				) 
+--													and c.Closed = 0
+--end
+
+--create procedure MarksByUser @ID int
+--as
+--if 3 = (select RoleId from Person where ID = @ID) -- Teacher
+--begin
+----declare @ID int = 271
+		
+--		SELECT				     TOP (1000) m.ID, c.Name AS Course, ps.FName + ' ' + ps.LName AS Student, m.Value, cs.StartTime AS [Date], pt.FName + ' ' + pt.LName AS Teacher, t.Degree
+--		FROM					 dbo.Mark AS m LEFT OUTER JOIN
+--								 dbo.ClassSchedule AS cs ON cs.ID = m.ClassScheduleID LEFT OUTER JOIN
+--								 dbo.Student AS s ON m.StudentID = s.ID LEFT OUTER JOIN
+--								 dbo.Teacher AS t ON m.TeacherID = t.ID LEFT OUTER JOIN
+--								 dbo.Person AS ps ON s.PersonID = ps.ID LEFT OUTER JOIN
+--								 dbo.Person AS pt ON t.PersonID = pt.ID LEFT OUTER JOIN
+--								 dbo.Course AS c ON cs.CourseID = c.ID
+--								 WHERE pt.ID = @ID
+--								 ORDER BY [Date]
+--end
+
+--if 4 = (select RoleId from Person where ID = @ID) -- Student
+--begin
+----declare @ID int = 1
+		
+--		SELECT				     TOP (1000) m.ID, c.Name AS Course, ps.FName + ' ' + ps.LName AS Student, m.Value, cs.StartTime AS [Date], pt.FName + ' ' + pt.LName AS Teacher, t.Degree
+--		FROM					 dbo.Mark AS m LEFT OUTER JOIN
+--								 dbo.ClassSchedule AS cs ON cs.ID = m.ClassScheduleID LEFT OUTER JOIN
+--								 dbo.Student AS s ON m.StudentID = s.ID LEFT OUTER JOIN
+--								 dbo.Teacher AS t ON m.TeacherID = t.ID LEFT OUTER JOIN
+--								 dbo.Person AS ps ON s.PersonID = ps.ID LEFT OUTER JOIN
+--								 dbo.Person AS pt ON t.PersonID = pt.ID LEFT OUTER JOIN
+--								 dbo.Course AS c ON cs.CourseID = c.ID
+--								 WHERE ps.ID = @ID
+--								 ORDER BY [Date]
+--end
+
+--ALTER procedure [dbo].[ScheduleForAllUser] (@ID int)
+
+--as
+
+--if 3 = (select RoleId from Person where ID = @ID) -- Teacher
+--begin
+--		SELECT          cs.ID AS ID, cs.StartTime AS [Start time], cs.EndTime AS [End time], 
+--						cr.ClassNumber AS [Classroom No.], c.Name AS [Course Name], 
+--						p.FName + ' ' + p.LName AS [Teacher name], 
+--						t.Degree
+
+--		FROM		     dbo.ClassSchedule AS cs INNER JOIN
+--                         dbo.ClassRoom AS cr ON cs.ClassRoomID = cr.ID INNER JOIN
+--                         dbo.Course AS c ON cs.CourseID = c.ID INNER JOIN
+--                         dbo.Teacher AS t ON cs.TeacherID = t.ID INNER JOIN
+--                         dbo.Person AS p ON t.PersonID = p.ID						 
+--		WHERE			 p.ID = @ID and c.Closed = 0
+
+--end
+
+--if 4 = (select RoleId from Person where ID = @ID) -- Student
+--begin
+--		SELECT          cs.ID AS ID, cs.StartTime AS [Start time], cs.EndTime AS [End time], 
+--						cr.ClassNumber AS [Classroom No.], c.Name AS [Course Name], 
+--						p.FName + ' ' + p.LName AS [Teacher name], 
+--						t.Degree
+--		FROM			dbo.ClassSchedule AS cs INNER JOIN
+--						dbo.ClassRoom AS cr ON cs.ClassRoomID = cr.ID INNER JOIN
+--						dbo.Course AS c ON cs.CourseID = c.ID INNER JOIN
+--						dbo.Teacher AS t ON cs.TeacherID = t.ID INNER JOIN
+--						dbo.Person AS p ON t.PersonID = p.ID						 
+--		WHERE			c.ID in (
+									
+--									SELECT          c.ID
+--									FROM            dbo.Course AS c LEFT OUTER JOIN
+--													CourseStudent as cs on c.ID = cs.CourseID LEFT OUTER JOIN
+--													Student as s on cs.StudentID = s.ID LEFT OUTER JOIN
+--													Person as p on s.PersonID = p.ID
+--									WHERE			p.ID = @ID
+--													) 
+--						and c.Closed = 0
+--end
+--begin 
+--		SELECT          cs.ID AS ID, cs.StartTime AS [Start time], cs.EndTime AS [End time], 
+--						cr.ClassNumber AS [Classroom No.], c.Name AS [Course Name], 
+--						p.FName + ' ' + p.LName AS [Teacher name], 
+--						t.Degree
+
+--		FROM		     dbo.ClassSchedule AS cs INNER JOIN
+--                         dbo.ClassRoom AS cr ON cs.ClassRoomID = cr.ID INNER JOIN
+--                         dbo.Course AS c ON cs.CourseID = c.ID INNER JOIN
+--                         dbo.Teacher AS t ON cs.TeacherID = t.ID INNER JOIN
+--                         dbo.Person AS p ON t.PersonID = p.ID						 
+--		WHERE			 p.ID = @ID and c.Closed = 0
+--end

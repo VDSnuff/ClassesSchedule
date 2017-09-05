@@ -589,6 +589,48 @@
       <Parameter Name="CourseID" Mode="In" Type="Int32" />
       <Parameter Name="TeacherID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="AssignStudentForCourse">
+      <Parameter Name="Student" Mode="In" Type="Int32" />
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="StudentLeaveCourse">
+      <Parameter Name="Student" Mode="In" Type="Int32" />
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="AssignStudentForCourseSP">
+      <Parameter Name="Student" Mode="In" Type="Int32" />
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="StudentLeaveCourseSP">
+      <Parameter Name="Student" Mode="In" Type="Int32" />
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CoursesForAll" ReturnType="Collection(ClassScheduleModel.CoursesForAll_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="CoursesForAllSP">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ScheduleForAllUser" ReturnType="Collection(ClassScheduleModel.ScheduleForAllUser_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ScheduleForAllUserSP">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="JoinCourseForStudent">
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="JoinCourseForStudentSP">
+      <Parameter Name="CourseID" Mode="In" Type="Int32" />
+      <Parameter Name="PersonID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="MarksByUser" ReturnType="Collection(ClassScheduleModel.MarksByUser_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="MarksByUserSP" ReturnType="Collection(ClassScheduleModel.MarksByUser_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="Login_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -790,4 +832,30 @@
     <Property Name="Teacher" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
     <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
+  <ComplexType Name="CoursesForAll_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+    <Property Type="Boolean" Name="Closed" Nullable="true" />
+    <Property Type="String" Name="Teacher" Nullable="true" MaxLength="201" />
+    <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="ScheduleForAllUser_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="DateTime" Name="Start_time" Nullable="false" />
+    <Property Type="DateTime" Name="End_time" Nullable="false" />
+    <Property Type="String" Name="Classroom_No_" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="Course_Name" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Teacher_name" Nullable="false" MaxLength="201" />
+    <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="MarksByUser_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Course" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Student" Nullable="true" MaxLength="201" />
+    <Property Type="Byte" Name="Value" Nullable="false" />
+    <Property Type="DateTime" Name="Date" Nullable="true" />
+    <Property Type="String" Name="Teacher" Nullable="true" MaxLength="201" />
+    <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+  </ComplexType>
 </Schema>

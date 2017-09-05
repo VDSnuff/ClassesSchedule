@@ -51,6 +51,11 @@
                         {
                             <p>Hi, @Session["FNAME"]  @Session["LNAME"] (Role: Student) <button onclick="location.href='@Url.Action("Logout", "Home")'" style="margin-left:10px; background-color:#F9F9F9" class="btn btn-xs btn-default">Logout</button></p>
                         }
+                        if (Session["ROLE"].ToString() == "1")
+                        {
+                            <p>Hello my Master! @Session["FNAME"]  @Session["LNAME"] (Role: God) <button onclick="location.href='@Url.Action("Logout", "Home")'" style="margin-left:10px; background-color:#F9F9F9" class="btn btn-xs btn-default">Logout</button></p>
+                        }
+
                     }
                     @* END *@
                 </div>

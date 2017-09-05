@@ -235,6 +235,9 @@
     <Compile Include="Models\Courses1_Result.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CoursesForAll_Result.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CoursesList.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
@@ -270,6 +273,9 @@
     <Compile Include="Models\MarkList.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MarksByUser_Result.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Person.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
@@ -277,6 +283,9 @@
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Schedule.cs">
+      <DependentUpon>CSModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ScheduleForAllUser_Result.cs">
       <DependentUpon>CSModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ScheduleList.cs">

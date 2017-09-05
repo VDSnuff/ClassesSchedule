@@ -332,5 +332,64 @@
     <FunctionImportMapping FunctionImportName="DelScheduleDate" FunctionName="ClassScheduleModel.Store.DelScheduleDate" />
     <FunctionImportMapping FunctionImportName="DelScheduleDateSP" FunctionName="ClassScheduleModel.Store.DelScheduleDate" />
     <FunctionImportMapping FunctionImportName="UpdateClassSchedule" FunctionName="ClassScheduleModel.Store.UpdateClassSchedule" />
+    <FunctionImportMapping FunctionImportName="AssignStudentForCourse" FunctionName="ClassScheduleModel.Store.AssignStudentForCourse" />
+    <FunctionImportMapping FunctionImportName="StudentLeaveCourse" FunctionName="ClassScheduleModel.Store.StudentLeaveCourse" />
+    <FunctionImportMapping FunctionImportName="AssignStudentForCourseSP" FunctionName="ClassScheduleModel.Store.AssignStudentForCourse" />
+    <FunctionImportMapping FunctionImportName="StudentLeaveCourseSP" FunctionName="ClassScheduleModel.Store.StudentLeaveCourse" />
+    <FunctionImportMapping FunctionImportName="CoursesForAll" FunctionName="ClassScheduleModel.Store.CoursesForAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClassScheduleModel.CoursesForAll_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Closed" ColumnName="Closed" />
+          <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="CoursesForAllSP" FunctionName="ClassScheduleModel.Store.CoursesForAll" />
+    <FunctionImportMapping FunctionImportName="ScheduleForAllUser" FunctionName="ClassScheduleModel.Store.ScheduleForAllUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClassScheduleModel.ScheduleForAllUser_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Start_time" ColumnName="Start time" />
+          <ScalarProperty Name="End_time" ColumnName="End time" />
+          <ScalarProperty Name="Classroom_No_" ColumnName="Classroom No." />
+          <ScalarProperty Name="Course_Name" ColumnName="Course Name" />
+          <ScalarProperty Name="Teacher_name" ColumnName="Teacher name" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ScheduleForAllUserSP" FunctionName="ClassScheduleModel.Store.ScheduleForAllUser" />
+    <FunctionImportMapping FunctionImportName="JoinCourseForStudent" FunctionName="ClassScheduleModel.Store.JoinCourseForStudent" />
+    <FunctionImportMapping FunctionImportName="JoinCourseForStudentSP" FunctionName="ClassScheduleModel.Store.JoinCourseForStudent" />
+    <FunctionImportMapping FunctionImportName="MarksByUser" FunctionName="ClassScheduleModel.Store.MarksByUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClassScheduleModel.MarksByUser_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Student" ColumnName="Student" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="MarksByUserSP" FunctionName="ClassScheduleModel.Store.MarksByUser">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ClassScheduleModel.MarksByUser_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Course" ColumnName="Course" />
+          <ScalarProperty Name="Student" ColumnName="Student" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+          <ScalarProperty Name="Degree" ColumnName="Degree" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

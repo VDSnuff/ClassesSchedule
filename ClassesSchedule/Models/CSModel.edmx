@@ -124,7 +124,7 @@
           <Property Name="Dismiss" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.CoursesList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.CoursesList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CoursesList">
           <Key>
             <PropertyRef Name="ID" />
@@ -138,7 +138,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.CoursesList' does not have a pri
           <Property Name="Degree" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.MarkList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.MarkList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MarkList">
           <Key>
             <PropertyRef Name="ID" />
@@ -153,7 +153,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.MarkList' does not have a primar
           <Property Name="Degree" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.Schedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Schedule">
           <Key>
             <PropertyRef Name="ID" />
@@ -172,7 +172,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primar
           <Property Name="Degree" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.ScheduleList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.ScheduleList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ScheduleList">
           <Key>
             <PropertyRef Name="ID" />
@@ -191,7 +191,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.ScheduleList' does not have a pr
           <Property Name="Degree" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.Students' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.Students' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Students">
           <Key>
             <PropertyRef Name="Person ID" />
@@ -209,7 +209,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Students' does not have a primar
           <Property Name="Dismiss" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.Teachers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Teachers">
           <Key>
             <PropertyRef Name="Person ID" />
@@ -444,6 +444,10 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <Parameter Name="Login" Type="nvarchar" Mode="In" />
           <Parameter Name="Password" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="AssignStudentForCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Student" Type="int" Mode="In" />
+          <Parameter Name="CourseID" Type="int" Mode="In" />
+        </Function>
         <Function Name="AssignTeacherForCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Teacher" Type="int" Mode="In" />
           <Parameter Name="CourseID" Type="int" Mode="In" />
@@ -462,6 +466,9 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
               </RowType>
             </CollectionType>
           </ReturnType>
+        </Function>
+        <Function Name="CoursesForAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
         </Function>
         <Function Name="DelCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CourseID" Type="int" Mode="In" />
@@ -486,9 +493,19 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
         <Function Name="InvolveTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="JoinCourseForStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CourseID" Type="int" Mode="In" />
+          <Parameter Name="PersonID" Type="int" Mode="In" />
+        </Function>
         <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Login" Type="nvarchar" Mode="In" />
           <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="MarksByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ScheduleForAllUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
         </Function>
         <Function Name="ScheduleUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
@@ -538,6 +555,10 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="StartCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="StudentLeaveCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Student" Type="int" Mode="In" />
+          <Parameter Name="CourseID" Type="int" Mode="In" />
         </Function>
         <Function Name="UpdateClassSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -1308,6 +1329,48 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
             <Parameter Name="CourseID" Mode="In" Type="Int32" />
             <Parameter Name="TeacherID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="AssignStudentForCourse">
+            <Parameter Name="Student" Mode="In" Type="Int32" />
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="StudentLeaveCourse">
+            <Parameter Name="Student" Mode="In" Type="Int32" />
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AssignStudentForCourseSP">
+            <Parameter Name="Student" Mode="In" Type="Int32" />
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="StudentLeaveCourseSP">
+            <Parameter Name="Student" Mode="In" Type="Int32" />
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CoursesForAll" ReturnType="Collection(ClassScheduleModel.CoursesForAll_Result)">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CoursesForAllSP">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ScheduleForAllUser" ReturnType="Collection(ClassScheduleModel.ScheduleForAllUser_Result)">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ScheduleForAllUserSP">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="JoinCourseForStudent">
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="JoinCourseForStudentSP">
+            <Parameter Name="CourseID" Mode="In" Type="Int32" />
+            <Parameter Name="PersonID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MarksByUser" ReturnType="Collection(ClassScheduleModel.MarksByUser_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MarksByUserSP" ReturnType="Collection(ClassScheduleModel.MarksByUser_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="Login_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1509,6 +1572,32 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <Property Name="Teacher" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
           <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="CoursesForAll_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="1000" />
+          <Property Type="Boolean" Name="Closed" Nullable="true" />
+          <Property Type="String" Name="Teacher" Nullable="true" MaxLength="201" />
+          <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="ScheduleForAllUser_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="DateTime" Name="Start_time" Nullable="false" />
+          <Property Type="DateTime" Name="End_time" Nullable="false" />
+          <Property Type="String" Name="Classroom_No_" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Course_Name" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Teacher_name" Nullable="false" MaxLength="201" />
+          <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="MarksByUser_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Course" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Student" Nullable="true" MaxLength="201" />
+          <Property Type="Byte" Name="Value" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="true" />
+          <Property Type="String" Name="Teacher" Nullable="true" MaxLength="201" />
+          <Property Type="String" Name="Degree" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1846,6 +1935,65 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
           <FunctionImportMapping FunctionImportName="DelScheduleDate" FunctionName="ClassScheduleModel.Store.DelScheduleDate" />
           <FunctionImportMapping FunctionImportName="DelScheduleDateSP" FunctionName="ClassScheduleModel.Store.DelScheduleDate" />
           <FunctionImportMapping FunctionImportName="UpdateClassSchedule" FunctionName="ClassScheduleModel.Store.UpdateClassSchedule" />
+          <FunctionImportMapping FunctionImportName="AssignStudentForCourse" FunctionName="ClassScheduleModel.Store.AssignStudentForCourse" />
+          <FunctionImportMapping FunctionImportName="StudentLeaveCourse" FunctionName="ClassScheduleModel.Store.StudentLeaveCourse" />
+          <FunctionImportMapping FunctionImportName="AssignStudentForCourseSP" FunctionName="ClassScheduleModel.Store.AssignStudentForCourse" />
+          <FunctionImportMapping FunctionImportName="StudentLeaveCourseSP" FunctionName="ClassScheduleModel.Store.StudentLeaveCourse" />
+          <FunctionImportMapping FunctionImportName="CoursesForAll" FunctionName="ClassScheduleModel.Store.CoursesForAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClassScheduleModel.CoursesForAll_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Closed" ColumnName="Closed" />
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CoursesForAllSP" FunctionName="ClassScheduleModel.Store.CoursesForAll" />
+          <FunctionImportMapping FunctionImportName="ScheduleForAllUser" FunctionName="ClassScheduleModel.Store.ScheduleForAllUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClassScheduleModel.ScheduleForAllUser_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Start_time" ColumnName="Start time" />
+                <ScalarProperty Name="End_time" ColumnName="End time" />
+                <ScalarProperty Name="Classroom_No_" ColumnName="Classroom No." />
+                <ScalarProperty Name="Course_Name" ColumnName="Course Name" />
+                <ScalarProperty Name="Teacher_name" ColumnName="Teacher name" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ScheduleForAllUserSP" FunctionName="ClassScheduleModel.Store.ScheduleForAllUser" />
+          <FunctionImportMapping FunctionImportName="JoinCourseForStudent" FunctionName="ClassScheduleModel.Store.JoinCourseForStudent" />
+          <FunctionImportMapping FunctionImportName="JoinCourseForStudentSP" FunctionName="ClassScheduleModel.Store.JoinCourseForStudent" />
+          <FunctionImportMapping FunctionImportName="MarksByUser" FunctionName="ClassScheduleModel.Store.MarksByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClassScheduleModel.MarksByUser_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Student" ColumnName="Student" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MarksByUserSP" FunctionName="ClassScheduleModel.Store.MarksByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ClassScheduleModel.MarksByUser_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Course" ColumnName="Course" />
+                <ScalarProperty Name="Student" ColumnName="Student" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Teacher" ColumnName="Teacher" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

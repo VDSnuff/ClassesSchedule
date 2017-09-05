@@ -8,6 +8,7 @@ namespace ClassesSchedule.ViewModel
 {
     public class MarksVM
     {
+        public IEnumerable<MarksByUser_Result> MarksByUser { get; set;}
         public IEnumerable<MarkList> MarksList { get; set; }
 
         public IEnumerable<string> Course { get; set; }

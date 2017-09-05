@@ -23,9 +23,9 @@ namespace ClassesSchedule.Controllers
             {
                 model.ScheduleList = (from t in ctx.ScheduleLists select t).ToList();
 
-                model.ScheduleUser = ctx.ScheduleUserFunc(Convert.ToInt32(Session["ID"])).ToList();
+                // model.ScheduleUser = ctx.ScheduleUserFunc(Convert.ToInt32(Session["ID"])).ToList();
 
-
+                model.ScheduleUser = ctx.ScheduleForAllUser(Convert.ToInt32(Session["ID"])).ToList();
 
                 //model.TeacherList = (from t in ctx.Teachers select t.Person.LName).ToList();
 
@@ -51,8 +51,6 @@ namespace ClassesSchedule.Controllers
                 }
                 model.ValuesC = itemsC;
 
-
-
                 // Drop Down List For Classes
                 model.ClassList = (from t in ctx.ClassRooms select t).ToList();
                 List<SelectListItem> itemsCl = new List<SelectListItem>();
@@ -61,8 +59,6 @@ namespace ClassesSchedule.Controllers
                     itemsCl.Add(new SelectListItem { Value = item.ID.ToString(), Text = item.ClassNumber });
                 }
                 model.ValuesCl = itemsCl;
-
-
 
                 //END
 
@@ -94,7 +90,8 @@ namespace ClassesSchedule.Controllers
                 model.ValuesC = itemsC;
 
                 //List of Courses
-                model.CoursesUser = ctx.Courses1(Convert.ToInt32(Session["ID"])).ToList();
+                // model.CoursesUser = ctx.Courses1(Convert.ToInt32(Session["ID"])).ToList();
+                model.CoursesUser = ctx.CoursesForAll(Convert.ToInt32(Session["ID"])).ToList();
             }
             return View(model);
         }
@@ -126,10 +123,27 @@ namespace ClassesSchedule.Controllers
             MarksVM model = new MarksVM();
             using (var ctx = new CSEntities())
             {
+
+                int UserIDint = Int32.Parse(Session["ID"].ToString());
+
+                var UserRole = from p in ctx.People where p.ID == UserIDint
+                               select p.RoleID;
+
+                string UserIDstring = Session["ID"].ToString();
+
+                if (UserRole.FirstOrDefault().ToString() == "3" || UserRole.FirstOrDefault().ToString() == "4")
+                {
+                    model.MarksByUser = ctx.MarksByUser(UserIDint).ToList();
+                }
+                else
+                {
+                    model.MarksList = (from t in ctx.MarkLists select t).ToList();
+                }
+
                 model.Teacher = Session["LNAME"].ToString();
                 model.TeacherID = Int32.Parse(Session["ID"].ToString());
 
-                model.MarksList = (from t in ctx.MarkLists select t).ToList();
+               
 
                 model.Course = (from c in ctx.Courses
                                 join ct in ctx.CourseTeachers on c.ID equals ct.CourseID
@@ -138,11 +152,15 @@ namespace ClassesSchedule.Controllers
                                 where p.ID == model.TeacherID && c.Closed == false
                                 select c.Name).ToList();
 
-                model.Date = (from cs in ctx.ClassSchedules
-                              join t in ctx.Teachers on cs.TeacherID equals t.ID
-                              join p in ctx.People on t.PersonID equals p.ID
-                              where p.ID == model.TeacherID
-                              select cs.StartTime).ToList();
+                model.Date =   (from cs in ctx.ClassSchedules
+                                join t in ctx.Teachers on cs.TeacherID equals t.ID
+                                join p in ctx.People on t.PersonID equals p.ID
+                                where p.ID == model.TeacherID
+                                select cs.StartTime).ToList();
+
+
+
+
             }
             return View(model);
         }
@@ -318,6 +336,28 @@ namespace ClassesSchedule.Controllers
             }
         }
 
+
+        public ActionResult JoinCourse(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.AssignStudentForCourse((int)Session["ID"], ID);
+
+                return RedirectToAction("Courses", "Home");
+            }
+        }
+
+        public ActionResult LeaveCourse(int ID)
+        {
+            using (var ctx = new CSEntities())
+            {
+                ctx.StudentLeaveCourse((int)Session["ID"], ID);
+
+                return RedirectToAction("Courses", "Home");
+            }
+        }
+
+
         public ActionResult DismissTeacher(int ID)
         {
             using (var ctx = new CSEntities())
@@ -397,9 +437,9 @@ namespace ClassesSchedule.Controllers
         {
             using (var ctx = new CSEntities())
             {
-                // ctx.UpdateClassSchedule(post.HelpID, post.STime, post.ETime, Int32.Parse(post.ClassList.FirstOrDefault()), Int32.Parse(post.CourseList.FirstOrDefault()), Int32.Parse(post.TeacherList.FirstOrDefault()));
+                ctx.UpdateClassSchedule(post.HelpID, post.STime, post.ETime, post.SelectedValuesCl[0], post.SelectedValuesC[0], post.SelectedValuesT[0]);
 
-                return RedirectToAction("Students", "Home");
+                return RedirectToAction("Schedule", "Home");
             }
         }
 

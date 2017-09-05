@@ -119,7 +119,7 @@
     <Property Name="Dismiss" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.CoursesList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.CoursesList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="CoursesList">
     <Key>
       <PropertyRef Name="ID" />
@@ -133,7 +133,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.CoursesList' does not have a pri
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.MarkList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.MarkList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="MarkList">
     <Key>
       <PropertyRef Name="ID" />
@@ -148,7 +148,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.MarkList' does not have a primar
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.Schedule' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Schedule">
     <Key>
       <PropertyRef Name="ID" />
@@ -167,7 +167,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Schedule' does not have a primar
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.ScheduleList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.ScheduleList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ScheduleList">
     <Key>
       <PropertyRef Name="ID" />
@@ -186,7 +186,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.ScheduleList' does not have a pr
     <Property Name="Degree" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.Students' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.Students' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Students">
     <Key>
       <PropertyRef Name="Person ID" />
@@ -204,7 +204,7 @@ warning 6002: The table/view 'ClassSchedule.dbo.Students' does not have a primar
     <Property Name="Dismiss" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ClassScheduleVOL2.dbo.Teachers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Teachers">
     <Key>
       <PropertyRef Name="Person ID" />
@@ -439,6 +439,10 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
     <Parameter Name="Login" Type="nvarchar" Mode="In" />
     <Parameter Name="Password" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="AssignStudentForCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Student" Type="int" Mode="In" />
+    <Parameter Name="CourseID" Type="int" Mode="In" />
+  </Function>
   <Function Name="AssignTeacherForCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Teacher" Type="int" Mode="In" />
     <Parameter Name="CourseID" Type="int" Mode="In" />
@@ -457,6 +461,9 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
         </RowType>
       </CollectionType>
     </ReturnType>
+  </Function>
+  <Function Name="CoursesForAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
   </Function>
   <Function Name="DelCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CourseID" Type="int" Mode="In" />
@@ -481,9 +488,19 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
   <Function Name="InvolveTeacher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="JoinCourseForStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CourseID" Type="int" Mode="In" />
+    <Parameter Name="PersonID" Type="int" Mode="In" />
+  </Function>
   <Function Name="Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Login" Type="nvarchar" Mode="In" />
     <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="MarksByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ScheduleForAllUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
   </Function>
   <Function Name="ScheduleUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
@@ -533,6 +550,10 @@ warning 6002: The table/view 'ClassSchedule.dbo.Teachers' does not have a primar
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="StartCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="StudentLeaveCourse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Student" Type="int" Mode="In" />
+    <Parameter Name="CourseID" Type="int" Mode="In" />
   </Function>
   <Function Name="UpdateClassSchedule" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />

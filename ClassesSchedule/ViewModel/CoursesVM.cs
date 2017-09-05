@@ -9,7 +9,7 @@ namespace ClassesSchedule.ViewModel
 {
     public class CoursesVM
     {
-        public IEnumerable<Courses1_Result> CoursesUser { get; set; }
+        public IEnumerable<CoursesForAll_Result> CoursesUser { get; set; }
       
         //POST
         public IEnumerable<CoursesList> CoursesList { get; set; }

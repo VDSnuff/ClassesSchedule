@@ -897,5 +897,137 @@ namespace ClassesSchedule.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClassSchedule", idParameter, startTimeParameter, endTimeParameter, classRoomIDParameter, courseIDParameter, teacherIDParameter);
         }
+    
+        public virtual int AssignStudentForCourse(Nullable<int> student, Nullable<int> courseID)
+        {
+            var studentParameter = student.HasValue ?
+                new ObjectParameter("Student", student) :
+                new ObjectParameter("Student", typeof(int));
+    
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AssignStudentForCourse", studentParameter, courseIDParameter);
+        }
+    
+        public virtual int StudentLeaveCourse(Nullable<int> student, Nullable<int> courseID)
+        {
+            var studentParameter = student.HasValue ?
+                new ObjectParameter("Student", student) :
+                new ObjectParameter("Student", typeof(int));
+    
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StudentLeaveCourse", studentParameter, courseIDParameter);
+        }
+    
+        public virtual int AssignStudentForCourseSP(Nullable<int> student, Nullable<int> courseID)
+        {
+            var studentParameter = student.HasValue ?
+                new ObjectParameter("Student", student) :
+                new ObjectParameter("Student", typeof(int));
+    
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AssignStudentForCourseSP", studentParameter, courseIDParameter);
+        }
+    
+        public virtual int StudentLeaveCourseSP(Nullable<int> student, Nullable<int> courseID)
+        {
+            var studentParameter = student.HasValue ?
+                new ObjectParameter("Student", student) :
+                new ObjectParameter("Student", typeof(int));
+    
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("StudentLeaveCourseSP", studentParameter, courseIDParameter);
+        }
+    
+        public virtual ObjectResult<CoursesForAll_Result> CoursesForAll(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CoursesForAll_Result>("CoursesForAll", iDParameter);
+        }
+    
+        public virtual int CoursesForAllSP(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CoursesForAllSP", iDParameter);
+        }
+    
+        public virtual ObjectResult<ScheduleForAllUser_Result> ScheduleForAllUser(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ScheduleForAllUser_Result>("ScheduleForAllUser", iDParameter);
+        }
+    
+        public virtual int ScheduleForAllUserSP(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ScheduleForAllUserSP", iDParameter);
+        }
+    
+        public virtual int JoinCourseForStudent(Nullable<int> courseID, Nullable<int> personID)
+        {
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            var personIDParameter = personID.HasValue ?
+                new ObjectParameter("PersonID", personID) :
+                new ObjectParameter("PersonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("JoinCourseForStudent", courseIDParameter, personIDParameter);
+        }
+    
+        public virtual int JoinCourseForStudentSP(Nullable<int> courseID, Nullable<int> personID)
+        {
+            var courseIDParameter = courseID.HasValue ?
+                new ObjectParameter("CourseID", courseID) :
+                new ObjectParameter("CourseID", typeof(int));
+    
+            var personIDParameter = personID.HasValue ?
+                new ObjectParameter("PersonID", personID) :
+                new ObjectParameter("PersonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("JoinCourseForStudentSP", courseIDParameter, personIDParameter);
+        }
+    
+        public virtual ObjectResult<MarksByUser_Result> MarksByUser(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MarksByUser_Result>("MarksByUser", iDParameter);
+        }
+    
+        public virtual ObjectResult<MarksByUser_Result> MarksByUserSP(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MarksByUser_Result>("MarksByUserSP", iDParameter);
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace ClassesSchedule.ViewModel
 
         public IEnumerable<ScheduleList> ScheduleList { get; set;}
 
-        public IEnumerable<ScheduleUserFunc_Result> ScheduleUser { get; set; }
+        public IEnumerable<ScheduleForAllUser_Result> ScheduleUser { get; set; }
 
         public IEnumerable<ClassRoom> ClassList { get; set; }
 
